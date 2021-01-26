@@ -1,0 +1,127 @@
+.register{
+    border-top-left-radius: 10% 30%;
+    border-bottom-left-radius: 10% 30%;
+    border-top-right-radius: 10% 30%;
+    border-bottom-right-radius: 10% 30%;
+    background: -webkit-linear-gradient(left, #0d37f1, #00c6ff);
+    margin-top: 8%;
+    padding: 3%;
+      
+}
+.register-left{
+    text-align: center;
+    margin-top: 1%;
+    color: white;
+}
+.register-left input{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+/*Borde curvo del registro*/
+.register-right{
+    background: #f8f9fa;
+    border-top-left-radius: 10% 30%;
+    border-bottom-left-radius: 10% 30%;
+    border-top-right-radius: 10% 30%;
+    border-bottom-right-radius: 10% 30%;
+}
+/*Imagen y animacion de la imagen*/
+.register-left img{
+    margin-top: 15%;
+    margin-bottom: 5%;
+    width: 60%;
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+.register-left p{
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+}
+/*Margen del registro debajo de registrarse*/
+.register .register-form{
+    padding: 10%;
+    margin-top: 10%;
+}
+/*Boton de registrarse*/
+.btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+.register .nav-tabs{
+    margin-top: 3%;
+    border: none;
+    background: #0062cc;
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+}
+.register .nav-tabs .nav-link{
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-link:hover{
+    border: none;
+}
+.register .nav-tabs .nav-link.active{
+    width: 100px;
+    color: #0062cc;
+    border: 2px solid #0062cc;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+.register-heading{
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #495057;
+}
+@media screen and (max-width: 775px) {
+    
+    .register{
+        background: -webkit-linear-gradient(left, #0d37f1, #00c6ff);
+        border-top-left-radius: 0% 0%;
+        border-bottom-left-radius: 0% 0%;
+        border-top-right-radius: 0% 0%;
+        border-bottom-right-radius: 0% 0%;
+    }
+    .register-right{
+        background: #f8f9fa;
+        border-top-left-radius: 10% 20%;
+        border-bottom-left-radius: 10% 20%;
+        border-top-right-radius: 10% 20%;
+        border-bottom-right-radius: 10% 20%;
+        margin-top: 8%;
+        width: 90%;
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+    
+}
