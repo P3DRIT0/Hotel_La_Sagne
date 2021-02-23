@@ -1,0 +1,220 @@
+.carousel-item {
+    max-height: 1210px;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+ .carousel-caption{
+     margin-bottom: 550px;
+ }
+ .titulo  {
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding-right: 20px;
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+ }
+ .titulo:hover{
+     color: rgba(255, 255, 255, 0.658);
+     
+ }
+ a:link, a:visited, a:active {
+    text-decoration:none;
+}
+
+.hide-scroll {
+    overflow: hidden;
+}
+
+body {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.habitaciones{
+display: flex;
+flex-direction: row;
+background-color: white;
+}
+.texto_cambiante{
+    height: 1000px;
+    
+}
+.imagenes_habitaciones{
+    width: 70%;
+    margin-top: 2%;
+   
+}
+.texto_habitaciones{
+    width: 30%;
+padding: 3%;
+}
+.texto_habitaciones li a{
+    font-family: 'Alex Brush', cursive;
+    font-size: 220%;
+    
+    
+}
+
+.titulo_habitaciones{
+    font-family: 'Alex Brush', cursive;
+    font-size: 500%;
+    
+}
+.habitaciones_tipos li{
+    list-style: none;
+    font-family: 'Alex Brush', cursive;
+    font-size: 230%;
+    border-bottom: 2px solid black;
+}
+.habitaciones_tipos p{
+font-size: 130%;
+}
+ 
+.habitaciones ol,
+ul {
+    list-style: none;
+}
+
+.habitaciones li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.carousel-control-next{
+    margin-top: 35%;
+}
+.carousel-control-prev{
+    margin-top: 35%;
+}
+
+.habitaciones a {
+    text-decoration: none;
+    color: black;
+    -webkit-transition: border 200ms ease-out;
+    -moz-transition: border 200ms ease-out;
+    -o-transition: border 200ms ease-out;
+    transition: border 200ms ease-out;
+    border-bottom: 2px solid transparent;
+    padding: 2px;
+}
+
+.habitaciones a:hover,
+a:focus,
+a:active {
+    border-bottom: 2px solid black;
+}
+
+
+
+
+.descripcion_habitacion{
+    font-size: 150%;
+    
+}
+
+
+.seccion2{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 1250px;
+    
+}
+
+.seccion2 nav{
+    width: 12%;
+    height: 1250px;
+    
+  
+}
+.seccion2 nav a{
+    color: white;
+}
+
+video {
+    position: fixed;
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto;
+    z-index: -100;
+  }
+
+  .Contenedor_video_generico{
+width: 100%;
+height: 1250px;
+  }
+  
+  button{
+    background-color: #212529;
+     border: none; height: 40px;
+     width: 170%;
+      padding: 5px 15px;
+       color: #ffffff;
+        font-size: 16px;
+         font-weight: 300;
+          margin-top: 10px;
+           margin-right: 10px;
+
+
+    }
+
+    .opacidad{
+    transition:opacity 1.2s ease-in-out;
+    }
+    .ancla{
+        margin-top:5%;
+    }
+    .submarinismo{
+        margin-top: 5%;
+        margin-left: 2%; ;
+        height: 800px;
+        margin-bottom: 10%;
+        margin-right: 2%;
+        justify-content: center;
+        
+        
+    }
+
+   .h1_titulos{
+    text-align: center;
+    color: white;
+    font-family: 'Alex Brush', cursive;
+    font-size: 420%;
+    background-color: transparent;
+    width: 430px;
+    height: 15%
+   }
+   .contenido_emergente{
+       opacity: 0;
+       
+   }
+   .opacidad_actividades{
+    transition:opacity 1.2s ease-in-out;
+    padding: 5%;
+    opacity: 0;
+    color: white;
+    background-color: #21252971;
+    }
+    .quienes_somos{
+     height: 1080px;
+     width: 100%;
+    background-image: url("./Multimedia/Quienes_somos.jpg");
+    }
+    .contenido_quienes_somos{
+       padding: 5%;
+    }
+    .texto_quines_somos{
+        font-size: 220%;
+
+    }
