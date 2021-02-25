@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <?php
 require_once './BD_registro.php';
+require_once './Correo_registro.php';
 $nombre = $apellidos = $correo = $direccion =$telefono= "";
 $Err_contraseñas="";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!($_POST['contraseña'] == $_POST['contraseña2'])) {
             $Err_contraseñas="Las contraseñas no coinciden";
         } else {
-            registrar_usuario($nombre, $apellidos,$contraseña,$correo,$telefono,$direccion);
+            registrar_usuario($nombre,$contraseña,$correo,$telefono,$direccion);
+            enviar_correos($correo, $nombre);
         }
     } else {
         if (isset($_POST['nombre'])) {
@@ -35,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_POST['telefono'])) {
             $telefono = $_POST['telefono'];
         }
-        if (isset($_POST['pregunta'])) {
-            $pregunta = $_POST['direccion'];
+        if (isset($_POST['direccion'])) {
+            $direccion = $_POST['direccion'];
         }
     }
 }
 ?>
-<html style="background-image:url(../Registro//Multimedia/Fondo_pantalla.jpg)";>
+<html style="background-image:url(../Registro//Multimedia/Fondo_pantalla.jpg)">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -59,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img class="icono" src ="../Registro/Multimedia/logo.png" alt=""/>
                     <h3>Bienvenido</h3>
                     <p>Estas a 30 segundos de reservar tus vacaciones</p>
-                    <form action="../Login.php" method="post">
+                    <form action="../Inicio_Sesion/Inicio_sesion.php" method="post">
                         <input type="submit" name="" value="Login"/><br/>
                     </form>
                 </div>

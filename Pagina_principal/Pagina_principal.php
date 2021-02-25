@@ -66,7 +66,7 @@
                 <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
             </li>
           </ul>
         </form>
