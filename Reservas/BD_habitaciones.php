@@ -15,7 +15,7 @@ function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $
         $sentencia = null;
         $base = null;
     } catch (PDOException $e) {
-        die('No se pudo conectar: ' . mysql_error());
+        print $e->getMessage();
     }
 }
 
@@ -38,7 +38,13 @@ function añadir_imagenes($imagen_habitacion,$descripcion){
   }
 }
 
-
+function lista_habitaciones(){
+    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    $sentencia = $base->prepare("SELECT * FROM habitaciones");
+    $sentencia->execute();
+    $resultados = $sentencia->fetchAll();
+     return $resultados;
+}
 
 
 
@@ -73,4 +79,22 @@ function visualizar_habitaciones(){
     print $e->getMessage();
   }
 }
+function borrar_habitaciones($habitaciones_borrar){
+     try {
+    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    for ($index = 0; $index < count($habitaciones_borrar); $index++) {
+    $sentencia2 = $base->prepare("DELETE * FROM imagenes_habitaciones WHERE id_habitacion=:id_habitacion");
+    $sentencia2->bindParam(':id_habitacion', $habitaciones_borrar[$index]);
+    $sentencia2->execute();
+    $sentencia = $base->prepare("DELETE * FROM habitaciones WHERE id=:id");
+    $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
+    $sentencia->execute();
+    }
+   
+    
+    
+    } catch (PDOException $e) {
+         print $e->getMessage();
+    }
+     }
 
