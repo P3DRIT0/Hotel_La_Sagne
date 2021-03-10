@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <textarea id="result" name="descripcion" placeholder="Breve descripcion de la habitacion"></textarea>
                     </div>
                     <input type="file" name="file"><br>
-                    <input type="submit" class="btnRegister"  value="Crear habitacion"/>
+                    <input type="submit" class="btnRegister"  value="Crear habitacion"/>                 
                 </form>
             </div>
         </div>

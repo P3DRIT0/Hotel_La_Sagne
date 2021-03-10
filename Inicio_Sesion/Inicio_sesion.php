@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
       if (comprobar_usuario($correo)){
           if(cotejar_contraseñas($contraseña,$correo)){
-              echo "usuario valido";   
+             crear_sesion($correo);
           }else{
               $Err_contraseñas="Contraseña incorrecta";
           }

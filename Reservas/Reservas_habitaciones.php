@@ -57,7 +57,19 @@ session_start();
             <div class="barra_busqueda">
                 <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarColor01 ">
-                    <ul class="navbar-nav  mb- mb-lg-0">
+                    <?php
+                    
+                    if($_SESSION['rol']=="Usuario_administrador"){
+                        
+                        $visibilidad="visible";
+                    }else{
+             
+                        $visibilidad="hidden";
+                    }
+                        echo "<ul class='navbar-nav  mb- mb-lg-0' style='visibility: $visibilidad'>";
+                 
+                         ?>
+                    
                         <li class="nav-item" style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_habitacion.php'"> Crear habitacion
                         </li>
@@ -65,10 +77,10 @@ session_start();
                             <button  class="btn btn-outline-light my-5 my-sm-3" onclick="location = 'Borrar_habitacion.php'"> Borrar habitacion
                         </li>
                         <li class="nav-item"style="margin-top:10px ">
-                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_habitacion.php'"> Modificar habitacion
+                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_Habitaciones.php'"> Modificar habitacion
                         </li>
                     </ul>
-
+                 
 
                     <form class="d-flex" style="width: 65%;margin-left:10% ">
 

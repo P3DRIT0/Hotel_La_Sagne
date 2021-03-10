@@ -17,6 +17,7 @@ for ($index1 = 0; $index1 < count($resultados); $index1++) {
     }
    if(!empty($habitaciones_borrar)){
        borrar_habitaciones($habitaciones_borrar);
+       header('Location:./Reservas_habitaciones.php');
        }
 ?>
 
