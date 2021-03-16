@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      <div class="login">
 	<div class="login-container">
             <form action="Inicio_sesion.php" class="form-login" method="post">
-             <img class="icono" src ="../Registro/logo.png" alt=""/>
+                <img class="icono" src ="../Registro/Multimedia/logo.png" alt=""/>
 		<label for="login-input-user" class="login__label">
 			Correo
 		</label>

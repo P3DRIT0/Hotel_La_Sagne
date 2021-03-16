@@ -60,7 +60,8 @@ function visualizar_habitaciones() {
             $titulo = $resultados[$index]['tipo_de_habitacion'];
             $descripcion = $resultados2[$index]['descripcion_imagen'];
             $precio = $resultados[$index]['precio'];
-            echo "<div class='habitacion'>";
+            $id=$resultados[$index]['id'];
+            echo "<div class='habitacion' id=habitacion$id>";
             echo "<img src='$ruta'></img>";
             echo "<div class='texto'>";
             echo "<h1>$titulo</h1>";
@@ -68,7 +69,9 @@ function visualizar_habitaciones() {
             echo "</div>";
             echo "<a class='precio'>$precio €</a>";
             echo "</div>";
+            
         }
+      return array ($id-$index,$id);
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -84,7 +87,6 @@ function borrar_habitaciones($habitaciones_borrar) {
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
-            print_r($base->errorInfo());
         }
     } catch (PDOException $e) {
         print $e->getMessage();

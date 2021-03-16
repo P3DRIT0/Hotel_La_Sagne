@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $m2 = $_POST['m2'];
     $descripcion=$_POST['descripcion'];
     $file_tmp_name = $_FILES["file"]["tmp_name"]; 
-    $file_name="./Imagenes_habitaciones/". $_FILES["file"]["name"]; 
+    $file_name="../Reservas/Imagenes_habitaciones/". $_FILES["file"]["name"]; 
     copy($file_tmp_name ,$file_name);
     
     

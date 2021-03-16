@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             registrar_usuario($nombre,$contraseña,$correo,$telefono,$direccion);
             enviar_correos($correo, $nombre);
+            header('Location:../Reservas/Reservas_habitaciones.php');
+            
         }
     } else {
         if (isset($_POST['nombre'])) {

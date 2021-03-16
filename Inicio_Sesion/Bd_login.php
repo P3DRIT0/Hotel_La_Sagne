@@ -45,28 +45,28 @@ return $credenciales_validas;
 }
 }
 function crear_sesion($correo){
-     try {
+  try {
  $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
  $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
  $sentencia->bindParam(':correo', $correo);
  $sentencia->execute();
  $result = $sentencia->fetch(PDO::FETCH_ASSOC);
- /*Creamos la sesion*/
  session_start();
  $_SESSION['usuario']=$result['nombre'];
  $_SESSION['email']=$result['email'];
  $_SESSION['telf']=$result['telf'];
  $_SESSION['direccion']=$result['direccion'];
  $id_rol=$result['rol_usuario'];
-//Acceder a la tabla roles  
+//Acceder a la tabla roles
  $sentencia = $base->prepare('SELECT nombre_rol FROM roles WHERE id=:id');
  $sentencia->bindParam(':id', $id_rol);
  $sentencia->execute();
  $result2 = $sentencia->fetch(PDO::FETCH_ASSOC);
  $_SESSION['rol']=$result2["nombre_rol"];
 
- header("Location:../Reservas/Reservas_habitaciones.php");   
+ 
  } catch(PDOException $e) {
     die('No se pudo conectar: ' .$e->getMessage());
 }
+header("Location:../Reservas/Reservas_habitaciones.php");
 }

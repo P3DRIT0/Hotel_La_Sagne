@@ -289,6 +289,9 @@
 
 
 <script>
+     window.onload=function (){
+        imagenes_suite();
+    }
   const TIEMPO_INTERVALO_MILESIMAS_SEG = 1000;
   let $oceano = document.querySelector('#oceano');
   let $deportes_acuaticos = document.querySelector('#deportes_acuaticos');
