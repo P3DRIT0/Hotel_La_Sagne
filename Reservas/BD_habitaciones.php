@@ -1,8 +1,8 @@
 <?php
-
+include '../config/conexiones_BD.php';
 function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $internet, $precio) {
     try {
-        $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+        $base = conectar();
         $sentencia = $base->prepare("INSERT INTO `habitaciones`(`m2`,`ventana`,`tipo_de_habitacion`,`servicio_limpieza`,`internet`,`precio`) VALUES (:m2,:ventana,:tipo_habitacion,:servicio_limpieza,:internet,:precio)");
         $sentencia->bindParam(':m2', $m2);
         $sentencia->bindParam(':ventana', $ventana);
@@ -19,7 +19,7 @@ function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $
 }
 
 function añadir_imagenes($imagen_habitacion, $descripcion) {
-    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     try {
         $sentencia->execute();
@@ -39,7 +39,7 @@ function añadir_imagenes($imagen_habitacion, $descripcion) {
 }
 
 function lista_habitaciones() {
-    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
@@ -47,7 +47,7 @@ function lista_habitaciones() {
 }
 
 function visualizar_habitaciones() {
-    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones");
     try {
@@ -79,7 +79,7 @@ function visualizar_habitaciones() {
 
 function borrar_habitaciones($habitaciones_borrar) {
     try {
-        $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+        $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
             $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_habitacion=:id_habitacion");
             $sentencia2->bindParam(':id_habitacion', $habitaciones_borrar[$index]);
@@ -94,7 +94,7 @@ function borrar_habitaciones($habitaciones_borrar) {
 }
 
 function modificar_habitaciones($id,$m2,$precio,$ventana,$limpieza,$internet,$tipo_de_habitacion) {
-    $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+    $base = conectar();
     $sentencia = $base->prepare("UPDATE habitaciones SET m2=:m2,ventana=:ventana,tipo_de_habitacion=:tipo_de_habitacion"
             . ",servicio_limpieza=:servicio_limpieza "
             . ",internet=:internet,precio=:precio; WHERE id=:id");

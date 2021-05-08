@@ -1,5 +1,5 @@
 <?php
-
+include '../config/conexiones_BD.php';
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +10,7 @@ function comprobar_usuario($correo){
    
     try {
 $usuario_registrado=false; 
-$base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+$base = conectar();
  $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
  $sentencia->bindParam(':correo', $correo);
  $sentencia->execute();
@@ -29,7 +29,7 @@ return $usuario_registrado;
 function cotejar_contraseñas($contraseña,$correo){
     try {
  $credenciales_validas=false;
- $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+ $base = conectar();
  $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
  $sentencia->bindParam(':correo', $correo);
  $sentencia->execute();
@@ -46,7 +46,7 @@ return $credenciales_validas;
 }
 function crear_sesion($correo){
   try {
- $base = new PDO('mysql:host=localhost; dbname=hotel', 'administrador', '1234');
+ $base = conectar();
  $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
  $sentencia->bindParam(':correo', $correo);
  $sentencia->execute();
