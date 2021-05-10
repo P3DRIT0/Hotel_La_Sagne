@@ -5,13 +5,14 @@ function obtener_habitacion($rest){
     
 try {
         $base = conectar();
-         $sentencia = $base->prepare("SELECT * FROM habitaciones where id=:num_habitacion");
-         $sentencia->bindParam(':num_habitacion',$rest);
-         $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones where id_habitacion=:num_habitacion");
-         $sentencia2->bindParam(':num_habitacion',$rest);
+         $sentencia = $base->prepare("SELECT * FROM habitaciones where tipo_de_habitacion=:tipo_habitacion");
+         $sentencia->bindParam(':tipo_habitacion',$rest);
          $sentencia->execute();
-         $sentencia2->execute();
          $resultados = $sentencia->fetchAll();
+         $id=$resultados[0][0];
+         $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones where id_habitacion=:id_habitacion");
+         $sentencia2->bindParam(':id_habitacion',$id);      
+         $sentencia2->execute();
          $resultados2 = $sentencia2->fetchAll();
          return array($resultados,$resultados2);
          

@@ -33,12 +33,27 @@
     </head>
 
     <body>
+        
 <?php
 require_once './Bd_habitacion.php';
 if(isset($_POST['num_habitacion'])){
 $num_habitacion = $_POST['num_habitacion'];
-$rest = substr($num_habitacion, -2);
-$habitacion=obtener_habitacion($rest);
+$tipo;
+switch ($num_habitacion) {
+    case "tipo1":
+        $tipo="Suite";
+        break;
+    case "tipo2":
+        $tipo="Habitacion Individual";
+        break;
+    case "tipo3":
+         $tipo="Habitacion Doble";
+        break;
+    default:
+        $tipo="No encontrado";
+}
+
+$habitacion=obtener_habitacion($tipo);
 $rutaimagen=$habitacion[1][0][2];
 $descripcion=$habitacion[1][0][3];
 $tipo=$habitacion[0][0][3];
@@ -61,7 +76,6 @@ echo "<input type='date' id='start' name='trip-start' value='2021-02-22' min='20
 echo " Día de salida:";
 echo "<input type='date' id='end' name='trip-end' value='2021-03-03' min='2021-01-01' max='2021-12-31'>";
 echo "<input type='text'  name='tipo' style='visibility: hidden' value='$tipo'> ";
-echo "<input type='text'  name='id_habitacion' style='visibility: hidden' value='$rest'> ";
 }
 
 ?>

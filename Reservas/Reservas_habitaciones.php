@@ -2,7 +2,6 @@
 <?php
 session_start();
 require_once './BD_habitaciones.php';
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,6 +18,7 @@ require_once './BD_habitaciones.php';
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
         <script src="./jquery-3.6.0.min.js" type="text/javascript"></script>   
     </head>
     <body>
@@ -49,7 +49,7 @@ require_once './BD_habitaciones.php';
                     </ul>
 
 
-                    <p class="usuario"><?php echo $_SESSION['usuario']?></p>
+                    <p class="usuario"><?php echo $_SESSION['usuario'] ?></p>
                     <img  class="avatar" src="./multimedia/avatar.png">
 
                 </div>
@@ -60,7 +60,6 @@ require_once './BD_habitaciones.php';
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
                         <?php
-                        
                         if ($_SESSION['rol'] == "Usuario_administrador") {
 
                             $visibilidad = "visible";
@@ -93,17 +92,93 @@ require_once './BD_habitaciones.php';
             </div>
         </nav>
 
-        <div class='contenedor'>
+        <div class='contenedor' >
             <?php
-            $numhabitaciones = visualizar_habitaciones();
-            $habitacioncliacada;
-            ?>
+            for ($index = 0; $index <= 2; $index++) {
+                $id = $index;
+                $id++;
+                $indice2 = $index * 5;
+                if ($index == 0) {
+                    $titulo = "Suite";
+                }if ($index == 1) {
+                    $titulo = "Habitación Individual";
+                } if ($index == 2) {
+                    $titulo = "Habitacion Doble";
+                }
+
+
+
+
+//                $numhabitaciones = visualizar_habitaciones();
+//               $habitacioncliacada;
+                ?>
+
+                <div class='habitacion' id=tipo<?php echo $id ?>>
+
+
+
+
+
+
+                    <div id="carousel-<?php echo $index ?>" class="carousel slide col-6" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carousel-<?php echo $index ?>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carousel-<?php echo $index ?>" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carousel-<?php echo $index ?>" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img
+                                    src="../Pagina_principal/Multimedia/<?php echo ++$indice2; ?>.jpg"
+                                    class="img-fluid"
+                                    alt="First slide"
+                                    />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="../Pagina_principal/Multimedia/<?php echo ++$indice2; ?>.jpg"
+                                    class="img-fluid"
+                                    alt="Second slide"
+                                    />
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="../Pagina_principal/Multimedia/<?php echo ++$indice2; ?>.jpg"
+                                    class="img-fluid"
+                                    alt="Second slide"
+                                    />
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?php echo $index ?>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?php echo $index ?>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+
+                    <div class="texto col-6">
+                        <h1><?php echo $titulo; ?></h1>
+
+                        <p>holaaaaaaaadad wddawdads</p>
+
+                    </div>
+                    <a class='precio'>$precio €</a>
+
+
+                </div>
+            
+            <?php } ?>
+
             <script>
-                for (var i = "<?php echo $numhabitaciones[0] ?>"; i < "<?php echo $numhabitaciones[1] ?>"; i++) {
+                for (var i = 1; i <= 3; i++) {
+                    console.log(i);
                     var num = parseInt(i, 10);
-                    var num2 = num + 1;
-                    console.log(num2);
-                    var id = '#habitacion' + num2;
+                    console.log(num);
+                    var id = '#tipo' + num;
                     let $i = document.querySelector(id);
                     console.log($i);
                     $i.addEventListener('click', plantilla);
@@ -113,8 +188,9 @@ require_once './BD_habitaciones.php';
                     console.log("funciona click");
                     var $dato = $(this).attr('id');
                     $("#num_habitaciones").val($dato);
-                     document.formulario1.submit();
-                    }
+                    console.log($dato);
+                    document.formulario1.submit();
+                }
             </script>
 
             <!-- Div invisible que guarda donde se hace click-->
@@ -123,6 +199,7 @@ require_once './BD_habitaciones.php';
                     <input type="text" id="num_habitaciones" value="" name="num_habitacion">
                 </form>
             </div>
+
         </div>
 
 
@@ -140,4 +217,5 @@ require_once './BD_habitaciones.php';
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
         -->
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 </html>

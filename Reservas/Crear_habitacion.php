@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $limpieza = false;
     }
+    echo "$tipo_habitacion";
     crear_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio,$file_name,$descripcion);
     añadir_imagenes($file_name,$descripcion);
     header('Location:./Reservas_habitaciones.php');
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <select name="tipo_habitacion">
                             <option>Suite</option>
                             <option>Habitacion Doble</option>
-                            <option selected>Habitacion Individual:</option>
+                            <option selected>Habitacion Individual</option>
                         </select>
                     </div>
                     <lable for="subject">Precio de la habitacion：</lable>
