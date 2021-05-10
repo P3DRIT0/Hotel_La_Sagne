@@ -12,18 +12,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-      <!-- Bootstrap CSS -->
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-        crossorigin="anonymous"
-      />
-      <link href="Cartera.css" rel="stylesheet" type="text/css" />
-      <link href="Calendario.css" rel="stylesheet" type="text/css" />
-      <!--Fuentes -->
-      
+      <link href="pagina_habitacion.css" rel="stylesheet" type="text/css" />
       <link
         href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap"
         rel="stylesheet"
@@ -33,6 +22,8 @@
     </head>
 
     <body>
+        
+        
         
 <?php
 require_once './Bd_habitacion.php';
@@ -57,58 +48,45 @@ $habitacion=obtener_habitacion($tipo);
 $rutaimagen=$habitacion[1][0][2];
 $descripcion=$habitacion[1][0][3];
 $tipo=$habitacion[0][0][3];
-echo "<div class='imagen'>";
-echo "<img class='imagen_cabecera'  src='$rutaimagen'>";
-echo "</div>";
-echo "<div class='contenido'> ";
-echo " <div class='descripcion'>";
-echo "<h1>$tipo</h1>";
-echo "<p class='texto de la descripcion '>";
-echo "$descripcion";
-echo "</p>";
-echo " </div>";
-echo "<form action='./Solicitud_reserva.php' method='post'>";
-echo "<div class='footer_calendar_final_reserver'>";
-echo "<div class='container'>";
-echo "<div class='calendar_dayin_dayout'>";
-echo "Día de llegada:";
-echo "<input type='date' id='start' name='trip-start' value='2021-02-22' min='2021-01-01' max='2021-12-31'>";
-echo " Día de salida:";
-echo "<input type='date' id='end' name='trip-end' value='2021-03-03' min='2021-01-01' max='2021-12-31'>";
-echo "<input type='text'  name='tipo' style='visibility: hidden' value='$tipo'> ";
+$precio=$habitacion[0][0][6];
+
+
+
+echo "
+  <!--contenedor principal-->
+    <div class='container'>
+        <!--zona reserva-->
+        <div class='reservationcalendar'>
+        </div>
+        <!--zona habitacion-->
+        <div class='room'>
+            <!--tipo de habitacion-->
+            <div class='roomtype'>
+                <h1>$tipo</h1>
+            </div>
+             <!--imagen de habitacion-->
+            <div class='roomimg'>
+        <img src='$rutaimagen' width='80%'>
+            </div>
+            <!--descripción de habitacion-->
+            <div class='roominfo'>
+                <p> $descripcion</p>
+            </div>
+            <!--precio de habitacion-->
+            <div class='roomprice'>
+                <p>$precio</p>
+            </div>
+            <!--botones-->
+            <div class='buttons'>
+                <input type='submit' value='Cancelar' id='cancel'>
+                <input type='submit' value='Reservar online' id='select'>
+            </div>
+        </div>
+    </div>
+";
 }
 
 ?>
-     
-     
-     
-        
-      
-        
-     
-      
-      
-          
-        
-          
-           
-            
-           
-            
-        
-          </div>
-          <div id="calendar"></div>
-      </div>
-        <div class="buttons_reservation" style="margin-top: 2%;margin: 2%;">
-          <button type="submit" class="button btn-primary">
-            Hacer reserva
-          </button>
-          <button type="reset" class="button">Cancel</button>
-        </div>
-      </div>
-      </form>
-    </div>
-
 
       <!-- Optional JavaScript; choose one of the two! -->
 
