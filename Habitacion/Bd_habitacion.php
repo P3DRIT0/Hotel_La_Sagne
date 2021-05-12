@@ -3,8 +3,12 @@
 session_start();
 include '../config/conexiones_BD.php';
 
+/**
+ * Método que recibe por cabecera el tipo de habitación y devuelve un array con el tipo de habitacion y su id
+ * @param String $rest Tipo de habitación
+ * @return Array Conjunto de tipos de habitaciones con sus IDs
+ */
 function obtener_habitacion($rest) {
-
     try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT * FROM habitaciones where tipo_de_habitacion=:tipo_habitacion");

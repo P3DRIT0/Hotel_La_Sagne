@@ -1,72 +1,86 @@
 <?php
+
 include '../config/conexiones_BD.php';
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+/**
+ * Método que recibe un correo y comprueba si esta registrado en la base de datos
+ * 
+ * @param String $correo Correo electrónico
+ * @return boolean Verdadero si existe el usuario con ese correo en la base de datos
  */
-
-function comprobar_usuario($correo){
-   
+function comprobar_usuario($correo) {
     try {
-$usuario_registrado=false; 
-$base = conectar();
- $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
- $sentencia->bindParam(':correo', $correo);
- $sentencia->execute();
- $result = $sentencia->fetch(PDO::FETCH_ASSOC);
- if(!empty($result["email"])){
-    $usuario_registrado=true;
-}
-$sentencia = null;
-$base=null;        
-return $usuario_registrado;
-} catch(PDOException $e) {
-    die('No se pudo conectar: ' . $e->getMessage());
+        $usuario_registrado = false;
+        $base = conectar();
+        $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
+        $sentencia->bindParam(':correo', $correo);
+        $sentencia->execute();
+        $result = $sentencia->fetch(PDO::FETCH_ASSOC);
+        if (!empty($result["email"])) {
+            $usuario_registrado = true;
+        }
+        $sentencia = null;
+        $base = null;
+        return $usuario_registrado;
+    } catch (PDOException $e) {
+        die('No se pudo conectar: ' . $e->getMessage());
+    }
 }
 
-}
-function cotejar_contraseñas($contraseña,$correo){
+/**
+ * Método que comprueba que la contraseña corresponda con ese correo
+ * 
+ * @param String $contraseña Contraseña del usuario
+ * @param String $correo Correo electrónico del usuario
+ * @return boolean Devuelve verdadero si el correo y la contraseña coinciden con las de la base de datos
+ */
+function cotejar_contraseñas($contraseña, $correo) {
     try {
- $credenciales_validas=false;
- $base = conectar();
- $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
- $sentencia->bindParam(':correo', $correo);
- $sentencia->execute();
- $result = $sentencia->fetch(PDO::FETCH_ASSOC);
- if(password_verify($contraseña,$result["password"])){
-     $credenciales_validas=true;
+        $credenciales_validas = false;
+        $base = conectar();
+        $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
+        $sentencia->bindParam(':correo', $correo);
+        $sentencia->execute();
+        $result = $sentencia->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($contraseña, $result["password"])) {
+            $credenciales_validas = true;
+        }
+        $sentencia = null;
+        $base = null;
+        return $credenciales_validas;
+    } catch (PDOException $e) {
+        die('No se pudo conectar: ' . $e->getMessage());
+    }
 }
-$sentencia = null;
-$base=null;  
-return $credenciales_validas;
- } catch(PDOException $e) {
-    die('No se pudo conectar: ' .$e->getMessage());
-}
-}
-function crear_sesion($correo){
-  try {
- $base = conectar();
- $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
- $sentencia->bindParam(':correo', $correo);
- $sentencia->execute();
- $result = $sentencia->fetch(PDO::FETCH_ASSOC);
- session_start();
- $_SESSION['usuario']=$result['nombre'];
- $_SESSION['email']=$result['email'];
- $_SESSION['telf']=$result['telf'];
- $_SESSION['direccion']=$result['direccion'];
- $id_rol=$result['rol_usuario'];
-//Acceder a la tabla roles
- $sentencia = $base->prepare('SELECT nombre_rol FROM roles WHERE id=:id');
- $sentencia->bindParam(':id', $id_rol);
- $sentencia->execute();
- $result2 = $sentencia->fetch(PDO::FETCH_ASSOC);
- $_SESSION['rol']=$result2["nombre_rol"];
 
- 
- } catch(PDOException $e) {
-    die('No se pudo conectar: ' .$e->getMessage());
-}
-header("Location:../Reservas/Reservas_habitaciones.php");
+/**
+ * Método que crea una sesión y le vincula los datos recogidos de la base de datos 
+ * para el usuario en cuestión
+ * 
+ * @param String $correo Correo electrónico del usuario
+ */
+function crear_sesion($correo) {
+    try {
+        $base = conectar();
+        $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
+        $sentencia->bindParam(':correo', $correo);
+        $sentencia->execute();
+        $result = $sentencia->fetch(PDO::FETCH_ASSOC);
+        session_start();
+        $_SESSION['usuario'] = $result['nombre'];
+        $_SESSION['email'] = $result['email'];
+        $_SESSION['telf'] = $result['telf'];
+        $_SESSION['direccion'] = $result['direccion'];
+        $id_rol = $result['rol_usuario'];
+
+        //Acceder a la tabla roles
+        $sentencia = $base->prepare('SELECT nombre_rol FROM roles WHERE id=:id');
+        $sentencia->bindParam(':id', $id_rol);
+        $sentencia->execute();
+        $result2 = $sentencia->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['rol'] = $result2["nombre_rol"];
+    } catch (PDOException $e) {
+        die('No se pudo conectar: ' . $e->getMessage());
+    }
+    header("Location:../Reservas/Reservas_habitaciones.php");
 }
