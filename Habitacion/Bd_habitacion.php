@@ -5,8 +5,9 @@ include '../config/conexiones_BD.php';
 
 /**
  * Método que recibe por cabecera el tipo de habitación y devuelve un array con el tipo de habitacion y su id
- * @param String $rest Tipo de habitación
- * @return Array Conjunto de tipos de habitaciones con sus IDs
+ * 
+ * @param string $rest Tipo de habitación
+ * @return array Conjunto de tipos de habitaciones con sus IDs
  */
 function obtener_habitacion($rest) {
     try {
@@ -29,7 +30,7 @@ function obtener_habitacion($rest) {
 /**
  * Metodo que recibe por cabecera el tipo de habitacion del que queremos saber cuantas existen en total(dadas de alta)
  * 
- * @param String $tipo Tipo de habitación
+ * @param string $tipo Tipo de habitación
  * @return int Numero de filas que corresponde al array formado por la sentencia previa
  */
 function contar_habitaciones($tipo) {
@@ -48,7 +49,7 @@ function contar_habitaciones($tipo) {
 /**
  * Metodo que recibe por cabecera un tipo de habitacion para contar el numero de estas que estan reservadas
  * 
- * @param String $tipo Tipo de habitación
+ * @param string $tipo Tipo de habitación
  * @return int Numero de filas que corresponde al array formado por la sentencia previa
  */
 function contar_reservas($tipo) {
@@ -67,7 +68,7 @@ function contar_reservas($tipo) {
 /**
  * Metodo que recoge por cabecera los datos con los que va a rellenar la reserva de una habitacion
  * 
- * @param String $tipo
+ * @param string $tipo
  * @param date $fecha_entrada
  * @param date $fecha_salida
  * @param int $id_habitacion
@@ -102,7 +103,7 @@ function crear_reserva($tipo, $fecha_entrada, $fecha_salida, $id_habitacion) {
 /**
  * Método que comprueba si quedan habitaciones disponibles en funcion de los parametros introducidos por cabecera
  * 
- * @param String $tipo Tipo de habitacion
+ * @param string $tipo Tipo de habitacion
  * @param date $fecha_entrada Fecha de entrada
  * @param date $fecha_salida Fecha de salida
  * @param int $id_habitacion ID habitacion

@@ -5,7 +5,7 @@ include '../config/conexiones_BD.php';
 /**
  * Método que recibe un correo y comprueba si esta registrado en la base de datos
  * 
- * @param String $correo Correo electrónico
+ * @param string $correo Correo electrónico
  * @return boolean Verdadero si existe el usuario con ese correo en la base de datos
  */
 function comprobar_usuario($correo) {
@@ -30,8 +30,8 @@ function comprobar_usuario($correo) {
 /**
  * Método que comprueba que la contraseña corresponda con ese correo
  * 
- * @param String $contraseña Contraseña del usuario
- * @param String $correo Correo electrónico del usuario
+ * @param string $contraseña Contraseña del usuario
+ * @param string $correo Correo electrónico del usuario
  * @return boolean Devuelve verdadero si el correo y la contraseña coinciden con las de la base de datos
  */
 function cotejar_contraseñas($contraseña, $correo) {
@@ -57,7 +57,7 @@ function cotejar_contraseñas($contraseña, $correo) {
  * Método que crea una sesión y le vincula los datos recogidos de la base de datos 
  * para el usuario en cuestión
  * 
- * @param String $correo Correo electrónico del usuario
+ * @param string $correo Correo electrónico del usuario
  */
 function crear_sesion($correo) {
     try {
