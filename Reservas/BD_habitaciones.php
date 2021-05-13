@@ -1,5 +1,18 @@
 <?php
+
 include '../config/conexiones_BD.php';
+
+/**
+ * Método que inserta una nueva habitación en la base de datos con los datos 
+ * recogidos por cabecera
+ * 
+ * @param float $m2 Metros cuadrados de la habitación
+ * @param boolean $ventana Indica si tiene o no ventana
+ * @param string $tipo_habitacion Indica el tipo de habitación a crear
+ * @param boolean $servicio_limpieza Indica si tiene o no servicio de limpieza
+ * @param boolean $internet Indica si tiene o no internet
+ * @param float $precio Precio de la habitación
+ */
 function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $internet, $precio) {
     try {
         $base = conectar();
@@ -18,6 +31,12 @@ function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $
     }
 }
 
+/**
+ * Método para añadir una imagen a las habitaciones.
+ * 
+ * @param file $imagen_habitacion Imagen de la habitación
+ * @param string $descripcion Descripción de la habitación
+ */
 function añadir_imagenes($imagen_habitacion, $descripcion) {
     $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
@@ -38,6 +57,11 @@ function añadir_imagenes($imagen_habitacion, $descripcion) {
     }
 }
 
+/**
+ * Método para listar las habitaciones existentes.
+ * 
+ * @return array Lista de habitaciones existentes
+ */
 function lista_habitaciones() {
     $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
@@ -46,6 +70,11 @@ function lista_habitaciones() {
     return $resultados;
 }
 
+/**
+ * Método para visualizar las habitaciones existentes.
+ * 
+ * @return array 
+ */
 function visualizar_habitaciones() {
     $base = conectar();
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
@@ -60,7 +89,7 @@ function visualizar_habitaciones() {
             $titulo = $resultados[$index]['tipo_de_habitacion'];
             $descripcion = $resultados2[$index]['descripcion_imagen'];
             $precio = $resultados[$index]['precio'];
-            $id=$resultados[$index]['id'];
+            $id = $resultados[$index]['id'];
             echo "<div class='habitacion' id=habitacion$id>";
             echo "<img src='$ruta'></img>";
             echo "<div class='texto'>";
@@ -69,14 +98,19 @@ function visualizar_habitaciones() {
             echo "</div>";
             echo "<a class='precio'>$precio €</a>";
             echo "</div>";
-            
         }
-      return array ($id-$index,$id);
+        return array($id - $index, $id);
     } catch (PDOException $e) {
         print $e->getMessage();
     }
 }
 
+/**
+ * Método para borrar habitaciones que recibe por cabecera un array con los id de 
+ * las habitaciones a borrar
+ * 
+ * @param array $habitaciones_borrar Array de habitaciones a borrar
+ */
 function borrar_habitaciones($habitaciones_borrar) {
     try {
         $base = conectar();
@@ -93,7 +127,18 @@ function borrar_habitaciones($habitaciones_borrar) {
     }
 }
 
-function modificar_habitaciones($id,$m2,$precio,$ventana,$limpieza,$internet,$tipo_de_habitacion) {
+/**
+ * Método para modificar los datos de una habitación en concreto en la base de datos.
+ * 
+ * @param int $id Identificador de la habitación
+ * @param float $m2 Metros cuadrados de la habitación
+ * @param float $precio Precio de la habitación
+ * @param boolean $ventana Si dispone de ventana o no
+ * @param boolean $limpieza Si dipone de servicio de limpieza o no
+ * @param boolean $internet Si dispone de internet o no
+ * @param string $tipo_de_habitacion Tipo de habitación
+ */
+function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $internet, $tipo_de_habitacion) {
     $base = conectar();
     $sentencia = $base->prepare("UPDATE habitaciones SET m2=:m2,ventana=:ventana,tipo_de_habitacion=:tipo_de_habitacion"
             . ",servicio_limpieza=:servicio_limpieza "
