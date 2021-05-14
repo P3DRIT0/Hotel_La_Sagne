@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
         crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
         añadir_imagenes($file_name,$tipo_habitacion);
-//        header('Location:./Reservas_habitaciones.php');
+        header('Location:./Reservas_habitaciones.php');
     }
 }
 ?>
@@ -79,11 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-12 pt-3">
                                 <textarea id="result" name="descripcion" placeholder="Breve descripcion de la habitacion"></textarea>
                             </div>
-                            <div class="col-12 pt-3">
-                                <textarea id="result2" name="descripcionimg" placeholder="Descripcion de la iamgen"></textarea>
-                            </div>
                             <input type="file" name="file"><br>
-                            <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>                 
+                            <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>  
+                            <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location= 'Reservas_habitaciones.php'"/> 
                         </form>
                     </div>
                 </div>
