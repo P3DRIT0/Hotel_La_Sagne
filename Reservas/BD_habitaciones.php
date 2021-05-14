@@ -35,7 +35,7 @@ function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $inte
  * Método para añadir una imagen a las habitaciones.
  * 
  * @param file $imagen_habitacion Imagen de la habitación
- * @param integer $id id de la habitacion
+ * @param string $descripcion Descripción de la habitación
  */
 function añadir_imagenes($imagen_habitacion,$tipo) {
     $base = conectar();
@@ -150,4 +150,44 @@ function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $interne
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     header('Location:./Reservas_habitaciones.php');
+}
+
+
+
+function ver_tipos_existentes(){
+    $base = conectar();
+    $sentencia = $base->prepare("SELECT tipo_de_habitacion FROM tipo_habitaciones");
+    try {
+    $sentencia->execute();
+    $resultados = $sentencia->fetchAll();
+    return $resultados;
+    $sentencia=null;
+    $base=null;
+} catch (PDOException $e) {
+        print $e->getMessage();
+    }
+
+}
+function crear_habitacion($tipo){
+    try {
+        $base = conectar();
+        $sentencia = $base->prepare("INSERT INTO `habitaciones`(`tipo_habitacion`) VALUES (:tipo_habitacion)");
+        $sentencia->bindParam(':tipo_habitacion', $tipo);
+        $sentencia->execute();
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+function listar_habitaciones(){
+    try {
+        $base = conectar();
+        $sentencia = $base->prepare("SELECT * FROM  habitaciones ");
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+} catch (PDOException $e) {
+        print $e->getMessage();
+
+}
+
 }

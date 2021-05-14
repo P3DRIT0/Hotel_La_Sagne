@@ -74,7 +74,7 @@ require_once './BD_habitaciones.php';
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_tipo.php'"> Crear tipo 
                         </li>
                         <li class="nav-item"style="margin-top:10px ">
-                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = '  '"> Crear habitacion
+                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_habitacion.php'"> Crear habitacion
                         </li>
                         <li class="nav-item" style="margin-top:10px" >
                             <button  class="btn btn-outline-light my-5 my-sm-3" onclick="location = 'Borrar_habitacion.php'"> Borrar habitacion
