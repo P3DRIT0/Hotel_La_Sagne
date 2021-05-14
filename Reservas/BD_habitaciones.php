@@ -3,7 +3,7 @@
 include '../config/conexiones_BD.php';
 
 /**
- * Método que inserta una nueva habitación en la base de datos con los datos 
+ * Método que inserta un nuevo tipo de habitacion  en la base de datos con los datos 
  * recogidos por cabecera
  * 
  * @param float $m2 Metros cuadrados de la habitación
@@ -12,20 +12,20 @@ include '../config/conexiones_BD.php';
  * @param boolean $servicio_limpieza Indica si tiene o no servicio de limpieza
  * @param boolean $internet Indica si tiene o no internet
  * @param float $precio Precio de la habitación
+ * @param string $descripcion Descripcion de la habitación
  */
-function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $internet, $precio) {
+function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion) {
     try {
         $base = conectar();
-        $sentencia = $base->prepare("INSERT INTO `habitaciones`(`m2`,`ventana`,`tipo_de_habitacion`,`servicio_limpieza`,`internet`,`precio`) VALUES (:m2,:ventana,:tipo_habitacion,:servicio_limpieza,:internet,:precio)");
+        $sentencia = $base->prepare("INSERT INTO `tipo_habitaciones`(`m2`,`ventana`,`tipo_de_habitacion`,`servicio_limpieza`,`internet`,`precio`,`descripcion`) VALUES (:m2,:ventana,:tipo_habitacion,:servicio_limpieza,:internet,:precio,:descripcion)");
         $sentencia->bindParam(':m2', $m2);
         $sentencia->bindParam(':ventana', $ventana);
         $sentencia->bindParam(':tipo_habitacion', $tipo_habitacion);
-        $sentencia->bindParam(':servicio_limpieza', $servicio_limpieza);
+        $sentencia->bindParam(':servicio_limpieza', $limpieza);
         $sentencia->bindParam(':internet', $internet);
         $sentencia->bindParam(':precio', $precio);
+        $sentencia->bindParam(':descripcion', $descripcion);
         $sentencia->execute();
-        $sentencia = null;
-        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -35,22 +35,20 @@ function crear_habitacion($m2, $ventana, $tipo_habitacion, $servicio_limpieza, $
  * Método para añadir una imagen a las habitaciones.
  * 
  * @param file $imagen_habitacion Imagen de la habitación
- * @param string $descripcion Descripción de la habitación
+ * @param integer $id id de la habitacion
  */
-function añadir_imagenes($imagen_habitacion, $descripcion) {
+function añadir_imagenes($imagen_habitacion,$tipo) {
     $base = conectar();
-    $sentencia = $base->prepare("SELECT * FROM habitaciones");
+    $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones WHERE tipo_de_habitacion = :tipo");
     try {
+         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
-        for ($index = 0; $index < count($resultados); $index++) {
-            
-        }
-        $id = $resultados[$index - 1]['id'];
-        $sentencia = $base->prepare("INSERT INTO `imagenes_habitaciones`(`id_habitacion`,`imagen_habitacion`,`descripcion_imagen`) VALUES (:id_habitacion,:imagen_habitacion,:descripcion_imagen)");
-        $sentencia->bindParam(':id_habitacion', $id);
+        echo $resultados[0][0];
+        $id = $resultados[0][0];
+        $sentencia = $base->prepare("INSERT INTO `imagenes_habitaciones`(`imagen_habitacion`,`id_tipo_habitacion`) VALUES (:imagen_habitacion,:tipo)");
         $sentencia->bindParam(':imagen_habitacion', $imagen_habitacion);
-        $sentencia->bindParam(':descripcion_imagen', $descripcion);
+        $sentencia->bindParam(':tipo', $id);
         $sentencia->execute();
     } catch (PDOException $e) {
         print $e->getMessage();

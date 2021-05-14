@@ -1,9 +1,10 @@
 <?php
 require_once './BD_habitaciones.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['nombre']) && isset($_POST['tipo_habitacion']) && isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion']) && (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0)) {
-        $nombre = $_POST['nombre'];
-        $tipo_habitacion = $_POST['tipo_habitacion'];
+    echo "llega hasta aqui";
+    if (isset($_POST['nombre'])&& isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion']) && (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0)) {
+   echo "entra";
+        $tipo_habitacion = $_POST['nombre'];
         $precio = $_POST['precio'];
         $m2 = $_POST['m2'];
         $descripcion = $_POST['descripcion'];
@@ -28,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $limpieza = false;
         }
-        echo "$tipo_habitacion";
-        crear_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $file_name, $descripcion);
-        añadir_imagenes($file_name, $descripcion);
-        header('Location:./Reservas_habitaciones.php');
+  
+        crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
+        añadir_imagenes($file_name,$tipo_habitacion);
+//        header('Location:./Reservas_habitaciones.php');
     }
 }
 ?>
@@ -49,26 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             crossorigin="anonymous"
             />
         <link rel="stylesheet" href="formularios.css" />
-        <title>Crear habitacion</title>
+        <title>Crear Tipo Habitacion</title>
     </head>
     <body>   
         <div id="caja" class="col-6">
-            <h3>Crear habitacion</h3>
+            <h3>Crear tipo habitacion</h3>
             <div class="col-10" id="formulario">
                 <div class="row">
                     <div class="col-sm-7 col-xs-12">
-                        <form action="../Reservas/Crear_habitacion.php"  method="post" enctype="multipart/form-data">
+                        <form action="../Reservas/Crear_tipo.php"  method="post" enctype="multipart/form-data">
                             <div class="form-group m-2">
-                                <lable for="subject">Nombre habitacion：</lable>
+                                <lable for="subject">Nombre del nuevo tipo：</lable>
                                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required />
-                            </div>
-                            <div class="col-12 pt-3">
-                                <label> Tipo de habitacion</label>
-                                <select name="tipo_habitacion">
-                                    <option>Suite</option>
-                                    <option>Habitacion Doble</option>
-                                    <option selected>Habitacion Individual:</option>
-                                </select>
                             </div>
                             <div class="col-12 pt-3">
                                 <lable for="subject">Precio de la habitacion：</lable>
@@ -86,8 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-12 pt-3">
                                 <textarea id="result" name="descripcion" placeholder="Breve descripcion de la habitacion"></textarea>
                             </div>
+                            <div class="col-12 pt-3">
+                                <textarea id="result2" name="descripcionimg" placeholder="Descripcion de la iamgen"></textarea>
+                            </div>
                             <input type="file" name="file"><br>
-                            <input id="boton" type="submit" class="btnRegister"  value="Crear habitacion"/>                 
+                            <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>                 
                         </form>
                     </div>
                 </div>

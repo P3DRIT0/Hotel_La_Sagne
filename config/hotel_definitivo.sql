@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2021 a las 17:15:59
+-- Tiempo de generación: 14-05-2021 a las 20:19:28
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -29,21 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `habitaciones` (
   `id` bigint(20) NOT NULL,
-  `m2` decimal(6,2) NOT NULL,
-  `ventana` bit(1) NOT NULL DEFAULT b'0',
-  `tipo_de_habitacion` varchar(255) NOT NULL,
-  `servicio_limpieza` bit(1) NOT NULL DEFAULT b'0',
-  `internet` bit(1) NOT NULL DEFAULT b'0',
-  `precio` decimal(6,2) NOT NULL
+  `tipo_habitacion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `habitaciones`
---
-
-INSERT INTO `habitaciones` (`id`, `m2`, `ventana`, `tipo_de_habitacion`, `servicio_limpieza`, `internet`, `precio`) VALUES
-(49, '165.00', b'1', 'Suite', b'1', b'1', '182.00'),
-(50, '165.00', b'1', 'Suite', b'1', b'1', '182.00');
 
 -- --------------------------------------------------------
 
@@ -71,42 +58,21 @@ CREATE TABLE `habitacion_servicio` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `habitacion_tipo`
---
-
-CREATE TABLE `habitacion_tipo` (
-  `id` bigint(20) NOT NULL,
-  `tipo_habitacion` varchar(255) NOT NULL,
-  `descripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `habitacion_tipo`
---
-
-INSERT INTO `habitacion_tipo` (`id`, `tipo_habitacion`, `descripcion`) VALUES
-(1, 'Suite', 'Nuestra mas alta gama de habitaciones');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `imagenes_habitaciones`
 --
 
 CREATE TABLE `imagenes_habitaciones` (
   `id` bigint(20) NOT NULL,
-  `id_habitacion` bigint(20) NOT NULL,
-  `imagen_habitacion` varchar(255) NOT NULL,
-  `descripcion_imagen` varchar(255) NOT NULL
+  `id_tipo_habitacion` bigint(20) NOT NULL,
+  `imagen_habitacion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `imagenes_habitaciones`
 --
 
-INSERT INTO `imagenes_habitaciones` (`id`, `id_habitacion`, `imagen_habitacion`, `descripcion_imagen`) VALUES
-(8, 49, '../Reservas/Imagenes_habitaciones/1.jpg', 'Suite con impresionantes vistas al mar para poder tener las vacaciones ideales al mejor precio,'),
-(9, 50, '../Reservas/Imagenes_habitaciones/2.jpg', 'Suite con piscina en primera linea de playa ');
+INSERT INTO `imagenes_habitaciones` (`id`, `id_tipo_habitacion`, `imagen_habitacion`) VALUES
+(20, 61, '../Reservas/Imagenes_habitaciones/Fondo1.jpg');
 
 -- --------------------------------------------------------
 
@@ -158,6 +124,30 @@ CREATE TABLE `servicios` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipo_habitaciones`
+--
+
+CREATE TABLE `tipo_habitaciones` (
+  `id` bigint(20) NOT NULL,
+  `m2` decimal(6,2) NOT NULL,
+  `ventana` bit(1) NOT NULL DEFAULT b'0',
+  `tipo_de_habitacion` varchar(255) NOT NULL,
+  `servicio_limpieza` bit(1) NOT NULL DEFAULT b'0',
+  `internet` bit(1) NOT NULL DEFAULT b'0',
+  `precio` decimal(6,2) NOT NULL,
+  `descripcion` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipo_habitaciones`
+--
+
+INSERT INTO `tipo_habitaciones` (`id`, `m2`, `ventana`, `tipo_de_habitacion`, `servicio_limpieza`, `internet`, `precio`, `descripcion`) VALUES
+(61, '123.00', b'1', 'Individual', b'1', b'1', '123.00', 'dffdfdf');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -187,7 +177,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telf`, `direccion`, `password`
 --
 ALTER TABLE `habitaciones`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tipo_de_habitacion` (`tipo_de_habitacion`);
+  ADD KEY `tipo_habitacion` (`tipo_habitacion`) USING BTREE;
 
 --
 -- Indices de la tabla `habitaciones_reservas`
@@ -205,18 +195,11 @@ ALTER TABLE `habitacion_servicio`
   ADD KEY `id_servicio` (`id_servicio`);
 
 --
--- Indices de la tabla `habitacion_tipo`
---
-ALTER TABLE `habitacion_tipo`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tipo_habitacion` (`tipo_habitacion`);
-
---
 -- Indices de la tabla `imagenes_habitaciones`
 --
 ALTER TABLE `imagenes_habitaciones`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_habitacion` (`id_habitacion`);
+  ADD KEY `id_tipo_habitacion` (`id_tipo_habitacion`);
 
 --
 -- Indices de la tabla `reservas`
@@ -240,6 +223,13 @@ ALTER TABLE `servicios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tipo_habitaciones`
+--
+ALTER TABLE `tipo_habitaciones`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tipo_de_habitacion` (`tipo_de_habitacion`) USING BTREE;
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -256,7 +246,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `habitaciones_reservas`
@@ -265,16 +255,10 @@ ALTER TABLE `habitaciones_reservas`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `habitacion_tipo`
---
-ALTER TABLE `habitacion_tipo`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT de la tabla `imagenes_habitaciones`
 --
 ALTER TABLE `imagenes_habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
@@ -289,10 +273,16 @@ ALTER TABLE `servicios`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo_habitaciones`
+--
+ALTER TABLE `tipo_habitaciones`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- Restricciones para tablas volcadas
@@ -302,27 +292,27 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  ADD CONSTRAINT `habitaciones_ibfk_1` FOREIGN KEY (`tipo_de_habitacion`) REFERENCES `habitacion_tipo` (`tipo_habitacion`);
+  ADD CONSTRAINT `tipo_habitacion` FOREIGN KEY (`tipo_habitacion`) REFERENCES `tipo_habitaciones` (`tipo_de_habitacion`);
 
 --
 -- Filtros para la tabla `habitaciones_reservas`
 --
 ALTER TABLE `habitaciones_reservas`
   ADD CONSTRAINT `habitaciones_reservas_ibfk_1` FOREIGN KEY (`num_reserva`) REFERENCES `reservas` (`num_reserva`),
-  ADD CONSTRAINT `habitaciones_reservas_ibfk_2` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`);
+  ADD CONSTRAINT `habitaciones_reservas_ibfk_2` FOREIGN KEY (`id_habitacion`) REFERENCES `tipo_habitaciones` (`id`);
 
 --
 -- Filtros para la tabla `habitacion_servicio`
 --
 ALTER TABLE `habitacion_servicio`
-  ADD CONSTRAINT `habitacion_servicio_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`),
+  ADD CONSTRAINT `habitacion_servicio_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `tipo_habitaciones` (`id`),
   ADD CONSTRAINT `habitacion_servicio_ibfk_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicios` (`id`);
 
 --
 -- Filtros para la tabla `imagenes_habitaciones`
 --
 ALTER TABLE `imagenes_habitaciones`
-  ADD CONSTRAINT `imagenes_habitaciones_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`);
+  ADD CONSTRAINT `imagenes_habitaciones_ibfk_1` FOREIGN KEY (`id_tipo_habitacion`) REFERENCES `tipo_habitaciones` (`id`);
 
 --
 -- Filtros para la tabla `reservas`
