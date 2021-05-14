@@ -16,7 +16,6 @@ for ($index1 = 0; $index1 < count($resultados); $index1++) {
 }
 if (!empty($habitaciones_borrar)) {
     borrar_habitaciones($habitaciones_borrar);
-    header('Location:./Reservas_habitaciones.php');
 }
 ?>
 
@@ -39,24 +38,32 @@ if (!empty($habitaciones_borrar)) {
         <div id="caja" class="col-6">
             <h3>Borrar habitación</h3>
             <div class="col-10" id="formulario">
-                <form action='./Borrar_habitacion.php' method='post'  
-                <?php
-                if (!empty($resultados)) {
-                    for ($index = 0; $index < count($resultados); $index++) {
-                        $id = $resultados[$index]['id'];
-                        $m2 = $resultados[$index]['m2'];
-                        $ventana = $resultados[$index]['ventana'];
-                        $tipo_de_habitacion = $resultados[$index]['tipo_de_habitacion'];
-                        $servicio_limpieza = $resultados[$index]['servicio_limpieza'];
-                        $internet = $resultados[$index]['internet'];
-                        $precio = $resultados[$index]['precio'];
-                        echo "<label><input type='checkbox' name='habitacion$index'</label>Habitacion$index »»Id:$id, m2:$m2 ,Tipo de habitacion:$tipo_de_habitacion, Precio:$precio €<br>";
-                    }
-                } else {
-                    echo "No existen habitaciones que borrar";
-                }
-                ?>
-                      <input id="boton" type='submit' name='borrar' value='Borrar'/>
+                <form action='./Borrar_habitacion.php' method='post'> 
+                    <table class="table table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Borrar</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($resultados)) {
+                                for ($index = 0; $index < count($resultados); $index++) {
+                                    $id = $resultados[$index]['id'];
+                                    $tipo_habitacion = $resultados[$index]['tipo_habitacion'];
+                                    echo "<tr><th scope='row'>$index</th><td><input type='checkbox' name='habitacion$index'</td><td>$id</td><td>$tipo_habitacion</td></tr>";
+                                }
+                            } else {
+                                echo "No existen habitaciones que borrar";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <input id="boton" type='submit' name='borrar' value='Borrar'/>
+                    <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
                 </form>
             </div>
         </div>

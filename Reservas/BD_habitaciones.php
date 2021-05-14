@@ -37,11 +37,11 @@ function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $inte
  * @param file $imagen_habitacion Imagen de la habitación
  * @param integer $id id de la habitacion
  */
-function añadir_imagenes($imagen_habitacion,$tipo) {
+function añadir_imagenes($imagen_habitacion, $tipo) {
     $base = conectar();
     $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones WHERE tipo_de_habitacion = :tipo");
     try {
-         $sentencia->bindParam(':tipo', $tipo);
+        $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         echo $resultados[0][0];
@@ -62,9 +62,23 @@ function añadir_imagenes($imagen_habitacion,$tipo) {
  */
 function lista_habitaciones() {
     $base = conectar();
-    $sentencia = $base->prepare("SELECT * FROM habitaciones");
+    $sentencia = $base->prepare("SELECT * FROM habitaciones ORDER by id");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
+    return $resultados;
+}
+
+/**
+ * Método para listar los tipos de habitaciones existentes.
+ * 
+ * @return array Lista de tipos de habitaciones existentes
+ */
+function lista_tipos_habitaciones() {
+    $base = conectar();
+    $sentencia = $base->prepare("SELECT * FROM tipo_habitaciones");
+    $sentencia->execute();
+    $resultados = $sentencia->fetchAll();
+    echo "tipos de habitaciones: " . $resultados;
     return $resultados;
 }
 
@@ -113,9 +127,6 @@ function borrar_habitaciones($habitaciones_borrar) {
     try {
         $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
-            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_habitacion=:id_habitacion");
-            $sentencia2->bindParam(':id_habitacion', $habitaciones_borrar[$index]);
-            $sentencia2->execute();
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
