@@ -37,19 +37,23 @@ function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $inte
  * @param file $imagen_habitacion Imagen de la habitación
  * @param string $descripcion Descripción de la habitación
  */
-function añadir_imagenes($imagen_habitacion, $tipo) {
+function añadir_imagenes($rutas_imagenes,$tipo) {
     $base = conectar();
     $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones WHERE tipo_de_habitacion = :tipo");
     try {
-        $sentencia->bindParam(':tipo', $tipo);
+         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         echo $resultados[0][0];
         $id = $resultados[0][0];
+        for ($index = 0; $index < count($rutas_imagenes); $index++) {
+        $imagenes=$rutas_imagenes[$index];
+        echo $imagenes;
         $sentencia = $base->prepare("INSERT INTO `imagenes_habitaciones`(`imagen_habitacion`,`id_tipo_habitacion`) VALUES (:imagen_habitacion,:tipo)");
-        $sentencia->bindParam(':imagen_habitacion', $imagen_habitacion);
+        $sentencia->bindParam(':imagen_habitacion',$imagenes);
         $sentencia->bindParam(':tipo', $id);
         $sentencia->execute();
+        }   
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -62,23 +66,9 @@ function añadir_imagenes($imagen_habitacion, $tipo) {
  */
 function lista_habitaciones() {
     $base = conectar();
-    $sentencia = $base->prepare("SELECT * FROM habitaciones ORDER by id");
+    $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
-    return $resultados;
-}
-
-/**
- * Método para listar los tipos de habitaciones existentes.
- * 
- * @return array Lista de tipos de habitaciones existentes
- */
-function lista_tipos_habitaciones() {
-    $base = conectar();
-    $sentencia = $base->prepare("SELECT * FROM tipo_habitaciones");
-    $sentencia->execute();
-    $resultados = $sentencia->fetchAll();
-    echo "tipos de habitaciones: " . $resultados;
     return $resultados;
 }
 
@@ -127,6 +117,9 @@ function borrar_habitaciones($habitaciones_borrar) {
     try {
         $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
+            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_habitacion=:id_habitacion");
+            $sentencia2->bindParam(':id_habitacion', $habitaciones_borrar[$index]);
+            $sentencia2->execute();
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
@@ -201,4 +194,31 @@ function listar_habitaciones(){
 
 }
 
+}
+function asignar_nombres(){
+    try {
+        $base = conectar();
+        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones");
+        $sentencia->execute();
+        $cuenta = $sentencia->rowCount();
+        return $cuenta;
+} catch (PDOException $e) {
+        print $e->getMessage();
+
+}
+}
+
+function comprobar_tipo($tipo){
+  try {
+        $base = conectar();
+        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones WHERE tipo_de_habitacion =:tipo");
+        $sentencia->bindParam(':tipo', $tipo);
+        $sentencia->execute();
+         $resultados = $sentencia->fetchAll();
+        return $resultados;
+} catch (PDOException $e) {
+        print $e->getMessage();
+
+}
+     
 }

@@ -1,39 +1,75 @@
 <?php
 require_once './BD_habitaciones.php';
+
+$error_tipo_existente="";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "llega hasta aqui";
-    if (isset($_POST['nombre'])&& isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion']) && (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0)) {
-   echo "entra";
-        $tipo_habitacion = $_POST['nombre'];
-        $precio = $_POST['precio'];
-        $m2 = $_POST['m2'];
-        $descripcion = $_POST['descripcion'];
-        $file_tmp_name = $_FILES["file"]["tmp_name"];
-        $file_name = "../Reservas/Imagenes_habitaciones/" . $_FILES["file"]["name"];
-        copy($file_tmp_name, $file_name);
+    
+ if (isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion'])) {
+$tipo_habitacion = ucfirst($_POST['nombre']);
+$existe=comprobar_tipo($tipo_habitacion);
+if(empty($existe)){
+$precio = $_POST['precio'];
+$m2 = $_POST['m2'];
+$descripcion = $_POST['descripcion'];
 
+if (isset($_POST['ventana'])) {
+$ventana = true;
+} else {
+$ventana = false;
+}
 
-        if (isset($_POST['ventana'])) {
-            $ventana = true;
-        } else {
-            $ventana = false;
-        }
+if (isset($_POST['internet'])) {
+$internet = true;
+} else {
+$internet = false;
+}
+if (isset($_POST['limpieza'])) {
+$limpieza = true;
+} else {
+$limpieza = false;
+} 
+    
+    
+$numero=asignar_nombres()*5;
+$rutas=array();
+//Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
+foreach($_FILES["archivo"]['tmp_name'] as $key => $tmp_name){
+//Validamos que el archivo exista
+if($_FILES["archivo"]["name"][$key]) {
 
-        if (isset($_POST['internet'])) {
-            $internet = true;
-        } else {
-            $internet = false;
-        }
-        if (isset($_POST['limpieza'])) {
-            $limpieza = true;
-        } else {
-            $limpieza = false;
-        }
-  
-        crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
-        añadir_imagenes($file_name,$tipo_habitacion);
-        header('Location:./Reservas_habitaciones.php');
-    }
+    $numero++;
+    $filename =$numero.".jpg"; //Obtenemos el nombre original del archivo
+
+  print_r($filename);
+$source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+$directorio = '../Reservas/Imagenes_habitaciones'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+//Validamos si la ruta de destino existe, en caso de no existir la creamos
+if(!file_exists($directorio)){
+//0777 son los permisos
+mkdir($directorio, 0777) or die("No se puede crear el directorio;n");
+}
+$dir = opendir($directorio); //Abrimos el directorio de destino
+$target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
+$rutas[]=$target_path;
+//Movemos y validamos que el archivo se haya cargado correctamente
+//El primer campo es el origen y el segundo el destino
+if(move_uploaded_file($source, $target_path)) {
+echo "El archivo $filename se ha almacenado en forma exitosa.<br>";
+} else {
+echo "Ha ocurrido un error, por favor inténtelo de nuevo.<br>";
+}
+closedir($dir); //Cerramos el directorio de destino
+
+}
+}
+
+crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
+añadir_imagenes($rutas, $tipo_habitacion);
+header('Location:./Reservas_habitaciones.php');
+}else{
+   $error_tipo_existente="El tipo ".$tipo_habitacion ." ya existe en la base de datos";
+}
+}
 }
 ?>
 <!DOCTYPE html>
@@ -57,10 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h3>Crear tipo habitacion</h3>
             <div class="col-10" id="formulario">
                 <div class="row">
-                    <div class="col-sm-7 col-xs-12">
+                    <div class="col-sm-12 col-xs-12">
                         <form action="../Reservas/Crear_tipo.php"  method="post" enctype="multipart/form-data">
-                            <div class="form-group m-2">
-                                <lable for="subject">Nombre del nuevo tipo：</lable>
+                            <div class="form-group">
+                                <lable  for="subject">Nombre del nuevo tipo：</lable>
                                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required />
                             </div>
                             <div class="col-12 pt-3">
@@ -73,15 +109,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 <label><input type="checkbox"  name="ventana" id="cbox1" value="1_checkbox"> Ventana</label><br>
                                 <input type="checkbox" id="cbox2" name="internet"  value="2_checkbox"> Internet</label><br>
-                                <input type="checkbox" id="cbox3"  name="limpieza" value="3_checkbox">Servicio de limpieza <label for="cbox3">
+                                <input type="checkbox" id="cbox3"  name="limpieza" value="3_checkbox"> Servicio de limpieza <label for="cbox3">
                                 </label>
                             </div>
                             <div class="col-12 pt-3">
-                                <textarea id="result" name="descripcion" placeholder="Breve descripcion de la habitacion"></textarea>
+                                <textarea  style="width:100%" id="result" name="descripcion" placeholder="Breve descripcion de la habitacion"></textarea>
                             </div>
-                            <input type="file" name="file"><br>
-                            <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>  
-                            <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location= 'Reservas_habitaciones.php'"/> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Archivos</label>
+                                <a style="color: red"><?php echo $error_tipo_existente?></a>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
+                                </div>
+                                <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>  
+                                <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
+  
+                                
                         </form>
                     </div>
                 </div>

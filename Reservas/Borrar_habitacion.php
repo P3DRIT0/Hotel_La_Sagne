@@ -16,6 +16,7 @@ for ($index1 = 0; $index1 < count($resultados); $index1++) {
 }
 if (!empty($habitaciones_borrar)) {
     borrar_habitaciones($habitaciones_borrar);
+    header('Location:Borrar_habitacion.php');
 }
 ?>
 
@@ -57,8 +58,9 @@ if (!empty($habitaciones_borrar)) {
                                     echo "<tr><th scope='row'>$index</th><td><input type='checkbox' name='habitacion$index'</td><td>$id</td><td>$tipo_habitacion</td></tr>";
                                 }
                             } else {
-                                echo "No existen habitaciones que borrar";
+                                echo "<p style='color:gray;text-align: center'>No hay habitaciones para borrar</p>";
                             }
+                             
                             ?>
                         </tbody>
                     </table>
