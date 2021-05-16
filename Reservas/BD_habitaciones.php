@@ -198,10 +198,11 @@ function listar_habitaciones(){
 function asignar_nombres(){
     try {
         $base = conectar();
-        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones");
+        $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones ORDER BY id DESC LIMIT 1;");
+        
         $sentencia->execute();
-        $cuenta = $sentencia->rowCount();
-        return $cuenta;
+        $resultados = $sentencia->fetchAll();
+        return $resultados[0][0];
 } catch (PDOException $e) {
         print $e->getMessage();
 
@@ -222,3 +223,34 @@ function comprobar_tipo($tipo){
 }
      
 }
+function devolver_tipos_imagenes(){
+     try {
+        $base = conectar();
+        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones INNER JOIN imagenes_habitaciones  ON tipo_habitaciones.id=imagenes_habitaciones.id_tipo_habitacion");
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        
+} catch (PDOException $e) {
+        print $e->getMessage();
+
+}
+    
+}
+function contar_tipos(){
+     try {
+        $base = conectar();
+        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones");
+        $sentencia->execute();
+         $cuenta = $sentencia->rowCount();
+            return $cuenta;
+        
+} catch (PDOException $e) {
+        print $e->getMessage();
+
+}
+    
+}
+
+
+
