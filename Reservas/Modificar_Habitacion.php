@@ -1,22 +1,20 @@
 
 <?php
 require_once './BD_habitaciones.php';
-/* 
+/*
  * Metodo para modificar las habitaciones 
  */
-$visibilidad="hidden";
+$visibilidad = "hidden";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-if(isset($_POST['habitacion'])){
-    $habitacion_seleccionada=$_POST['habitacion'];
-    $nuevo_tipo=$_POST['tipo_habitacion'.$habitacion_seleccionada];
-    modificar_habitacion($habitacion_seleccionada, $nuevo_tipo);
+    if (isset($_POST['habitacion'])) {
+        $habitacion_seleccionada = $_POST['habitacion'];
+        $nuevo_tipo = $_POST['tipo_habitacion' . $habitacion_seleccionada];
+        modificar_habitacion($habitacion_seleccionada, $nuevo_tipo);
+    } else {
 
-    
-}else{
-  
-$visibilidad="visible";
-}
+        $visibilidad = "visible";
+    }
 }
 
 
@@ -53,36 +51,36 @@ $resultados = lista_habitaciones();
                         </thead>
                         <tbody>
                             <?php
-                             $tipos = ver_tipos_existentes();
+                            $tipos = ver_tipos_existentes();
                             if (!empty($resultados)) {
-                               
-                                
+
+
                                 for ($index = 0; $index < count($resultados); $index++) {
+
                                     $id = $resultados[$index]['id'];
                                     $tipo_habitacion = $resultados[$index]['tipo_habitacion'];
                                     echo "<tr><th scope='row'>$index</th><td><input type='radio' name='habitacion' value='$id'</td><td>$id</td><td>";
                                     echo "<select  class='col-11 pt-2' name='tipo_habitacion$id'>";
+                                    echo "<option selected disabled>" . $tipo_habitacion . "</option>";
                                     
                                     for ($index1 = 0; $index1 < count($tipos); $index1++) {
-                                       
-                                echo "<option>" . $tipos[$index1][0] . "</option>";
-                }
-                
-                                echo "<option selected>".$tipo_habitacion."</option></td></tr>";
-                               
+
+
+                                        echo "<option>" . $tipos[$index1][0] . "</option>";
+                                    }
+
+                                    echo "</td></tr>";
                                 }
                             } else {
                                 echo "<p style='color:gray;text-align: center'>No hay habitaciones para borrar</p>";
-                                
                             }
-                             
                             ?>
                         </tbody>
                     </table>
                     <input id="boton" type='submit' name='seleccionar' value='Modificar'/>
                     <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
                 </form>
-                <p style='visibility:<?php echo $visibilidad?>;color:red;text-align: center '> Ninguna habitación seleccionada </p>"
+                <p style='visibility:<?php echo $visibilidad ?>;color:red;text-align: center '> Ninguna habitación seleccionada </p>"
             </div>
         </div>
     </body>
