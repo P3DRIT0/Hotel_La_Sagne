@@ -7,8 +7,8 @@ and open the template in the editor.
 <?php
 require_once './BD_registro.php';
 require_once './Correo_registro.php';
-$nombre = $apellidos = $correo = $direccion =$telefono= "";
-$Err_contraseñas="";
+$nombre = $apellidos = $correo = $direccion = $telefono = "";
+$Err_contraseñas = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['contraseña']) && isset($_POST['contraseña2']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['direccion'])) {
         $nombre = $_POST['nombre'];
@@ -19,18 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $telefono = $_POST['telefono'];
         $direccion = $_POST['direccion'];
         if (!($_POST['contraseña'] == $_POST['contraseña2'])) {
-            $Err_contraseñas="Las contraseñas no coinciden";
+            $Err_contraseñas = "Las contraseñas no coinciden";
         } else {
-            registrar_usuario($nombre,$contraseña,$correo,$telefono,$direccion);
+            registrar_usuario($nombre, $contraseña, $correo, $telefono, $direccion);
             enviar_correos($correo, $nombre);
-  session_start();
- $_SESSION['usuario']=$nombre;
- $_SESSION['email']=$correo;
- $_SESSION['telf']=$telefono;
- $_SESSION['direccion']=$direccion;
- $_SESSION['rol'] = "Usuario_registrado";
-  header('Location:../Reservas/Reservas_habitaciones.php');
-            
+            session_start();
+            $_SESSION['usuario'] = $nombre;
+            $_SESSION['email'] = $correo;
+            $_SESSION['telf'] = $telefono;
+            $_SESSION['direccion'] = $direccion;
+            $_SESSION['rol'] = "Usuario_registrado";
+            header('Location:../Reservas/Reservas_habitaciones.php');
         }
     } else {
         if (isset($_POST['nombre'])) {
@@ -62,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <LINK REL=StyleSheet HREF="../Registro/estilo.css" TYPE="text/css" MEDIA=screen>
     </head>
     <body style="background:transparent">
-     
+
         <div class="container register">
             <div class="row">
                 <div class="col-md-3 register-left">
@@ -81,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nombre*" name="nombre" value="<?php echo $nombre?>"/>
+                                            <input type="text" class="form-control" placeholder="Nombre*" name="nombre" value="<?php echo $nombre ?>"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Primer Apellido *" name="apellido"  value="<?php echo $apellidos?>"/>
+                                            <input type="text" class="form-control" placeholder="Primer Apellido *" name="apellido"  value="<?php echo $apellidos ?>"/>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" placeholder="Contraseña *"   name="contraseña"/>
@@ -92,23 +91,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <div class="form-group">
                                             <input type="password" class="form-control"  placeholder="Confirmar contraseña*"  name="contraseña2"/>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Email *" name="email" value="<?php echo $correo?>"/>
+                                            <input type="email" class="form-control" placeholder="Email *" name="email" value="<?php echo $correo ?>"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" minlength="9" maxlength="9" class="form-control" placeholder="Telefono *" name="telefono" value="<?php echo $telefono?>"/>
+                                            <input type="text" minlength="9" maxlength="9" class="form-control" placeholder="Telefono *" name="telefono" value="<?php echo $telefono ?>"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Dirección *"  name="direccion" value="<?php echo $direccion;?>"/>
+                                            <input type="text" class="form-control" placeholder="Dirección *"  name="direccion" value="<?php echo $direccion; ?>"/>
                                         </div>
-                                       
+
                                         <br>
                                         <input type="submit" class="btnRegister"  value="Registrarse"/>
                                     </div>
-                                    <a style="color:red"><?php echo $Err_contraseñas;?></a>
+                                    <a style="color:red"><?php echo $Err_contraseñas; ?></a>
                                 </div>
                             </form>
                         </div>
@@ -117,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </div>
-         
+
 
 
 
