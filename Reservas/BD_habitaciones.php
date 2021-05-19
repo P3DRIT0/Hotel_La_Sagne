@@ -131,6 +131,11 @@ function borrar_habitaciones($habitaciones_borrar) {
     try {
         $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
+            echo 'Borrando';
+            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_habitacion1");
+            $sentencia2->bindParam(':id_habitacion1', $habitaciones_borrar[$index]);
+            $sentencia2->execute();
+
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
@@ -314,3 +319,16 @@ function contar_tipos() {
         print $e->getMessage();
     }
 }
+
+function modificar_habitacion($id, $nuevo_tipo) {
+    try {
+        $base = conectar();
+        $sentencia = $base->prepare("UPDATE habitaciones SET tipo_habitacion=:tipo WHERE id =:id");
+         $sentencia->bindParam(':tipo', $nuevo_tipo);
+        $sentencia->bindParam(':id', $id);
+        $sentencia->execute();
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+    
