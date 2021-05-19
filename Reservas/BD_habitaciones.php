@@ -37,23 +37,23 @@ function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $inte
  * @param file $imagen_habitacion Imagen de la habitación
  * @param string $descripcion Descripción de la habitación
  */
-function añadir_imagenes($rutas_imagenes,$tipo) {
+function añadir_imagenes($rutas_imagenes, $tipo) {
     $base = conectar();
     $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones WHERE tipo_de_habitacion = :tipo");
     try {
-         $sentencia->bindParam(':tipo', $tipo);
+        $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         echo $resultados[0][0];
         $id = $resultados[0][0];
         for ($index = 0; $index < count($rutas_imagenes); $index++) {
-        $imagenes=$rutas_imagenes[$index];
-        echo $imagenes;
-        $sentencia = $base->prepare("INSERT INTO `imagenes_habitaciones`(`imagen_habitacion`,`id_tipo_habitacion`) VALUES (:imagen_habitacion,:tipo)");
-        $sentencia->bindParam(':imagen_habitacion',$imagenes);
-        $sentencia->bindParam(':tipo', $id);
-        $sentencia->execute();
-        }   
+            $imagenes = $rutas_imagenes[$index];
+            echo $imagenes;
+            $sentencia = $base->prepare("INSERT INTO `imagenes_habitaciones`(`imagen_habitacion`,`id_tipo_habitacion`) VALUES (:imagen_habitacion,:tipo)");
+            $sentencia->bindParam(':imagen_habitacion', $imagenes);
+            $sentencia->bindParam(':tipo', $id);
+            $sentencia->execute();
+        }
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -114,12 +114,15 @@ function visualizar_habitaciones() {
  * @param array $habitaciones_borrar Array de habitaciones a borrar
  */
 function borrar_habitaciones($habitaciones_borrar) {
+    
     try {
         $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
-            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_habitacion=:id_habitacion");
-            $sentencia2->bindParam(':id_habitacion', $habitaciones_borrar[$index]);
+            echo 'Borrando';
+            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_habitacion1");
+            $sentencia2->bindParam(':id_habitacion1', $habitaciones_borrar[$index]);
             $sentencia2->execute();
+            
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
@@ -156,23 +159,21 @@ function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $interne
     header('Location:./Reservas_habitaciones.php');
 }
 
-
-
-function ver_tipos_existentes(){
+function ver_tipos_existentes() {
     $base = conectar();
     $sentencia = $base->prepare("SELECT tipo_de_habitacion FROM tipo_habitaciones");
     try {
-    $sentencia->execute();
-    $resultados = $sentencia->fetchAll();
-    return $resultados;
-    $sentencia=null;
-    $base=null;
-} catch (PDOException $e) {
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        $sentencia = null;
+        $base = null;
+    } catch (PDOException $e) {
         print $e->getMessage();
     }
-
 }
-function crear_habitacion($tipo){
+
+function crear_habitacion($tipo) {
     try {
         $base = conectar();
         $sentencia = $base->prepare("INSERT INTO `habitaciones`(`tipo_habitacion`) VALUES (:tipo_habitacion)");
@@ -182,75 +183,65 @@ function crear_habitacion($tipo){
         print $e->getMessage();
     }
 }
-function listar_habitaciones(){
+
+function listar_habitaciones() {
     try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT * FROM  habitaciones ");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
         print $e->getMessage();
-
+    }
 }
 
-}
-function asignar_nombres(){
+function asignar_nombres() {
     try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones ORDER BY id DESC LIMIT 1;");
-        
+
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados[0][0];
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
         print $e->getMessage();
-
+    }
 }
-}
 
-function comprobar_tipo($tipo){
-  try {
+function comprobar_tipo($tipo) {
+    try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones WHERE tipo_de_habitacion =:tipo");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
-         $resultados = $sentencia->fetchAll();
+        $resultados = $sentencia->fetchAll();
         return $resultados;
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
         print $e->getMessage();
+    }
+}
 
-}
-     
-}
-function devolver_tipos_imagenes(){
-     try {
+function devolver_tipos_imagenes() {
+    try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones INNER JOIN imagenes_habitaciones  ON tipo_habitaciones.id=imagenes_habitaciones.id_tipo_habitacion");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
         print $e->getMessage();
+    }
+}
 
-}
-    
-}
-function contar_tipos(){
-     try {
+function contar_tipos() {
+    try {
         $base = conectar();
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones");
         $sentencia->execute();
-         $cuenta = $sentencia->rowCount();
-            return $cuenta;
-        
-} catch (PDOException $e) {
+        $cuenta = $sentencia->rowCount();
+        return $cuenta;
+    } catch (PDOException $e) {
         print $e->getMessage();
-
+    }
 }
-    
-}
-
-
-
