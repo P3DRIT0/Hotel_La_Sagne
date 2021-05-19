@@ -15,7 +15,7 @@ require_once './BD_habitaciones.php';
         <link rel='stylesheet' type='text/css' media='screen' href='./precios_habitaciones.css'>
         <title>Reservas</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
@@ -74,6 +74,9 @@ require_once './BD_habitaciones.php';
                         <li class="nav-item" style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_tipo.php'"> Crear tipo 
                         </li>
+                        <li class="nav-item" style="margin-top:10px ">
+                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Borrar_tipo_habitacion.php'"> Borrar tipo 
+                        </li>
                         <li class="nav-item"style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_habitacion.php'"> Crear habitacion
                         </li>
@@ -83,6 +86,7 @@ require_once './BD_habitaciones.php';
                         <li class="nav-item"style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_Habitaciones.php'"> Modificar habitacion
                         </li>
+
 
                         </ul>
 
@@ -179,53 +183,53 @@ require_once './BD_habitaciones.php';
 
             <script>
                 for (var i = 1; i <= 3; i++) {
-                console.log(i);
-                var num = parseInt(i, 10);
-                console.log(num);
-                var id = '#tipo' + num;
-                let $i = document.querySelector(id);
-                console.log($i);
-                $i.addEventListener('click', plantilla);
+                    console.log(i);
+                    var num = parseInt(i, 10);
+                    console.log(num);
+                    var id = '#tipo' + num;
+                    let $i = document.querySelector(id);
+                    console.log($i);
+                    $i.addEventListener('click', plantilla);
                 }
 
                 function plantilla() {
-                console.log("funciona click");
-                var $dato = $(this).attr('id');
-                $("#num_habitaciones").val($dato);
-                console.log($dato);
-                document.formulario1.submit();
+                    console.log("funciona click");
+                    var $dato = $(this).attr('id');
+                    $("#num_habitaciones").val($dato);
+                    console.log($dato);
+                    document.formulario1.submit();
                 }
 
 
-              
-      
-     
-                    
-     </script>
-
-                    <!-- Div invisible que guarda donde se hace click-->
-                    <div style="visibility:hidden">
-                        <form action="../Habitacion/Habitacion.php" method="post" name="formulario1">
-                            <input type="text" id="num_habitaciones" value="" name="num_habitacion">
-                        </form>
-                    </div>
-
-                </div>
 
 
 
 
+            </script>
+
+            <!-- Div invisible que guarda donde se hace click-->
+            <div style="visibility:hidden">
+                <form action="../Habitacion/Habitacion.php" method="post" name="formulario1">
+                    <input type="text" id="num_habitaciones" value="" name="num_habitacion">
+                </form>
+            </div>
+
+        </div>
 
 
-                <!-- Optional JavaScript; choose one of the two! -->
 
-                <!-- Option 1: Bootstrap Bundle with Popper --
 
-                <!-- Option 2: Separate Popper and Bootstrap JS -->
-                <!--
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-                -->
-            </body>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-        </html>
+
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper --
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+        -->
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+</html>

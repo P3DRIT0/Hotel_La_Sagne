@@ -73,6 +73,19 @@ function lista_habitaciones() {
 }
 
 /**
+ * Método para listar los diferentes tipos de habitaciones existentes.
+ * 
+ * @return array Lista de los tipos de habitaciones existentes
+ */
+function lista_tipos_habitaciones() {
+    $base = conectar();
+    $sentencia = $base->prepare("SELECT * FROM tipo_habitaciones");
+    $sentencia->execute();
+    $resultados = $sentencia->fetchAll();
+    return $resultados;
+}
+
+/**
  * Método para visualizar las habitaciones existentes.
  * 
  * @return array 
@@ -114,15 +127,10 @@ function visualizar_habitaciones() {
  * @param array $habitaciones_borrar Array de habitaciones a borrar
  */
 function borrar_habitaciones($habitaciones_borrar) {
-    
+
     try {
         $base = conectar();
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
-            echo 'Borrando';
-            $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_habitacion1");
-            $sentencia2->bindParam(':id_habitacion1', $habitaciones_borrar[$index]);
-            $sentencia2->execute();
-            
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
@@ -130,6 +138,66 @@ function borrar_habitaciones($habitaciones_borrar) {
     } catch (PDOException $e) {
         print $e->getMessage();
     }
+}
+
+/**
+ * Método para borrar diferentes tipos de habitaciones que recibe en un array por 
+ * cabecera.
+ * 
+ * @param array $tipos_habitaciones_a_borrar Array de habitaciones a borrar
+ */
+function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
+
+    try {
+        $base = conectar();
+        for ($index = 0; $index < count($tipos_habitaciones_a_borrar); $index++) {
+
+            //Borrando servicios dependientes del tipo de habitación
+            //PENDIENTE
+            //Borrando reservas dependientes del tipo de habitación
+            //PENDIENTE
+            //Borrando las imagenes dependientes del tipo de habitación
+            $sentencia = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_tipo;");
+            $sentencia->bindParam(':id_tipo', $id_tipo[$index]);
+            $sentencia->execute();
+
+            //Borrar imagenes del servidor
+            for ($i = 0; $i < 5; $i++) {
+                borrar_img_servidor((($id_tipo[$index] * 5) + 1) + $i);
+            }
+            //Borrando habitaciones del tipo indicado
+            $sentencia2 = $base->prepare("DELETE FROM habitaciones WHERE tipo_habitacion=:tipo_habitacion");
+            $sentencia2->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
+
+            //Borrando el tipo
+            $sentencia3 = $base->prepare("DELETE FROM tipo_habitaciones WHERE tipo_de_habitacion=:tipo_habitacion");
+            $sentencia3->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
+
+            $msg = "listo";
+            echo "<script type='text/javascript'>alert($msg);</script>";
+            print 'Listo para ejecutar';
+            print_r("listo");
+            echo 'Listo';
+
+            $sentencia2->execute();
+            $sentencia3->execute();
+
+            $sentencia = null;
+            $sentencia2 = null;
+            $sentencia3 = null;
+            $base = null;
+        }
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+
+/**
+ * Método para borrar las imagenes residuales del servidor
+ * @param type $index
+ */
+function borrar_img_servidor($index) {
+    unlink('Imagenes_habitaciones/' . $index . '.jpg');
 }
 
 /**
@@ -198,11 +266,12 @@ function listar_habitaciones() {
 
 function asignar_nombres() {
     try {
+
         $base = conectar();
         $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones ORDER BY id DESC LIMIT 1;");
-
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
+
         return $resultados[0][0];
     } catch (PDOException $e) {
         print $e->getMessage();

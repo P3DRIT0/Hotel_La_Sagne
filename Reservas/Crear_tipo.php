@@ -29,7 +29,7 @@ $limpieza = true;
 $limpieza = false;
 } 
     
-    
+crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
 $numero=asignar_nombres()*5;
 $rutas=array();
 //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
@@ -63,7 +63,7 @@ closedir($dir); //Cerramos el directorio de destino
 }
 }
 
-crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
+
 añadir_imagenes($rutas, $tipo_habitacion);
 header('Location:./Reservas_habitaciones.php');
 }else{
