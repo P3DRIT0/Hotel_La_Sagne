@@ -1,0 +1,20 @@
+<configuracion>
+    <usuario>
+        <nombre>conexion</nombre>
+        <password>1234</password>
+        <rol>conexion</rol>
+    </usuario>
+    
+    <usuario>
+        <nombre>estandar</nombre>
+        <password>1234</password>
+        <rol>estandar</rol>
+    </usuario>
+    
+    <usuario>
+        <nombre>administrador</nombre>
+        <password>1234</password>
+        <rol>admin</rol>
+    </usuario>
+    
+</configuracion>

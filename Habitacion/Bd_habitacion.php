@@ -11,7 +11,7 @@ include '../config/conexiones_BD.php';
  */
 function obtener_habitacion($rest) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM habitaciones where tipo_de_habitacion=:tipo_habitacion");
         $sentencia->bindParam(':tipo_habitacion', $rest);
         $sentencia->execute();
@@ -35,7 +35,7 @@ function obtener_habitacion($rest) {
  */
 function contar_habitaciones($tipo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT id FROM habitaciones where tipo_de_habitacion=:tipo");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
@@ -54,7 +54,7 @@ function contar_habitaciones($tipo) {
  */
 function contar_reservas($tipo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT num_reserva FROM reservas where tipo_habitacion=:tipo");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
@@ -76,7 +76,7 @@ function contar_reservas($tipo) {
  */
 function crear_reserva($tipo, $fecha_entrada, $fecha_salida, $id_habitacion) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("INSERT INTO reservas (id_usuario,fecha_entrada,fecha_salida,tipo_habitacion)VALUES(:id,:entrada,:salida,:tipo)");
         $sentencia->bindParam(':id', $_SESSION['id']);
         $sentencia->bindParam(':entrada', $fecha_entrada);
@@ -110,7 +110,7 @@ function crear_reserva($tipo, $fecha_entrada, $fecha_salida, $id_habitacion) {
  */
 function ver_fechas($tipo, $fecha_entrada, $fecha_salida, $id_habitacion) {
     try {
-        $base = conectar();
+       $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM reservas where tipo_habitacion=:tipo");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();

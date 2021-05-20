@@ -78,6 +78,9 @@ require_once './BD_habitaciones.php';
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Borrar_tipo_habitacion.php'"> Borrar tipo 
                         </li>
                         <li class="nav-item"style="margin-top:10px ">
+                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_tipo.php'"> Modificar Tipo
+                        </li>
+                        <li class="nav-item"style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Crear_habitacion.php'"> Crear habitacion
                         </li>
                         <li class="nav-item" style="margin-top:10px" >
@@ -86,9 +89,7 @@ require_once './BD_habitaciones.php';
                         <li class="nav-item"style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_Habitacion.php'"> Modificar habitacion
                         </li>
-                         <li class="nav-item"style="margin-top:10px ">
-                            <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_tipo.php'"> Modificar Tipo
-                        </li>
+                         
 
 
                         </ul>

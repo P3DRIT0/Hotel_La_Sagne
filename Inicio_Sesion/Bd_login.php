@@ -11,7 +11,7 @@ include '../config/conexiones_BD.php';
 function comprobar_usuario($correo) {
     try {
         $usuario_registrado = false;
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
         $sentencia->bindParam(':correo', $correo);
         $sentencia->execute();
@@ -37,7 +37,7 @@ function comprobar_usuario($correo) {
 function cotejar_contraseñas($contraseña, $correo) {
     try {
         $credenciales_validas = false;
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
         $sentencia->bindParam(':correo', $correo);
         $sentencia->execute();
@@ -61,7 +61,7 @@ function cotejar_contraseñas($contraseña, $correo) {
  */
 function crear_sesion($correo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare('SELECT * FROM usuarios WHERE email=:correo');
         $sentencia->bindParam(':correo', $correo);
         $sentencia->execute();

@@ -16,7 +16,7 @@ include '../config/conexiones_BD.php';
  */
 function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("INSERT INTO `tipo_habitaciones`(`m2`,`ventana`,`tipo_de_habitacion`,`servicio_limpieza`,`internet`,`precio`,`descripcion`) VALUES (:m2,:ventana,:tipo_habitacion,:servicio_limpieza,:internet,:precio,:descripcion)");
         $sentencia->bindParam(':m2', $m2);
         $sentencia->bindParam(':ventana', $ventana);
@@ -38,7 +38,7 @@ function crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $inte
  * @param string $descripcion Descripción de la habitación
  */
 function añadir_imagenes($rutas_imagenes, $tipo) {
-    $base = conectar();
+    $base = conectar('admin');
     $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones WHERE tipo_de_habitacion = :tipo");
     try {
         $sentencia->bindParam(':tipo', $tipo);
@@ -65,7 +65,7 @@ function añadir_imagenes($rutas_imagenes, $tipo) {
  * @return array Lista de habitaciones existentes
  */
 function lista_habitaciones() {
-    $base = conectar();
+   $base = conectar('admin');
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
@@ -78,7 +78,7 @@ function lista_habitaciones() {
  * @return array Lista de los tipos de habitaciones existentes
  */
 function lista_tipos_habitaciones() {
-    $base = conectar();
+    $base = conectar('admin');
     $sentencia = $base->prepare("SELECT * FROM tipo_habitaciones");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
@@ -91,7 +91,7 @@ function lista_tipos_habitaciones() {
  * @return array 
  */
 function visualizar_habitaciones() {
-    $base = conectar();
+    $base = conectar('admin');
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones");
     try {
@@ -129,7 +129,7 @@ function visualizar_habitaciones() {
 function borrar_habitaciones($habitaciones_borrar) {
 
     try {
-        $base = conectar();
+        $base = conectar('admin');
         for ($index = 0; $index < count($habitaciones_borrar); $index++) {
             echo 'Borrando';
             $sentencia2 = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_habitacion1");
@@ -154,7 +154,7 @@ function borrar_habitaciones($habitaciones_borrar) {
 function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
 
     try {
-        $base = conectar();
+        $base = conectar('admin');
         for ($index = 0; $index < count($tipos_habitaciones_a_borrar); $index++) {
 
             //Borrando servicios dependientes del tipo de habitación
@@ -217,7 +217,7 @@ function borrar_img_servidor($index) {
  * @param string $tipo_de_habitacion Tipo de habitación
  */
 function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $internet, $tipo_de_habitacion) {
-    $base = conectar();
+    $base = conectar('admin');
     $sentencia = $base->prepare("UPDATE habitaciones SET m2=:m2,ventana=:ventana,tipo_de_habitacion=:tipo_de_habitacion"
             . ",servicio_limpieza=:servicio_limpieza "
             . ",internet=:internet,precio=:precio; WHERE id=:id");
@@ -233,7 +233,7 @@ function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $interne
 }
 
 function ver_tipos_existentes() {
-    $base = conectar();
+   $base = conectar('admin');
     $sentencia = $base->prepare("SELECT tipo_de_habitacion FROM tipo_habitaciones");
     try {
         $sentencia->execute();
@@ -248,7 +248,7 @@ function ver_tipos_existentes() {
 
 function crear_habitacion($tipo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("INSERT INTO `habitaciones`(`tipo_habitacion`) VALUES (:tipo_habitacion)");
         $sentencia->bindParam(':tipo_habitacion', $tipo);
         $sentencia->execute();
@@ -259,7 +259,7 @@ function crear_habitacion($tipo) {
 
 function listar_habitaciones() {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM  habitaciones ");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
@@ -272,7 +272,7 @@ function listar_habitaciones() {
 function asignar_nombres() {
     try {
 
-        $base = conectar();
+       $base = conectar('admin');
         $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones ORDER BY id DESC LIMIT 1;");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
@@ -285,7 +285,7 @@ function asignar_nombres() {
 
 function comprobar_tipo($tipo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones WHERE tipo_de_habitacion =:tipo");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->execute();
@@ -298,7 +298,7 @@ function comprobar_tipo($tipo) {
 
 function devolver_tipos_imagenes() {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones INNER JOIN imagenes_habitaciones  ON tipo_habitaciones.id=imagenes_habitaciones.id_tipo_habitacion");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
@@ -310,7 +310,7 @@ function devolver_tipos_imagenes() {
 
 function contar_tipos() {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones");
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
@@ -322,7 +322,7 @@ function contar_tipos() {
 
 function modificar_habitacion($id, $nuevo_tipo) {
     try {
-        $base = conectar();
+        $base = conectar('admin');
         $sentencia = $base->prepare("UPDATE habitaciones SET tipo_habitacion=:tipo WHERE id =:id");
          $sentencia->bindParam(':tipo', $nuevo_tipo);
         $sentencia->bindParam(':id', $id);
