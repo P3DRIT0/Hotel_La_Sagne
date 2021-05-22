@@ -190,8 +190,9 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
             $sentencia = null;
             $sentencia2 = null;
             $sentencia3 = null;
-            $base = null;
+          
         }
+          $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
