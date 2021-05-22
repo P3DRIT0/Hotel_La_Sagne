@@ -65,7 +65,7 @@ function añadir_imagenes($rutas_imagenes, $tipo) {
  * @return array Lista de habitaciones existentes
  */
 function lista_habitaciones() {
-   $base = conectar('admin');
+    $base = conectar('admin');
     $sentencia = $base->prepare("SELECT * FROM habitaciones");
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
@@ -155,6 +155,8 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
 
     try {
         $base = conectar('admin');
+        $base->beginTransaction();
+
         for ($index = 0; $index < count($tipos_habitaciones_a_borrar); $index++) {
 
             //Borrando servicios dependientes del tipo de habitación
@@ -162,8 +164,11 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
             //Borrando reservas dependientes del tipo de habitación
             //PENDIENTE
             //Borrando las imagenes dependientes del tipo de habitación
+
             $sentencia = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_tipo;");
+
             $sentencia->bindParam(':id_tipo', $id_tipo[$index]);
+
             $sentencia->execute();
 
             //Borrar imagenes del servidor
@@ -173,10 +178,12 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
             //Borrando habitaciones del tipo indicado
             $sentencia2 = $base->prepare("DELETE FROM habitaciones WHERE tipo_habitacion=:tipo_habitacion");
             $sentencia2->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
+            $sentencia2->execute();
 
             //Borrando el tipo
             $sentencia3 = $base->prepare("DELETE FROM tipo_habitaciones WHERE tipo_de_habitacion=:tipo_habitacion");
             $sentencia3->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
+            $sentencia3->execute();
 
             $msg = "listo";
             echo "<script type='text/javascript'>alert($msg);</script>";
@@ -184,15 +191,16 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
             print_r("listo");
             echo 'Listo';
 
-            $sentencia2->execute();
-            $sentencia3->execute();
-
             $sentencia = null;
             $sentencia2 = null;
             $sentencia3 = null;
-            $base = null;
         }
+        $base->commit();
+        echo 'Datos borrados correctamente';
+        $base = null;
     } catch (PDOException $e) {
+        $base->rollBack();
+        echo 'Ha ocurrido un error al intentar borrar los datos';
         print $e->getMessage();
     }
 }
@@ -233,7 +241,7 @@ function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $interne
 }
 
 function ver_tipos_existentes() {
-   $base = conectar('admin');
+    $base = conectar('admin');
     $sentencia = $base->prepare("SELECT tipo_de_habitacion FROM tipo_habitaciones");
     try {
         $sentencia->execute();
@@ -272,7 +280,7 @@ function listar_habitaciones() {
 function asignar_nombres() {
     try {
 
-       $base = conectar('admin');
+        $base = conectar('admin');
         $sentencia = $base->prepare("SELECT id FROM tipo_habitaciones ORDER BY id DESC LIMIT 1;");
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
@@ -324,11 +332,10 @@ function modificar_habitacion($id, $nuevo_tipo) {
     try {
         $base = conectar('admin');
         $sentencia = $base->prepare("UPDATE habitaciones SET tipo_habitacion=:tipo WHERE id =:id");
-         $sentencia->bindParam(':tipo', $nuevo_tipo);
+        $sentencia->bindParam(':tipo', $nuevo_tipo);
         $sentencia->bindParam(':id', $id);
         $sentencia->execute();
     } catch (PDOException $e) {
         print $e->getMessage();
     }
 }
-    
