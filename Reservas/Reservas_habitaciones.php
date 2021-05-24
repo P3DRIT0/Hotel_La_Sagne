@@ -58,7 +58,7 @@ require_once './BD_habitaciones.php';
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $_SESSION['usuario'] ?></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                        <li><a class="dropdown-item" href="../Perfil/Perfil.php">Perfil</a></li>
                                         <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Reservas</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="../Registro/Registro.php">Logout</a></li>
