@@ -9,18 +9,21 @@ require_once './BD_habitaciones.php';
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <link rel='stylesheet' type='text/css' media='screen' href='./precios_habitaciones.css'>
         <title>Reservas</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <!-- CSS -->
+        <link rel='stylesheet' type='text/css' media='screen' href='./precios_habitaciones.css'>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+            crossorigin="anonymous"/>
+
+        <!--Fuentes -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-        <script src="./jquery-3.6.0.min.js" type="text/javascript"></script>   
+
     </head>
     <body>
         <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -45,14 +48,32 @@ require_once './BD_habitaciones.php';
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <div>
-                            <a class="titulo" href="#Arriba">Hotel La Sagne </a>
+                            <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
                         </div>
                     </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <?php if (!empty($_SESSION["usuario"])) { ?>
 
-
-                    <p class="usuario"><?php echo $_SESSION['usuario'] ?></p>
-                    <img  class="avatar" src="./multimedia/avatar.png">
-
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $_SESSION['usuario'] ?></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Reservas</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="../Registro/Registro.php">Logout</a></li>
+                                    </ul>
+                                </li>
+                            <?php } else { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </form>
                 </div>
             </div>
 
@@ -89,7 +110,7 @@ require_once './BD_habitaciones.php';
                         <li class="nav-item"style="margin-top:10px ">
                             <button  class="btn btn-outline-light my-2 my-sm-3" onclick="location = 'Modificar_Habitacion.php'"> Modificar habitacion
                         </li>
-                         
+
 
 
                         </ul>
@@ -204,11 +225,6 @@ require_once './BD_habitaciones.php';
                     document.formulario1.submit();
                 }
 
-
-
-
-
-
             </script>
 
             <!-- Div invisible que guarda donde se hace click-->
@@ -220,20 +236,21 @@ require_once './BD_habitaciones.php';
 
         </div>
 
-
-
-
-
-
-        <!-- Optional JavaScript; choose one of the two! -->
-
-        <!-- Option 1: Bootstrap Bundle with Popper --
-
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-        -->
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <!-- Separate Popper and Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"
+    ></script>
+    <!--Jquery-->
+    <script
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+        type="text/javascript"
+    ></script>
 </html>
