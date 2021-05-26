@@ -1,80 +1,96 @@
 <?php
 require_once './BD_habitaciones.php';
 
-$error_tipo_existente="";
+$error_tipo_existente = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
- if (isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion'])) {
-$tipo_habitacion = ucfirst($_POST['nombre']);
-$existe=comprobar_tipo($tipo_habitacion);
-if(empty($existe)){
-$precio = $_POST['precio'];
-$m2 = $_POST['m2'];
-$descripcion = $_POST['descripcion'];
 
-if (isset($_POST['ventana'])) {
-$ventana = true;
-} else {
-$ventana = false;
-}
+    if (isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['m2']) && isset($_POST['descripcion'])) {
+        $tipo_habitacion = ucfirst($_POST['nombre']);
+        $existe = comprobar_tipo($tipo_habitacion);
+        if (empty($existe)) {
+            $precio = $_POST['precio'];
+            $m2 = $_POST['m2'];
+            $descripcion = $_POST['descripcion'];
 
-if (isset($_POST['internet'])) {
-$internet = true;
-} else {
-$internet = false;
-}
-if (isset($_POST['limpieza'])) {
-$limpieza = true;
-} else {
-$limpieza = false;
-} 
-    
-crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
-$numero=asignar_nombres()*5;
-$rutas=array();
+            if (isset($_POST['ventana'])) {
+                $ventana = true;
+            } else {
+                $ventana = false;
+            }
+
+            if (isset($_POST['internet'])) {
+                $internet = true;
+            } else {
+                $internet = false;
+            }
+            if (isset($_POST['limpieza'])) {
+                $limpieza = true;
+            } else {
+                $limpieza = false;
+            }
+
+            crear_tipo_habitacion($m2, $ventana, $tipo_habitacion, $limpieza, $internet, $precio, $descripcion);
+            $numero = asignar_nombres() * 5;
+            $rutas = array();
 //Como el elemento es un arreglos utilizamos foreach para extraer todos los valores
-foreach($_FILES["archivo"]['tmp_name'] as $key => $tmp_name){
+            foreach ($_FILES["archivo"]['tmp_name'] as $key => $tmp_name) {
 //Validamos que el archivo exista
-if($_FILES["archivo"]["name"][$key]) {
+                if ($_FILES["archivo"]["name"][$key]) {
 
-    $numero++;
-    $filename =$numero.".jpg"; //Obtenemos el nombre original del archivo
+                    $numero++;
+                    $filename = $numero . ".jpg"; //Obtenemos el nombre original del archivo
 
-  print_r($filename);
-$source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
-$directorio = '../Reservas/Imagenes_habitaciones'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+                    print_r($filename);
+                    $source = $_FILES["archivo"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+                    $directorio = '../Reservas/Imagenes_habitaciones'; //Declaramos un  variable con la ruta donde guardaremos los archivos
 //Validamos si la ruta de destino existe, en caso de no existir la creamos
-if(!file_exists($directorio)){
+                    if (!file_exists($directorio)) {
 //0777 son los permisos
-mkdir($directorio, 0777) or die("No se puede crear el directorio;n");
-}
-$dir = opendir($directorio); //Abrimos el directorio de destino
-$target_path = $directorio.'/'.$filename; //Indicamos la ruta de destino, así como el nombre del archivo
-$rutas[]=$target_path;
+                        mkdir($directorio, 0777) or die("No se puede crear el directorio;n");
+                    }
+                    $dir = opendir($directorio); //Abrimos el directorio de destino
+                    $target_path = $directorio . '/' . $filename; //Indicamos la ruta de destino, así como el nombre del archivo
+                    $rutas[] = $target_path;
 //Movemos y validamos que el archivo se haya cargado correctamente
 //El primer campo es el origen y el segundo el destino
-if(move_uploaded_file($source, $target_path)) {
-echo "El archivo $filename se ha almacenado en forma exitosa.<br>";
-} else {
-echo "Ha ocurrido un error, por favor inténtelo de nuevo.<br>";
-}
-closedir($dir); //Cerramos el directorio de destino
+                    if (move_uploaded_file($source, $target_path)) {
+                        echo "El archivo $filename se ha almacenado en forma exitosa.<br>";
+                    } else {
+                        echo "Ha ocurrido un error, por favor inténtelo de nuevo.<br>";
+                    }
+                    closedir($dir); //Cerramos el directorio de destino
+                }
+            }
 
-}
-}
 
-
-añadir_imagenes($rutas, $tipo_habitacion);
-header('Location:./Reservas_habitaciones.php');
-}else{
-   $error_tipo_existente="El tipo ".$tipo_habitacion ." ya existe en la base de datos";
-}
-}
+            añadir_imagenes($rutas, $tipo_habitacion);
+            header('Location:./Reservas_habitaciones.php');
+        } else {
+            $error_tipo_existente = "El tipo " . $tipo_habitacion . " ya existe en la base de datos";
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="apple-touch-icon" sizes="57x57" href="../config/ico/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../config/ico/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../config/ico/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../config/ico/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../config/ico/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../config/ico/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../config/ico/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../config/ico/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../config/ico/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../config/ico/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../config/ico/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../config/ico/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../config/ico/favicon-16x16.png">
+        <link rel="manifest" href="../config/ico//manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="../config/ico/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -117,14 +133,14 @@ header('Location:./Reservas_habitaciones.php');
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Archivos</label>
-                                <a style="color: red"><?php echo $error_tipo_existente?></a>
+                                <a style="color: red"><?php echo $error_tipo_existente ?></a>
                                 <div class="col-sm-8">
                                     <input type="file" class="form-control" id="archivo[]" name="archivo[]" multiple="">
                                 </div>
                                 <input id="boton" type="submit" class="btnRegister"  value="Crear nuevo tipo"/>  
                                 <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
-  
-                                
+
+
                         </form>
                     </div>
                 </div>

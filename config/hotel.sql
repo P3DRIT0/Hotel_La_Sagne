@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 14:56:18
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 8.0.5
+-- Tiempo de generación: 26-05-2021 a las 16:38:05
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,8 +37,9 @@ CREATE TABLE `habitaciones` (
 --
 
 INSERT INTO `habitaciones` (`id`, `tipo_habitacion`) VALUES
-(60, 'Indi'),
-(61, 'Indi');
+(65, 'Individual'),
+(66, 'Individual'),
+(67, 'Individual');
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,9 @@ CREATE TABLE `imagenes_habitaciones` (
 --
 
 INSERT INTO `imagenes_habitaciones` (`id`, `id_tipo_habitacion`, `imagen_habitacion`) VALUES
-(96, 103, '../Reservas/Imagenes_habitaciones/511.jpg');
+(102, 105, '../Reservas/Imagenes_habitaciones/526.jpg'),
+(103, 105, '../Reservas/Imagenes_habitaciones/527.jpg'),
+(104, 105, '../Reservas/Imagenes_habitaciones/528.jpg');
 
 -- --------------------------------------------------------
 
@@ -151,8 +154,7 @@ CREATE TABLE `tipo_habitaciones` (
 --
 
 INSERT INTO `tipo_habitaciones` (`id`, `m2`, `ventana`, `tipo_de_habitacion`, `servicio_limpieza`, `internet`, `precio`, `descripcion`) VALUES
-(102, '123.00', b'0', 'Suite', b'0', b'0', '123.00', ''),
-(103, '123.00', b'1', 'Indi', b'1', b'1', '123.00', 'adwda');
+(105, '80.00', b'1', 'Individual', b'1', b'1', '80.00', 'asasasas');
 
 -- --------------------------------------------------------
 
@@ -167,16 +169,16 @@ CREATE TABLE `usuarios` (
   `telf` varchar(9) NOT NULL,
   `direccion` varchar(60) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `rol_usuario` bigint(20) NOT NULL
+  `rol_usuario` bigint(20) NOT NULL,
+  `imagen_usuario` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telf`, `direccion`, `password`, `rol_usuario`) VALUES
-(95, 'Pedro', 'pedrofc99@gmail.com', '698139991', 'tuputacasa', '$2y$10$5aDZoZYQKW9HqpzCpL7IOecT5JL8i7iWF5gWeaxi.xi0MP1WFNtM6', 2),
-(97, 'pablo', 'pablo@gmail.com', '123456789', 'callex', '$2y$10$ZBvQnn.1U/bHiMrDhgrxF.C8UDzeIXDxj55x659k4NfVTBUIvZoB.', 2);
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telf`, `direccion`, `password`, `rol_usuario`, `imagen_usuario`) VALUES
+(99, 'Pedro', 'pedrofc99@gmail.com', '698139991', 'tuputacasa', '$2y$10$jgpu4o4t0ivCc4bsrbPF1.vLkP6fDixoD3Au8HfxMtQUDP3vD/VPu', 2, '../Perfil/Multimedia/6bc745eafa214ba49b7fbbe744aa41c5.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -256,7 +258,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `habitaciones_reservas`
@@ -268,7 +270,7 @@ ALTER TABLE `habitaciones_reservas`
 -- AUTO_INCREMENT de la tabla `imagenes_habitaciones`
 --
 ALTER TABLE `imagenes_habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
@@ -286,13 +288,13 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `tipo_habitaciones`
 --
 ALTER TABLE `tipo_habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- Restricciones para tablas volcadas
