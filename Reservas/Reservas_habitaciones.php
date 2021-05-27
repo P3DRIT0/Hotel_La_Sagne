@@ -155,8 +155,6 @@ require_once '../Perfil/Bd_Perfil.php';
             $tipos = devolver_tipos_imagenes();
             $contar_tipos = contar_tipos();
             $devolver_tipos= ver_tipos_existentes();
-            echo $devolver_tipos[0][0];
-            echo $contar_tipos;
             $index1 = 0;
             $index2 = 0;
             $titulo = 0;
