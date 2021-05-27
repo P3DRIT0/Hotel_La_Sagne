@@ -89,12 +89,12 @@ include_once '../Perfil/Bd_Perfil.php';
                                     
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
-                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Ver Habitaciones </a></li>
+                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
                                     </ul>
                                 </li>
-                        <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"])?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
+                        <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"])?>"width="50" height="50"/></a>
                     </form>
                         <?php } else { ?>
                             <li class="nav-item">

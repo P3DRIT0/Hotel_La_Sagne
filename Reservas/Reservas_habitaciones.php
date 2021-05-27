@@ -154,8 +154,9 @@ require_once '../Perfil/Bd_Perfil.php';
             <?php
             $tipos = devolver_tipos_imagenes();
             $contar_tipos = contar_tipos();
+            $devolver_tipos= ver_tipos_existentes();
+            echo $devolver_tipos[0][0];
             echo $contar_tipos;
-
             $index1 = 0;
             $index2 = 0;
             $titulo = 0;
@@ -168,10 +169,10 @@ require_once '../Perfil/Bd_Perfil.php';
                 ?>
 
                 <div class='habitacion' id=tipo<?php echo $tipos[$index][3] ?>>
-                    <div id="carousel-<?php echo "carrusel" . $index2 ?>" class="carousel slide col-6" data-bs-ride="carousel">
+                    <div id="carousel-<?php echo "carrusel" . $index2 ?>" class="carousel slide col-6" data-bs-ride="carousel" value='<?php echo $devolver_tipos[$index][0]?>'>
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>"  data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>"  data-bs-slide-to="1" aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
@@ -211,7 +212,7 @@ require_once '../Perfil/Bd_Perfil.php';
                     </div>
 
 
-                    <div class="texto col-6" id="tipo<?php echo $id ?>">
+                    <div class="texto col-6" id="tipo<?php echo $id ?>" value='<?php echo $devolver_tipos[$index][0]?>'>
                         <h1><?php echo $tipos[$titulo][3]; ?></h1>
 
                         <p><?php echo $tipos[$titulo][7]; ?></p>
@@ -243,14 +244,14 @@ require_once '../Perfil/Bd_Perfil.php';
 
                 function plantilla() {
                     console.log("funciona click");
-                    var $dato = $(this).attr('id');
-                    $("#num_habitaciones").val($dato);
-                    console.log($dato);
+                    var dato = $(this).attr('value');
+                    $("#num_habitaciones").val(dato);
+                    console.log(dato);
                     document.formulario1.submit();
                 }
 
             </script>
-
+  <script src="../config/jquery-3.6.0.min.js"></script>
             <!-- Div invisible que guarda donde se hace click-->
             <div style="visibility:hidden">
                 <form action="../Habitacion/Habitacion.php" method="post" name="formulario1">

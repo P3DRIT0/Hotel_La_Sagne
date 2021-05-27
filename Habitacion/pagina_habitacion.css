@@ -2,47 +2,231 @@ body {
     margin: 0%;
 }
 
+
 /*contenedor principal*/
-.container {
+
+.contenedor {
     width: 100%;
-    height: 969px;
+    display: flex;
+    flex-direction: row;
+     float: left;
+    flex-wrap: nowrap;
+}
+
+
+/*zona reserva*/
+
+.reservationcalendar {
+    float: left;
+    display: block;
+	position: relative;
+	z-index: 0;
+	width: 50%;
+    flex-basis: 50%;
+    background-image: url(./Multimedia/Fondo_pantalla.jpg);
+    box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.55);
+ 
+}
+.reservationcalendar:after {  
+    content: '';
+	display: inline-block;
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image: radial-gradient(ellipse at left bottom, rgba(72, 118, 234, 1) 0%,rgba(55, 90, 243, .9) 59%, rgba(32, 124, 229, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+.datosreservas{
+    position: relative;
+	z-index: 1;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.infohotel {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/*zona reserva*/
-.reservationcalendar {
-    flex-basis: 50%;
-    background-color: rgb(55, 115, 255);
+.infohotel img {
+    margin-left: 0%;
 }
+
+.minicalendar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0%;
+    margin: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    list-style: none;
+    color: rgb(0, 0, 0);
+}
+
+.personselector {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0%;
+    margin-left: 20%;
+    margin-right: 20%;
+    list-style: none;
+}
+
+.combo {
+    width: 40px;
+    height: 20px;
+}
+/*calendario*/
+.contenedor_calendario {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.real_calendar {
+    height: 60vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar {
+    width: 46rem;
+    height: 38rem;
+    
+    
+}
+
+.month {
+    height: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    text-align: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.month i {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.month h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.weekdays {
+    height: 5rem;
+    padding: 0 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.weekdays div {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    width: calc(44.2rem / 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.2rem;
+}
+
+.days div {
+    font-size: 1.4rem;
+    margin: 0.3rem;
+    width: calc(40.2rem / 7);
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.days div:hover:not(.today) {
+    background-color: rgb(172, 197, 255);
+    color: black;
+    text-shadow: none;
+}
+
+.prev-date,
+.next-date {
+    opacity: 0.75;
+}
+
+.today {
+    background-color: #4163fd;
+    border: 0.1rem solid white;
+}
+
 
 /*zona habitación*/
+
 .room {
+   float: left;
+    display: block;
+	position: relative;
+	z-index: 0;
+	width: 50%;
     flex-basis: 50%;
-    background: -webkit-linear-gradient(bottom, #0d37f1, #00c6ff);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    background-image: url(./Multimedia/Fondo_pantalla.jpg);
+    box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.55);
+}
+.room:after{
+    content: '';
+	display: inline-block;
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image: radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
 }
 
+
 /*tipo de habitación*/
+
 .roomtype {
     text-align: center;
     font-size: 25px;
 }
 
+
 /*imagen de habitación*/
-.roomimg {
-    text-align: center;
-    margin: 1%;
-}
+
 .roomimg img {
-    border: 1px;
-    box-shadow: 1px 1px 10px 1px rgb(55, 115, 255);
+   height: 500px; 
 }
 
+
 /*descripción de habitación*/
+
 .roominfo p {
     margin: 2%;
     margin-left: 5%;
@@ -52,19 +236,26 @@ body {
     font-size: 25px;
 }
 
+
 /*precio de habitación*/
-.roomprice{
+
+.roomprice {
     height: 100px;
+    
 }
-.roomprice p {
+
+.roomprice p{
     margin-top: 0%;
     margin-bottom: 0%;
     margin-right: 5%;
     text-align: right;
     font-size: 50px;
+   
 }
 
+
 /*botones*/
+
 .buttons {
     display: flex;
     flex-direction: row;
@@ -72,29 +263,75 @@ body {
     justify-content: space-between;
 }
 
+
 /*botón cancelar*/
+
 #cancel {
     margin-left: 10%;
     font-size: 25px;
     background-color: rgb(172, 197, 255);
     border: ridge 1px black;
 }
+
 #cancel:hover {
     background-color: rgb(133, 170, 255);
 }
 
+
 /*botón reservar*/
+
 #select {
     margin-right: 10%;
     font-size: 25px;
     background-color: rgb(172, 197, 255);
     border: ridge 1px black;
 }
+
 #select:hover {
     background-color: rgb(133, 170, 255);
 }
-h1{
+.infohotel h1{
     color: white;
     font-family: 'Alex Brush', cursive;
-    font-size: 280%;
+    font-size: 400%;
+    margin-left:30%;
+}
+body{
+    background-image: url(../Registro//Multimedia/Fondo_pantalla.jpg);
+    overflow:hidden;
+}
+.titulo  {
+    width: 100%;
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding-right: 20px;
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
+.titulo:hover{
+    color: rgba(255, 255, 255, 0.658);
+
+}
+.login__input:hover,
+.login__input:focus{
+	color: white;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	background-color: transparent;
+}
+.login__input {
+	color: white;
+	font-size: 1.15rem;
+	width: 100%;
+	padding: .5rem 1rem;
+	border: 2px solid transparent;
+	outline: none;
+	border-radius: 1.5rem;
+	background-color: rgba(255, 255, 255, 0.25);
+	letter-spacing: 1px;
 }
