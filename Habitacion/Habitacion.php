@@ -118,12 +118,12 @@ if (isset($_POST['num_habitacion'])) {
                     <ul class="minicalendar">
                         <li class="datein">
                             <label>Fecha de llegada:</label>
-                            <input id="checkin" class="login__input" maxlength="10" value="12-05-2021">
+                            <input id="checkin" class="login__input" maxlength="10" value="">
                         </li>
                         <img src="./Multimedia/arrow.png" height="25px">
                         <li class="dateout">
                             <label>Fecha de salida:</label>
-                            <input id="checkout" class="login__input" maxlength="10" value="15-05-2021">
+                            <input id="checkout" class="login__input" maxlength="10" value="">
                         </li>
                     </ul>
 
@@ -204,7 +204,7 @@ if (isset($_POST['num_habitacion'])) {
     </div>
     <script src="calendario.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="/config/jquery-3.6.0.min.js"></script>
+  
 </body>
 
 </html>
