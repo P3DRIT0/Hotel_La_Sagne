@@ -12,13 +12,14 @@ include '../config/conexiones_BD.php';
 function obtener_habitacion($rest) {
     try {
         $base = conectar('admin');
-        $sentencia = $base->prepare("SELECT * FROM habitaciones where tipo_de_habitacion=:tipo_habitacion");
-        $sentencia->bindParam(':tipo_habitacion', $rest);
+        $sentencia = $base->prepare("SELECT * FROM tipo_habitaciones WHERE tipo_de_habitacion=:tipo");
+         $sentencia->bindParam(':tipo', $rest);
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         $id = $resultados[0][0];
-        $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones where id_habitacion=:id_habitacion");
-        $sentencia2->bindParam(':id_habitacion', $id);
+        
+        $sentencia2 = $base->prepare("SELECT * FROM imagenes_habitaciones where id_tipo_habitacion=:id_tipo_habitacion");
+        $sentencia2->bindParam(':id_tipo_habitacion', $id);
         $sentencia2->execute();
         $resultados2 = $sentencia2->fetchAll();
         return array($resultados, $resultados2);

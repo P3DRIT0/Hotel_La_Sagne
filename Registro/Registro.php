@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <?php
 require_once './BD_registro.php';
-require_once './Correo_registro.php';
+//require_once './Correo_registro.php';
 $nombre = $apellidos = $correo = $direccion = $telefono = "";
 $Err_contraseñas = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $Err_contraseñas = "Las contraseñas no coinciden";
         } else {
             registrar_usuario($nombre, $contraseña, $correo, $telefono, $direccion, $rol = 1, $foto_perfil);
-            enviar_correos($correo, $nombre);
+//            enviar_correos($correo, $nombre);
             session_start();
             $_SESSION['usuario'] = $nombre;
             $_SESSION['email'] = $correo;

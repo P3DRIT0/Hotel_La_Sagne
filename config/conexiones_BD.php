@@ -6,8 +6,6 @@
 function conectar ($rol){
     try{
     $campos = configuracion('../config/BD_configuracion.xml', '../config/BD_configuracion.xsd', $rol);
-    $usuario="administrador";
-    $contraseña="1234";
     $server="localhost";
     $dbname="hotel";
     $base = new PDO("mysql:dbname=$dbname;host=$server", $campos[0], $campos[1]);
