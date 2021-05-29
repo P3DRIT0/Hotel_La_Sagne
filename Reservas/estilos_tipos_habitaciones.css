@@ -1,3 +1,31 @@
+
+.divhabitaciones{
+    margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(./Multimedia/Fondo_pantalla.jpg);
+    height: 2000px;
+    
+ 
+}
+.divhabitaciones:after{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+
+.datoshabitaciones{
+    position: relative;
+	z-index: 1;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
  
 .avatar{
     width: 2%;
@@ -32,7 +60,7 @@ a:link, a:visited, a:active {
 }
 img{
     width: 100%;
-    max-height: 300px;
+    max-height: 299px;
       
 }
 .contenedor{
@@ -42,7 +70,6 @@ img{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #212529;
 
 }
 .habitacion{
@@ -53,22 +80,17 @@ img{
     margin-left: 3%;
     width: 46%;
     height: 299px;
-    background: -webkit-linear-gradient(bottom, #0d37f1, #00c6ff);
+    background: url(./Multimedia/Fondo_pantalla.jpg);;
 }
 
 .barra_busqueda{
     height: 100px;
     width: 100%;
-    background: -webkit-linear-gradient(left, #0d37f1, #00c6ff);
-
 }
 .barra_busqueda .d-flex{ 
     padding-top: 1.5%;
 }
-.barra_busqueda .d-flex input{
-    margin-left: 65%;
-    width: 50%;
-}
+
 .texto{
     width: 100%;
     height: 83%;
@@ -84,6 +106,7 @@ img{
     text-decoration: none;
     padding-bottom: 5px;
     margin-left: 5px;
+    margin-right: 10px;
 }
 .precio:hover{
     color: white;
@@ -103,4 +126,13 @@ img{
 }
 button{
     margin-top: 3%;
+}
+.barra_busqueda{
+    height: 100px;
+    width: 100%;
+   background: url(./Multimedia/Fondo_pantalla.jpg);
+
+}
+.barra_busqueda .d-flex{ 
+    padding-top: 1.5%;
 }

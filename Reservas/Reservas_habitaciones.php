@@ -30,7 +30,7 @@ require_once '../Perfil/Bd_Perfil.php';
         <title>Reservas</title>
 
         <!-- CSS -->
-        <link rel='stylesheet' type='text/css' media='screen' href='./precios_habitaciones.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='./estilos_tipos_habitaciones.css'>
         <!-- Bootstrap CSS -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -43,7 +43,8 @@ require_once '../Perfil/Bd_Perfil.php';
         <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
 
     </head>
-    <body>
+
+    <header>
         <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
                 <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -96,12 +97,9 @@ require_once '../Perfil/Bd_Perfil.php';
 
                             <?php } ?>
                         </ul>
-
                     </form>
                 </div>
-            </div>
-
-
+            </div> 
             <div class="barra_busqueda">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
@@ -113,7 +111,7 @@ require_once '../Perfil/Bd_Perfil.php';
 
                             $visibilidad = "hidden";
                         }
-                        echo "<ul class='navbar-nav  mb- mb-lg-0' style='visibility: $visibilidad'>";
+                        echo "<ul class='navbar-nav  mb-lg-0' style='visibility: $visibilidad'>";
                         ?>
 
                         <li class="nav-item" style="margin-top:10px ">
@@ -149,8 +147,13 @@ require_once '../Perfil/Bd_Perfil.php';
                 </div>
             </div>
         </nav>
+    </header>
 
-        <div class='contenedor' >
+    <!-- Cuerpo del html -->
+    <body>
+        <div class="divhabitaciones">
+            <div class="datoshabitaciones">
+                 <div class='contenedor' >
             <?php
             $tipos = devolver_tipos_imagenes();
             $contar_tipos = contar_tipos();
@@ -210,7 +213,7 @@ require_once '../Perfil/Bd_Perfil.php';
                     </div>
 
 
-                    <div class="texto col-6" id="tipo<?php echo $id ?>" value='<?php echo $devolver_tipos[$index][0]?>'>
+                    <div  class="texto  col-6" id="tipo<?php echo $id ?>" value='<?php echo $devolver_tipos[$index][0]?>'>
                         <h1><?php echo $tipos[$titulo][3]; ?></h1>
 
                         <p><?php echo $tipos[$titulo][7]; ?></p>

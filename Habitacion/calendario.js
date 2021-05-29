@@ -145,13 +145,13 @@ function dayselected() {
         document.getElementById("checkin").value="";
         document.getElementById("checkout").value="";
         document.getElementById('checkin').value = dateenter;
-        document.getElementById(event.srcElement.id).style.backgroundColor = "lightblue";
+        document.getElementById(event.srcElement.id).style.backgroundColor = "  #ffffff ";
         document.getElementById(event.srcElement.id).style.color = "black";
         elemento1 = event.srcElement.id;
     }
     if (contadorclicks == 1) {
         document.getElementById('checkout').value = dateenter;
-        document.getElementById(event.srcElement.id).style.backgroundColor = "lightblue";
+        document.getElementById(event.srcElement.id).style.backgroundColor = "#ffffff";
         document.getElementById(event.srcElement.id).style.color = "black";
         elemento2 = event.srcElement.id;
         verrango();
@@ -205,13 +205,13 @@ var monthword1 = months[contador];
 
 function colorear() {
     try {
-        document.getElementById(elemento1).style.backgroundColor = "lightblue";
+        document.getElementById(elemento1).style.backgroundColor = "#ffffff";
         document.getElementById(elemento1).style.color = "black";
     } catch (e) {
         //el primer parameto no se encuentra en el mes
     }
     try {
-        document.getElementById(elemento2).style.backgroundColor = "lightblue";
+        document.getElementById(elemento2).style.backgroundColor = "#ffffff";
         document.getElementById(elemento2).style.color = "black";
     } catch (e) {
         //el segundo parameto no se encuentra en el mes
@@ -222,7 +222,7 @@ function colorear() {
 function  colorearinervalo(){
     for (var i = 0; i <intervalo.length; i++) {
         try {
-        document.getElementById(intervalo[i]).style.backgroundColor= "lightblue";
+        document.getElementById(intervalo[i]).style.backgroundColor= "#ffffff";
         document.getElementById(intervalo[i]).style.color="black";
     } catch (e) {
         //Intenta colorear el elemento selleccionado

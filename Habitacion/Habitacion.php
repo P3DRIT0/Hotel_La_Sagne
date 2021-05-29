@@ -117,13 +117,13 @@ if (isset($_POST['num_habitacion'])) {
 
                     <ul class="minicalendar">
                         <li class="datein">
-                            <label>Fecha de llegada:</label>
-                            <input id="checkin" class="login__input" maxlength="10" value="">
+                            <label class="fecha">Fecha de llegada</label>
+                            <input id="checkin" class="login__input" maxlength="10" value="" readonly="">
                         </li>
                         <img src="./Multimedia/arrow.png" height="25px">
                         <li class="dateout">
-                            <label>Fecha de salida:</label>
-                            <input id="checkout" class="login__input" maxlength="10" value="">
+                            <label class="fecha">Fecha de salida</label>
+                            <input id="checkout" class="login__input" maxlength="10" value="" readonly="">
                         </li>
                     </ul>
 
@@ -196,8 +196,8 @@ if (isset($_POST['num_habitacion'])) {
                 </div>
                 <!--botones-->
                 <div class="buttons">
-                    <input type="submit" value="Cancelar" id="cancel">
-                    <input type="submit" value="Reservar online" id="select">
+                    <input type="submit"  class="login__submit" value="Reservar online" id="select">
+                    <input type="submit"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
                 </div>
             </div>
         </div>

@@ -234,6 +234,7 @@ background-image: radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%
     justify-content: center;
     text-align: justify;
     font-size: 25px;
+    height: 100px;
 }
 
 
@@ -260,41 +261,14 @@ background-image: radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:space-around;
 }
 
-
-/*botón cancelar*/
-
-#cancel {
-    margin-left: 10%;
-    font-size: 25px;
-    background-color: rgb(172, 197, 255);
-    border: ridge 1px black;
-}
-
-#cancel:hover {
-    background-color: rgb(133, 170, 255);
-}
-
-
-/*botón reservar*/
-
-#select {
-    margin-right: 10%;
-    font-size: 25px;
-    background-color: rgb(172, 197, 255);
-    border: ridge 1px black;
-}
-
-#select:hover {
-    background-color: rgb(133, 170, 255);
-}
 .infohotel h1{
     color: white;
     font-family: 'Alex Brush', cursive;
     font-size: 400%;
-    margin-left:30%;
+    margin-left:38%;
 }
 body{
     background-image: url(../Registro//Multimedia/Fondo_pantalla.jpg);
@@ -318,12 +292,7 @@ a:link, a:visited, a:active {
     color: rgba(255, 255, 255, 0.658);
 
 }
-.login__input:hover,
-.login__input:focus{
-	color: white;
-	border: 2px solid rgba(255, 255, 255, 0.5);
-	background-color: transparent;
-}
+
 .login__input {
 	color: white;
 	font-size: 1.15rem;
@@ -334,4 +303,51 @@ a:link, a:visited, a:active {
 	border-radius: 1.5rem;
 	background-color: rgba(255, 255, 255, 0.25);
 	letter-spacing: 1px;
+        text-align: center;
+}
+.login__submit{
+	color: #ffffff;
+	font-size: 1rem;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-top: 1rem;
+	padding: .75rem;
+	border-radius: 2rem;
+       
+	display: block;
+	width: 40%;
+	background-color: #bf4343;
+	border: none;
+	cursor: pointer;
+}
+
+.login__submit:hover {
+	background-color:#e45858 ;
+}
+.login__cancelar {
+	color: black;
+	font-size: 1rem;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-top: 1rem;
+	padding: .75rem;
+	border-radius: 2rem;
+       
+	display: block;
+	width: 20%;
+	background-color: #FFFFFF;
+	border: none;
+	cursor: pointer;
+}
+
+.login__cancelar:hover {
+	background-color: #CCCCCC;
+}
+.fecha{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+   padding-left: 35%;
+   font-size: 110%
 }
