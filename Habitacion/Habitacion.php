@@ -103,7 +103,7 @@ if (isset($_POST['num_habitacion'])) {
     </nav>
 </header>
 <body>
-
+    <form action="./Solicitud_reserva.php" method="post">
     <!--contenedor principal-->
     <div class="contenedor">
         <!--zona reserva-->
@@ -118,12 +118,12 @@ if (isset($_POST['num_habitacion'])) {
                     <ul class="minicalendar">
                         <li class="datein">
                             <label class="fecha">Fecha de llegada</label>
-                            <input id="checkin" class="login__input" maxlength="10" value="" readonly="">
+                            <input id="checkin" class="login__input" maxlength="10" value=""  name="fecha_llegada" readonly="">
                         </li>
                         <img src="./Multimedia/arrow.png" height="25px">
                         <li class="dateout">
                             <label class="fecha">Fecha de salida</label>
-                            <input id="checkout" class="login__input" maxlength="10" value="" readonly="">
+                            <input id="checkout" class="login__input" maxlength="10" value="" name="fecha_salida" readonly="">
                         </li>
                     </ul>
 
@@ -199,9 +199,11 @@ if (isset($_POST['num_habitacion'])) {
                     <input type="submit"  class="login__submit" value="Reservar online" id="select">
                     <input type="submit"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
                 </div>
+                <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo?>">
             </div>
         </div>
     </div>
+    </form>
     <script src="calendario.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   

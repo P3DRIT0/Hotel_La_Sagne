@@ -3,6 +3,7 @@
 session_start();
 require_once './BD_habitaciones.php';
 require_once '../Perfil/Bd_Perfil.php';
+echo $_SESSION['id'];
 ?>
 <!doctype html>
 <html lang="en">

@@ -37,17 +37,17 @@ include_once '../Perfil/Bd_Perfil.php';
     <link href="./estilo.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-    />
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+        crossorigin="anonymous"
+        />
     <!--Fuentes -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap"
+        rel="stylesheet"
+        />
 
     <title>Hotel La sagne </title>
 
@@ -83,28 +83,28 @@ include_once '../Perfil/Bd_Perfil.php';
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <?php if (!empty($_SESSION["usuario"])) { ?>
 
-                                <li class="nav-item dropdown">
-                                    
-                                   <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
-                                    
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
-                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
-                                    </ul>
-                                </li>
-                        <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"])?>"width="50" height="50"/></a>
+                            <li class="nav-item dropdown">
+
+                                <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
+                                    <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
+                                </ul>
+                            </li>
+                            <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>"width="50" height="50"/></a>
                     </form>
-                        <?php } else { ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
+                    </li>
+                <?php } ?>
+                </ul>
                 </form>
             </div>
         </div>

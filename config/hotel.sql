@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2021 a las 16:38:05
+-- Tiempo de generación: 02-06-2021 a las 19:09:20
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.13
 
@@ -37,9 +37,9 @@ CREATE TABLE `habitaciones` (
 --
 
 INSERT INTO `habitaciones` (`id`, `tipo_habitacion`) VALUES
-(65, 'Individual'),
-(66, 'Individual'),
-(67, 'Individual');
+(68, 'Individual'),
+(69, 'Individual'),
+(70, 'Individual');
 
 -- --------------------------------------------------------
 
@@ -50,8 +50,16 @@ INSERT INTO `habitaciones` (`id`, `tipo_habitacion`) VALUES
 CREATE TABLE `habitaciones_reservas` (
   `id` bigint(20) NOT NULL,
   `num_reserva` bigint(20) NOT NULL,
-  `id_habitacion` bigint(20) NOT NULL
+  `id_habitacion` bigint(20) NOT NULL,
+  `fecha_disponibilidad` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `habitaciones_reservas`
+--
+
+INSERT INTO `habitaciones_reservas` (`id`, `num_reserva`, `id_habitacion`, `fecha_disponibilidad`) VALUES
+(87, 101, 68, '2021-06-04 22:00:00');
 
 -- --------------------------------------------------------
 
@@ -81,9 +89,9 @@ CREATE TABLE `imagenes_habitaciones` (
 --
 
 INSERT INTO `imagenes_habitaciones` (`id`, `id_tipo_habitacion`, `imagen_habitacion`) VALUES
-(102, 105, '../Reservas/Imagenes_habitaciones/526.jpg'),
-(103, 105, '../Reservas/Imagenes_habitaciones/527.jpg'),
-(104, 105, '../Reservas/Imagenes_habitaciones/528.jpg');
+(119, 111, '../Reservas/Imagenes_habitaciones/556.jpg'),
+(120, 111, '../Reservas/Imagenes_habitaciones/557.jpg'),
+(121, 111, '../Reservas/Imagenes_habitaciones/558.jpg');
 
 -- --------------------------------------------------------
 
@@ -98,6 +106,13 @@ CREATE TABLE `reservas` (
   `fecha_salida` timestamp NOT NULL DEFAULT current_timestamp(),
   `tipo_habitacion` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`num_reserva`, `id_usuario`, `fecha_entrada`, `fecha_salida`, `tipo_habitacion`) VALUES
+(101, 105, '2021-06-01 22:00:00', '2021-06-04 22:00:00', 'Individual');
 
 -- --------------------------------------------------------
 
@@ -132,6 +147,15 @@ CREATE TABLE `servicios` (
   `disponibilidad` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `nombre_servicio`, `precio_servicio`, `descripcion`, `disponibilidad`) VALUES
+(1, 'Internet', '10.00', 'Servicios de conexion ', b'1'),
+(2, 'Internet', '10.00', 'Servicios', b'1'),
+(3, 'Lavanderia', '9999.99', 'dasdqaw', b'1');
+
 -- --------------------------------------------------------
 
 --
@@ -154,7 +178,7 @@ CREATE TABLE `tipo_habitaciones` (
 --
 
 INSERT INTO `tipo_habitaciones` (`id`, `m2`, `ventana`, `tipo_de_habitacion`, `servicio_limpieza`, `internet`, `precio`, `descripcion`) VALUES
-(105, '80.00', b'1', 'Individual', b'1', b'1', '80.00', 'asasasas');
+(111, '123.00', b'1', 'Individual', b'1', b'1', '123.00', 'fghdfghfdghfdgh');
 
 -- --------------------------------------------------------
 
@@ -178,7 +202,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `telf`, `direccion`, `password`, `rol_usuario`, `imagen_usuario`) VALUES
-(99, 'Pedro', 'pedrofc99@gmail.com', '698139991', 'tuputacasa', '$2y$10$jgpu4o4t0ivCc4bsrbPF1.vLkP6fDixoD3Au8HfxMtQUDP3vD/VPu', 2, '../Perfil/Multimedia/6bc745eafa214ba49b7fbbe744aa41c5.jpg');
+(100, 'pablo', 'pablo@gmail.com', '123456789', 'callex', '$2y$10$PQmzgIIsFElSNu78U.BsSef2ow7SOTuusn5P6h1tHC4X4bLtiK1SC', 2, '../Perfil/Multimedia/7e683d738d1da240fb12f3d8eb86db0e.jpg'),
+(105, 'Pedro', 'pedrofc99@gmail.com', '698139991', 'tuputacasa', '$2y$10$XTRTnaAtpHoi52EBlG/zP.5RV9g2AKBkaQYvV1xOGHB6rUynuVzSu', 1, '../Perfil/Multimedia/avatar_defecto.png');
 
 --
 -- Índices para tablas volcadas
@@ -258,43 +283,43 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `habitaciones`
 --
 ALTER TABLE `habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `habitaciones_reservas`
 --
 ALTER TABLE `habitaciones_reservas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `imagenes_habitaciones`
 --
 ALTER TABLE `imagenes_habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `num_reserva` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `num_reserva` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_habitaciones`
 --
 ALTER TABLE `tipo_habitaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- Restricciones para tablas volcadas
@@ -311,7 +336,7 @@ ALTER TABLE `habitaciones`
 --
 ALTER TABLE `habitaciones_reservas`
   ADD CONSTRAINT `habitaciones_reservas_ibfk_1` FOREIGN KEY (`num_reserva`) REFERENCES `reservas` (`num_reserva`),
-  ADD CONSTRAINT `habitaciones_reservas_ibfk_2` FOREIGN KEY (`id_habitacion`) REFERENCES `tipo_habitaciones` (`id`);
+  ADD CONSTRAINT `habitaciones_reservas_ibfk_2` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`);
 
 --
 -- Filtros para la tabla `habitacion_servicio`

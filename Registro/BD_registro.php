@@ -34,3 +34,15 @@ function registrar_usuario($nombre, $contraseña, $correo, $telefono, $direccion
     }
     echo "consulta registrada con exito ";
 }
+function id_usuario($email){
+      try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT id FROM usuarios where email=:email");
+        $sentencia->bindParam(':email', $email);
+        $sentencia->execute();
+        $result = $sentencia->fetchAll();
+        return $result;
+} catch (PDOException $e) {
+        die('No se pudo conectar: ' . mysql_error());
+    }
+}
