@@ -161,7 +161,7 @@ include_once '../Perfil/Bd_Perfil.php';
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto px-5">
                         <li class="nav-item active">
                             <a id="suite">Suite</a>
                         </li>

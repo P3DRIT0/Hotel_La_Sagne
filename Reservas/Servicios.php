@@ -5,7 +5,7 @@ $lista_tipos_habitaciones = lista_tipos_habitaciones();
 $lista_servicios = lista_servicios();
 $selector_tipo_habita;
 $count = 0;
-
+print_r($lista_tipos_habitaciones);
 
 $nombre_servicio = "";
 $precio = "";
@@ -127,9 +127,12 @@ if (isset($_POST["borrar"])) {
 
                             <select class="form-select" aria-label="Default select example" name="selector_tipo_habitacion" id="selector_tipo_habitacion">
                                 <option selected>Selecciona un tipo de habitación</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                for ($i = 0; $i < count($lista_tipos_habitaciones); $i++) {
+                                    $tipo = $lista_tipos_habitaciones[$i]["tipo_de_habitacion"];
+                                    echo "<option value='$tipo' id='option$tipo'>$tipo</option>";
+                                }
+                                ?>
                             </select>
 
                         </div>
@@ -165,6 +168,11 @@ if (isset($_POST["borrar"])) {
                 </div>
             </div>
         </div>
+        <div style="visibility: hidden">
+            <form action="action" method="POST">
+                <input type="text" name="tipo_habitacion" id="tipo_habitacion">
+            </form>
+        </div>
     </body>
     <script
         src="https://code.jquery.com/jquery-3.5.1.js"
@@ -173,17 +181,16 @@ if (isset($_POST["borrar"])) {
     ></script>
     <script>
                             $(document).ready(function () {
-                                $("#selector_tipo_habitacion").on("change",function () {
-                                    console.log("<?php
-                            
+                                $("#selector_tipo_habitacion").on("change", function () {
+                                    $("#tipo_hitacion").val($("#option"))
                             echo $count;
                             ?>");
                                 })
                                 $("#eli").on("click", function () {
-                                    <?php
-                            $count++;
-                            echo $count;
-                            ?>
+<?php
+$count++;
+echo $count;
+?>
 
 
 
