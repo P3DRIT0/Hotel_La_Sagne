@@ -159,11 +159,11 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
 
         for ($index = 0; $index < count($tipos_habitaciones_a_borrar); $index++) {
 
-            //Borrando servicios dependientes del tipo de habitación
-            //PENDIENTE
-            //Borrando reservas dependientes del tipo de habitación
-            //PENDIENTE
-            //Borrando las imagenes dependientes del tipo de habitación
+//Borrando servicios dependientes del tipo de habitación
+//PENDIENTE
+//Borrando reservas dependientes del tipo de habitación
+//PENDIENTE
+//Borrando las imagenes dependientes del tipo de habitación
 
             $sentencia = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_tipo;");
 
@@ -171,16 +171,16 @@ function borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo) {
 
             $sentencia->execute();
 
-            //Borrar imagenes del servidor
+//Borrar imagenes del servidor
             for ($i = 0; $i < 5; $i++) {
                 borrar_img_servidor((($id_tipo[$index] * 5) + 1) + $i);
             }
-            //Borrando habitaciones del tipo indicado
+//Borrando habitaciones del tipo indicado
             $sentencia2 = $base->prepare("DELETE FROM habitaciones WHERE tipo_habitacion=:tipo_habitacion");
             $sentencia2->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
             $sentencia2->execute();
 
-            //Borrando el tipo
+//Borrando el tipo
             $sentencia3 = $base->prepare("DELETE FROM tipo_habitaciones WHERE tipo_de_habitacion=:tipo_habitacion");
             $sentencia3->bindParam(':tipo_habitacion', $tipos_habitaciones_a_borrar[$index]);
             $sentencia3->execute();
@@ -338,4 +338,78 @@ function modificar_habitacion($id, $nuevo_tipo) {
     } catch (PDOException $e) {
         print $e->getMessage();
     }
+}
+
+/**
+ * Método que obtiene todos los servicios existentes en la base de datos
+ * @return array Contiene los servicios
+ */
+function lista_servicios() {
+    try {
+        $base = conectar("admin");
+        $sql = $base->prepare("SELECT * FROM servicios");
+        $sql->execute();
+        $result[] = $sql->fetchAll();
+        return $result;
+
+//        print_r($result[0]);
+    } catch (Exception $ex) {
+        print $ex->getMessage();
+    }
+}
+
+/**
+ * Método que inserta en la base de datos un nuevo servicio 
+ * 
+ * @param string $nombre Nombre del servicio
+ * @param int $precio Precio del servicio
+ * @param string $descripcion Descripción del servicio
+ */
+function servicio_nuevo($nombre, $precio, $descripcion) {
+    try {
+        $base = conectar("admin");
+        $sql = $base->prepare("INSERT INTO servicios (nombre_servicio,precio_servicio,descripcion) VALUES (:nombre,:precio,:descripcion)");
+        $sql->bindParam(":nombre", $nombre);
+        $sql->bindParam(":precio", $precio);
+        $sql->bindParam(":descripcion", $descripcion);
+        $sql->execute();
+
+        echo "Guardado <br>";
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+
+/**
+ * Método para comprobar si un servicio existe
+ * 
+ * @param array $lista_servicios Lista de servicios existentes
+ * @param string $nombre Nombre del servicio a evaluar
+ * @return boolean Indica si existe en la base de datos
+ */
+function servicio_comprobar($lista_servicios, $nombre) {
+//print_r($lista_servicios[0]);
+    $existe = false;
+    for ($i = 0; $i < count($lista_servicios[0]); $i++) {
+        if ($lista_servicios[0][$i]["nombre_servicio"] == $nombre) {
+            $existe = true;
+        }
+    }
+    return $existe;
+}
+
+function servicio_borrar($servicios_a_borrar_id) {
+    //Borrar en servicios
+    try {
+        $base = conectar("admin");
+        for ($i = 0; $i < count($servicios_a_borrar_id); $i++) {
+            $sql = $base->prepare("DELETE FROM servicios WHERE id=:id");
+            $sql->bindParam(":id", $servicios_a_borrar_id[$i]);
+            $sql->execute();
+        }
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+
+    //Borrar en servicios_habitaciones
 }
