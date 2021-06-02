@@ -1,6 +1,6 @@
 <?php
+require_once '../Registro/BD_registro.php';
 
-include '../config/conexiones_BD.php';
 
 /**
  * Método que recibe un correo y comprueba si esta registrado en la base de datos
@@ -67,6 +67,8 @@ function crear_sesion($correo) {
         $sentencia->execute();
         $result = $sentencia->fetch(PDO::FETCH_ASSOC);
         session_start();
+        $id_usuario=id_usuario($correo)[0][0];
+        $_SESSION['id'] =$id_usuario; 
         $_SESSION['usuario'] = $result['nombre'];
         $_SESSION['email'] = $result['email'];
         $_SESSION['telf'] = $result['telf'];
