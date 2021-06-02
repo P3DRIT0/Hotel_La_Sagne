@@ -93,7 +93,7 @@ if (isset($_POST['num_habitacion'])) {
                                         <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
                                     </ul>
                                 </li>
-                                <a href="../Perfil/Perfil.php"><img src='<?php echo cargar_img_perfil($_SESSION['email']);?>' style="width: 50px;height: 50px"></a>
+                                <a href="../Perfil/Perfil.php"><img src='<?php echo cargar_img_perfil($_SESSION['email']);?>' style="width: 50px;height: 50px;margin-top: 1px"></a>
                     </ul>
                     </form>
                     </ul>

@@ -30,3 +30,16 @@ function cambiar_img_perfil($email,$img){
         die('No se pudo conectar: ' . mysql_error());
     }
 }
+
+function consultar_reservas(){
+     try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM reservas WHERE id_usuario=:id");
+        $sentencia->bindParam(':id', $_SESSION['id']);
+        $sentencia->execute();
+         $resultados = $sentencia->fetchAll();
+         return $resultados;
+        }  catch (PDOException $e) {
+        die('No se pudo conectar: ' . mysql_error());
+    }
+}
