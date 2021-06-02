@@ -172,8 +172,7 @@ echo $_SESSION['id'];
                     //                $numhabitaciones = visualizar_habitaciones();
                     //               $habitacioncliacada;
                 ?>
-
-                    <div class='habitacion' id=tipo<?php echo $tipos[$index][3] ?>>
+                    <div class='habitacion' id=tipo<?php echo $tipos[$titulo][3] ?>>
                         <div id="carousel-<?php echo "carrusel" . $index2 ?>" class="carousel slide col-6" data-bs-ride="carousel" value='<?php echo $devolver_tipos[$index][0] ?>'>
                             <div class="carousel-indicators">
                                 <button type="button" data-bs-target="#carousel-<?php echo "carrusel" . $index2 ?>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -202,7 +201,7 @@ echo $_SESSION['id'];
                         </div>
 
 
-                        <div class="texto  col-6" id="tipo<?php echo $id ?>" value='<?php echo $devolver_tipos[$index][0] ?>'>
+                        <div class="texto  col-6" id="tipo<?php echo $id ?>" value='<?php echo $tipos[$titulo][3] ?>'>
                             <h1><?php echo $tipos[$titulo][3]; ?></h1>
 
                             <p><?php echo $tipos[$titulo][7]; ?></p>
