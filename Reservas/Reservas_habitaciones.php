@@ -2,7 +2,16 @@
 session_start();
 require_once './BD_habitaciones.php';
 require_once '../Perfil/Bd_Perfil.php';
-echo $_SESSION['id'];
+ if ($_SESSION['rol'] == "Usuario_trabajador") {
+     if(empty($consultar_datos_trabajador= consultar_datos_trabajadores($_SESSION['id']))){
+         header('Location:../Añadir_propiedades_usuarios/Añadir_datos_trabajadores.php');
+     }
+ }
+ if ($_SESSION['rol'] == "Usuario_administrador") {
+     if(empty($consultar_datos_admin= consultar_datos_administradores($_SESSION['id']))){
+         header('Location:../Añadir_propiedades_usuarios/Añadir_datos_trabajadores.php');
+     }
+ }
 ?>
 <!doctype html>
 <html lang="en">
@@ -132,7 +141,8 @@ echo $_SESSION['id'];
 
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="./Servicios.php">Gestionar Servicios</a></li>
-                                <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li>
+                                <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li
+                                <li></li>
                             </ul>
                         </li>
                         </ul>

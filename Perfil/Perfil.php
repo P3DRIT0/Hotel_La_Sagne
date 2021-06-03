@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $imagen_actual_aux = explode("/", $imagen_actual_ruta);
                 $imagen_actual = end($imagen_actual_aux);
                 //Aqui compruebo si la imagen por defecto es la que esta,si es el caso no la borro pero si no lo es borro la imagen anterior
-                if ($imagen_actual === "avatar_defecto.png") {
+                if ($imagen_actual === "avatar_defecto.png" || $imagen_actual === "foto_perfil_trabajadores.png"|| $imagen_actual === "foto_perfil_administradores.png") {
                     cambiar_img_perfil($_SESSION["email"], $target_path);
                     header('Location:./Perfil.php');
                 } else {
