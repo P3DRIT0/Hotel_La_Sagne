@@ -413,3 +413,14 @@ function servicio_borrar($servicios_a_borrar_id) {
 
     //Borrar en servicios_habitaciones
 }
+function listar_reservas() {
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM reservas INNER JOIN habitaciones_reservas ON reservas.num_reserva=habitaciones_reservas.num_reserva INNER JOIN usuarios ON reservas.id_usuario = usuarios.id");
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
