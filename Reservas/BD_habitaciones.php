@@ -476,3 +476,14 @@ function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servici
         echo $ex->getMessage();
     }
 }
+function listar_reservas() {
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM reservas INNER JOIN habitaciones_reservas ON reservas.num_reserva=habitaciones_reservas.num_reserva INNER JOIN usuarios ON reservas.id_usuario = usuarios.id");
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}

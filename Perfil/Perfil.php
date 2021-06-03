@@ -103,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
+                        
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li class="nav-item">
@@ -180,8 +181,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </div>
                             </div>
-
                             <input type="submit" class="btn btn-dark"  value="Guardar Cambios" />
+                   
+                            <div id="Historial reservas" >
+                                <br>   
+           <table class='table table-striped'>
+            <thead class="thead-light">
+            <tr>
+            <th scope="col">Tipo de habitacion</th>
+            <th scope="col">Numero de reserva</th>
+            <th scope="col">Fecha de entrada </th>
+            <th scope="col">Fecha de salida </th>
+            </tr>
+            </thead>
+            <tbody>
+<?php $reservas_usuario=consultar_reservas();
+    if(!(empty($reservas_usuario))){
+        echo "   <tr>";
+        for ($index = 0; $index < count($reservas_usuario);$index++) {
+        echo "
+                   <td scope='row'>".$reservas_usuario[$index][4]."</td>
+                    <td scope='row'>".$reservas_usuario[$index][0]."</td>
+                    <td scope='row'>".$reservas_usuario[$index][2]."</td>
+                    <td scope='row'>".$reservas_usuario[$index][3]."</td>
+                    </tr>
+                
+              ";  
+                  }
+            } else {
+                echo "<p style='color:gray;text-align: center'>No hay habitaciones introducidas</p>";
+            }
+            ?>
+            </tbody>
+            </table>
+                            </div>
+
+                            
                             </section>
 
                             </form>
