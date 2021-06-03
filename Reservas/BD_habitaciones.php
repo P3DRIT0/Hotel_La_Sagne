@@ -424,3 +424,27 @@ function listar_reservas() {
         print $e->getMessage();
     }
 }
+function consultar_datos_trabajadores($id_usuario){
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM trabajadores WHERE id_usuario=:id_usuario");
+        $sentencia->bindParam(":id_usuario", $id_usuario);
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+function consultar_datos_administradores($id_usuario){
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM administradores WHERE id_usuario=:id_usuario");
+        $sentencia->bindParam(":id_usuario", $id_usuario);
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
