@@ -398,8 +398,12 @@ function servicio_comprobar($lista_servicios, $nombre) {
     return $existe;
 }
 
+/**
+ * 
+ * @param type $servicios_a_borrar_id
+ */
 function servicio_borrar($servicios_a_borrar_id) {
-    //Borrar en servicios
+//Borrar en servicios
     try {
         $base = conectar("admin");
         for ($i = 0; $i < count($servicios_a_borrar_id); $i++) {
@@ -411,7 +415,66 @@ function servicio_borrar($servicios_a_borrar_id) {
         echo $ex->getMessage();
     }
 
-    //Borrar en servicios_habitaciones
+//Borrar en servicios_habitaciones
+}
+
+/**
+ * 
+ * @param type $tipo_habitacion
+ * @param type $servicios
+ */
+function insertar_en_servicios_habitaciones($tipo_habitacion, $servicios) {
+    echo 'Entrando en insertar<br>';
+    print_r($servicios);
+    echo '<br>';
+
+    try {
+        $base = conectar("admin");
+        for ($i = 0; $i < count($servicios); $i++) {
+            echo "<br>count = " . count($servicios) . "<br>";
+            $servicio = $servicios[$i];
+            echo "Servicio: " . $servicio . "<br>";
+
+            $sql = $base->prepare("INSERT INTO habitacion_servicio (tipo_habitacion, id_servicio) VALUES (:tipo, :servicio)");
+            $sql->bindParam(":tipo", $tipo_habitacion);
+            $sql->bindParam(":servicio", $servicio);
+            $sql->execute();
+        }
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+}
+
+/**
+ * 
+ * @param type $id_tipo_habitacion
+ * @return type
+ */
+function lista_servicios_tipo_habitacion($tipo_habitacion) {
+    try {
+        $base = conectar("admin");
+        $sql = $base->prepare("SELECT habitacion_servicio.id_servicio, servicios.id, servicios.nombre_servicio FROM habitacion_servicio INNER JOIN servicios ON (habitacion_servicio.id_servicio = servicios.id)WHERE habitacion_servicio.tipo_habitacion = :tipo");
+        $sql->bindParam(":tipo", $tipo_habitacion);
+        $sql->execute();
+        $result[] = $sql->fetchAll();
+        return $result;
+    } catch (Exception $ex) {
+        print $ex->getMessage();
+    }
+}
+
+function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servicios_a_borrar_id) {
+    try {
+        $base = conectar("admin");
+        for ($i = 0; $i < count($servicios_a_borrar_id); $i++) {
+            $sql = $base->prepare("DELETE FROM habitacion_servicio WHERE id_servicio=:id AND tipo_habitacion=:tipo");
+            $sql->bindParam(":id", $servicios_a_borrar_id[$i]);
+            $sql->bindParam(":tipo", $tipo_habitacion_seleccionada);
+            $sql->execute();
+        }
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
 }
 function listar_reservas() {
     try {
