@@ -1,19 +1,46 @@
 <?php
 require_once './BD_habitaciones.php';
-
-$resultados = lista_tipos_habitaciones();
+$visiblidad = "visible";
+$lista_tipos_habitaciones = lista_tipos_habitaciones();
 $tipos_habitaciones_a_borrar;
 $id_tipo;
-for ($index1 = 0; $index1 < count($resultados); $index1++) {
+for ($index1 = 0; $index1 < count($lista_tipos_habitaciones); $index1++) {
     $habitaciones = "habitacion$index1";
     if (isset($_POST[$habitaciones])) {
-        $tipos_habitaciones_a_borrar[] = $resultados[$index1]['tipo_de_habitacion'];
-        $id_tipo[] = $resultados[$index1]['id'];
+        $tipos_habitaciones_a_borrar[] = $lista_tipos_habitaciones[$index1]['tipo_de_habitacion'];
+        $id_tipo[] = $lista_tipos_habitaciones[$index1]['id'];
     }
 }
 if (!empty($tipos_habitaciones_a_borrar)) {
-    borrar_tipo_habitaciones($tipos_habitaciones_a_borrar, $id_tipo);
-    header('Location:Borrar_tipo_habitacion.php');
+
+    for ($i = 0; $i < count($tipos_habitaciones_a_borrar); $i++) {
+        $consulta = consultar_reservas_por_tipo($tipos_habitaciones_a_borrar[$i]);
+        if (empty($consulta)) {
+            echo 'Borrando';
+            borrar_tipo_habitaciones($tipos_habitaciones_a_borrar[$i], $id_tipo[$i]);
+            header('Location:Borrar_tipo_habitacion.php');
+        } else {
+            $visibilidad = "hidden";
+            echo "<div class='wrapper red' style='height:450px'>
+                                 <div class='header__wrapper'>
+                                 <div class='header'>
+                                 <div class='sign'><span></span></div>
+                                  </div>
+                                  </div>
+                                  <h1 style='padding-top: 30px;'>Opps</h1>
+                                  <p>La habitaciones de tipo $tipos_habitaciones_a_borrar[$i] no se pueden borrar ya que existen habitaciones de este tipo con reservas vigentes</p>";
+            ?>
+            <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras habitaciones </button>
+            <?php
+            echo '</div>';
+        }
+    }
+}
+if (isset($_POST["consulta"])) {
+    echo 'Consultando';
+    $c = "Casa";
+    $consulta = consultar_reservas_por_tipo($c);
+    print_r($consulta);
 }
 ?>
 
@@ -47,10 +74,11 @@ if (!empty($tipos_habitaciones_a_borrar)) {
             crossorigin="anonymous"
             />
         <link rel="stylesheet" href="formularios.css" />
+        <LINK REL=StyleSheet HREF="../Habitacion/Botones_estilo.css" TYPE="text/css" MEDIA=screen>
         <title>Borrar habitacion</title>
     </head>
     <body>
-        <div id="caja" class="col-6">
+        <div id="caja" class="col-6" style="visibility: <?php $visibilidad ?>">
             <h3>Borrar tipo de habitación</h3>
             <div class="col-10" id="formulario">
                 <form action='./Borrar_tipo_habitacion.php' method='post'> 
@@ -65,10 +93,10 @@ if (!empty($tipos_habitaciones_a_borrar)) {
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($resultados)) {
-                                for ($index = 0; $index < count($resultados); $index++) {
-                                    $id = $resultados[$index]['id'];
-                                    $tipo_habitacion = $resultados[$index]['tipo_de_habitacion'];
+                            if (!empty($lista_tipos_habitaciones)) {
+                                for ($index = 0; $index < count($lista_tipos_habitaciones); $index++) {
+                                    $id = $lista_tipos_habitaciones[$index]['id'];
+                                    $tipo_habitacion = $lista_tipos_habitaciones[$index]['tipo_de_habitacion'];
                                     echo "<tr><th scope='row'>$index</th><td><input type='checkbox' name='habitacion$index'</td><td>$id</td><td>$tipo_habitacion</td></tr>";
                                 }
                             } else {
@@ -78,6 +106,7 @@ if (!empty($tipos_habitaciones_a_borrar)) {
                         </tbody>
                     </table>
                     <input id="boton" type='submit' name='borrar' value='Borrar'/>
+                    <input id="boton" type='submit' name='consulta' value='consulta'/>
                     <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
                 </form>
             </div>
