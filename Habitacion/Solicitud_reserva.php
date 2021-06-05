@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             for ($index = 0; $index < count($id_habitaciones) && $id_no_valido; $index++) {
                 if (empty($id_reservadas)) {
                     crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_habitaciones[$index][0]);
-                      enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
+                    enviar_correo_reserva($_SESSION['email'], $_SESSION['usuario']);
                     $id_no_valido = false;
                     echo '   <div class="wrapper green">
                                             <div class="header__wrapper">
@@ -70,64 +70,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (!(in_array($id_habitaciones[$index][0], $id_reservadas))) {
 
 
-                    crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_habitaciones[$index][0]);
-                      enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
-                    $id_no_valido = false;
-                    echo '   <div class="wrapper green">
-  <div class="header__wrapper">
-    <div class="header">
-      <div class="sign"><span></span></div>
-    </div>
-  </div>
-  <h1>Exito</h1>
-  <p>Habitación reservada</p>'
-?>
-  <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver mas habitaciones </button>
-  <?php
-  echo '
-</div>';
-                }
-                }
-            }
-            
-        } else {
-           
-             $id_reservables= consultar_id_reservas($fecha_salida_amd, $fecha_entrada_amd);
-             if(!(empty($id_reservables)) && $id_reservables[0][1]==$tipo){
-                    crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd,$id_reservables[0][0]);
-                    enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
-                    echo '   <div class="wrapper green">
-  <div class="header__wrapper">
-    <div class="header">
-      <div class="sign"><span></span></div>
-    </div>
-  </div>
-  <h1>Exito</h1>
-  <p>Habitación reservada</p>'
-?>
-  <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver mas habitaciones </button>
-  <?php
-  echo '
-</div>';
-                }else{
-                   
-                          echo '<div class="wrapper red">
-  <div class="header__wrapper">
-    <div class="header">
-      <div class="sign"><span></span></div>
-    </div>
-  </div>
-  <h1>Opps</h1>
-  <p>Lo sentimos pero no tenemos  habitaciones de tipo '. $tipo.' disponibles en este periodo</p>
-  '?>
-  <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras habitaciones </button>
-  <?php
-  echo '
-</div>';
+                        crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_habitaciones[$index][0]);
+                        enviar_correo_reserva($_SESSION['email'], $_SESSION['usuario']);
+                        $id_no_valido = false;
+                        echo '   <div class="wrapper green">
+                                    <div class="header__wrapper">
+                                      <div class="header">
+                                        <div class="sign"><span></span></div>
+                                      </div>
+                                    </div>
+                                    <h1>Exito</h1>
+                                    <p>Habitación reservada</p>'
+                        ?>
+                        <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver mas habitaciones </button>
+                        <?php
+                        echo '</div>';
                     }
                 }
             }
+        } else {
+
+            $id_reservables = consultar_id_reservas($fecha_salida_amd, $fecha_entrada_amd);
+            if (!(empty($id_reservables)) && $id_reservables[0][1] == $tipo) {
+                crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_reservables[0][0]);
+                enviar_correo_reserva($_SESSION['email'], $_SESSION['usuario']);
+                echo '   <div class="wrapper green">
+                            <div class="header__wrapper">
+                              <div class="header">
+                                <div class="sign"><span></span></div>
+                              </div>
+                            </div>
+                            <h1>Exito</h1>
+                            <p>Habitación reservada</p>'
+                ?>
+                <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver mas habitaciones </button>
+                <?php
+                echo '</div>';
+            } else {
+
+                echo '<div class="wrapper red">
+                        <div class="header__wrapper">
+                          <div class="header">
+                            <div class="sign"><span></span></div>
+                          </div>
+                        </div>
+                        <h1>Opps</h1>
+                        <p>Lo sentimos pero no tenemos  habitaciones de tipo ' . $tipo . ' disponibles en este periodo</p>
+                        '
+                ?>
+                <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras habitaciones </button>
+                <?php
+                echo '</div>';
+            }
         }
+    }
+}
     
 
 
