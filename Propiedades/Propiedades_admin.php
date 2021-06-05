@@ -1,5 +1,5 @@
 <?php
-include_once './BD_añadir_propiedades.php';
+include_once './BD_propiedades.php';
 session_start();
 function añadir_datos_trabajadores($fecha_nac,$dni,$nacionalidad,$sexo){
  $lista_prp_usuarios=cargar_propiedades_usuario($_SESSION['id']);

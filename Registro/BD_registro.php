@@ -42,6 +42,8 @@ function id_usuario($email){
         $sentencia->execute();
         $result = $sentencia->fetchAll();
         return $result;
+        $sentencia=null;
+        $base=null;
 } catch (PDOException $e) {
         die('No se pudo conectar: ' . mysql_error());
     }

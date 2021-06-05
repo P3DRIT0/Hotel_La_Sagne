@@ -1,5 +1,5 @@
 <?php
-include_once './Añadir_propiedades_admins_trabajadores.php';
+include_once './Propiedades_admin.php';
 if ($_SESSION['rol'] == "Usuario_administrador") {
     añadir_datos_administradores();
 }
@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 ?>
+<!DOCTYPE html>
 <html style="background-image:url(../Registro//Multimedia/Fondo_pantalla.jpg)">
     <head>
         <link rel="apple-touch-icon" sizes="57x57" href="../config/ico/apple-icon-57x57.png">

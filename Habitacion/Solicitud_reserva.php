@@ -96,7 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            
              $id_reservables= consultar_id_reservas($fecha_salida_amd, $fecha_entrada_amd);
              if(!(empty($id_reservables)) && $id_reservables[0][1]==$tipo){
-                 echo $id_reservables[0][1],$id_reservables[0][0];
                     crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd,$id_reservables[0][0]);
                     enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
                     echo '   <div class="wrapper green">

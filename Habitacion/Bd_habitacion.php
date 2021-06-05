@@ -23,6 +23,10 @@ function obtener_habitacion($rest) {
         $sentencia2->execute();
         $resultados2 = $sentencia2->fetchAll();
         return array($resultados, $resultados2);
+        $sentencia=null;
+        $sentencia2=null;
+        $base=null;
+        
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -42,6 +46,8 @@ function contar_habitaciones($tipo) {
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
         return $cuenta;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -61,6 +67,8 @@ function contar_reservas($tipo) {
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
         return $cuenta;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -116,6 +124,8 @@ function devolver_id_habitaciones_reservadas(){
         $sentencia->execute();
         $result = $sentencia->fetchAll();
         return $result;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -126,7 +136,8 @@ function devolver_id_habitaciones(){
     $sentencia2 = $base->prepare("SELECT id FROM habitaciones");
         $sentencia2->execute();
         $result2 = $sentencia2->fetchAll();
-        
+        $sentencia2=null;
+        $base=null;
         return $result2;
         } catch (PDOException $e) {
         print $e->getMessage();
@@ -152,6 +163,8 @@ function consultar_id_reservas($fecha_salida,$fecha_entrada){
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
