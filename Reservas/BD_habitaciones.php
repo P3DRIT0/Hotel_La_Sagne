@@ -214,30 +214,26 @@ function borrar_img_servidor($index) {
 }
 
 /**
- * Método para modificar los datos de una habitación en concreto en la base de datos.
+ * Método para modificar los datos de un tipo de habitación.
  * 
  * @param int $id Identificador de la habitación
  * @param float $m2 Metros cuadrados de la habitación
  * @param float $precio Precio de la habitación
  * @param boolean $ventana Si dispone de ventana o no
- * @param boolean $limpieza Si dipone de servicio de limpieza o no
- * @param boolean $internet Si dispone de internet o no
- * @param string $tipo_de_habitacion Tipo de habitación
  */
-function modificar_habitaciones($id, $m2, $precio, $ventana, $limpieza, $internet, $tipo_de_habitacion) {
-    $base = conectar('admin');
-    $sentencia = $base->prepare("UPDATE habitaciones SET m2=:m2,ventana=:ventana,tipo_de_habitacion=:tipo_de_habitacion"
-            . ",servicio_limpieza=:servicio_limpieza "
-            . ",internet=:internet,precio=:precio; WHERE id=:id");
-    $sentencia->bindParam(':m2', $m2);
-    $sentencia->bindParam(':ventana', $ventana);
-    $sentencia->bindParam(':tipo_de_habitacion', $tipo_de_habitacion);
-    $sentencia->bindParam(':servicio_limpieza', $limpieza);
-    $sentencia->bindParam(':internet', $internet);
-    $sentencia->bindParam(':precio', $precio);
-    $sentencia->bindParam(':id', $id);
-    $sentencia->execute();
-    header('Location:./Reservas_habitaciones.php');
+function modificar_tipo_habitaciones($id, $m2, $precio, $ventana) {
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("UPDATE tipo_habitaciones SET m2=:m2,ventana=:ventana,precio=:precio WHERE id=:id");
+        $sentencia->bindParam(':m2', $m2);
+        $sentencia->bindParam(':ventana', $ventana);
+        $sentencia->bindParam(':precio', $precio);
+        $sentencia->bindParam(':id', $id);
+        $sentencia->execute();
+        print 'Modificacion ejecutada';
+    } catch (Exception $e) {
+        print $e->getMessage();
+    }
 }
 
 function ver_tipos_existentes() {
@@ -476,6 +472,7 @@ function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servici
         echo $ex->getMessage();
     }
 }
+
 function listar_reservas() {
     try {
         $base = conectar('admin');
@@ -487,7 +484,8 @@ function listar_reservas() {
         print $e->getMessage();
     }
 }
-function consultar_datos_trabajadores($id_usuario){
+
+function consultar_datos_trabajadores($id_usuario) {
     try {
         $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM trabajadores WHERE id_usuario=:id_usuario");
@@ -499,7 +497,8 @@ function consultar_datos_trabajadores($id_usuario){
         print $e->getMessage();
     }
 }
-function consultar_datos_administradores($id_usuario){
+
+function consultar_datos_administradores($id_usuario) {
     try {
         $base = conectar('admin');
         $sentencia = $base->prepare("SELECT * FROM administradores WHERE id_usuario=:id_usuario");

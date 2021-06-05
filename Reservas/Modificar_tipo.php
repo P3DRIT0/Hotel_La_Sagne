@@ -1,6 +1,14 @@
 <?php
 require_once './BD_habitaciones.php';
 $lista_tipos = lista_tipos_habitaciones();
+
+if (isset($_POST["guardar"])) {
+    echo"guardando los datos <br>";
+    echo $_POST["id_m"] . "metros" . $_POST["m2_m"] . "Precio" . $_POST["precio_m"] . "ventana" . $_POST["ventana_m"] . "<br>";
+
+    modificar_tipo_habitaciones($_POST["id_m"], $_POST["m2_m"], $_POST["precio_m"], $_POST["ventana_m"]);
+    header('Location:Modificar_tipo.php');
+}
 ?>
 <html>
     <head>
@@ -57,13 +65,19 @@ $lista_tipos = lista_tipos_habitaciones();
                                 for ($i = 0; $i < count($lista_tipos); $i++) {
                                     $id = $lista_tipos[$i]['id'];
                                     $m2 = $lista_tipos[$i]['m2'];
-                                    $ventana = $lista_tipos[$i]['ventana'];
+                                    $ventana_boolean = $lista_tipos[$i]['ventana'];
+                                    if ($ventana_boolean) {
+                                        $ventana = "SI";
+                                    } else {
+                                        $ventana = "NO";
+                                    }
                                     $tipo = $lista_tipos[$i]['tipo_de_habitacion'];
                                     $servicio_limpieza = $lista_tipos[$i]['servicio_limpieza'];
                                     $internet = $lista_tipos[$i]['internet'];
                                     $precio = $lista_tipos[$i]['precio'];
-
+                                    $i++;
                                     echo "<tr><th scope='row'>$i</th>";
+                                    $i--;
                                     if (isset($_POST["tipo_habitacion"])) {
                                         if ($_POST["tipo_habitacion"] == $i) {
                                             echo "<td><input type='radio' name='tipo_habitacion' value='$i' checked </td>";
@@ -91,11 +105,14 @@ $lista_tipos = lista_tipos_habitaciones();
                 <?php
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['modificar'])) {
-                        $tipo_seleccionado = $_POST['tipo_habitacion'];
-                        $m2 = $lista_tipos[$tipo_seleccionado]['m2'];
-                        $tipo = $lista_tipos[$tipo_seleccionado]['tipo_de_habitacion'];
-                        $precio = $lista_tipos[$tipo_seleccionado]['precio'];
-                        echo "<form action='./Procesar_modificaciones.php' method='post'>
+                        if (isset($_POST['tipo_habitacion'])) {
+                            $tipo_seleccionado = $_POST['tipo_habitacion']; //Devuelve el indice ($i) seleccionado del bucle for que recorre el array $lista_tipos
+
+                            $id_m = $lista_tipos[$tipo_seleccionado]["id"];
+                            $m2_m = $lista_tipos[$tipo_seleccionado]['m2'];
+                            $tipo_m = $lista_tipos[$tipo_seleccionado]['tipo_de_habitacion'];
+                            $precio_m = $lista_tipos[$tipo_seleccionado]['precio'];
+                            echo "<form action='./Modificar_tipo.php' method='post'>
                     <table class='table table-striped table-dark text-light'>
                         <thead class='thead-light'>
                             <tr>
@@ -107,21 +124,24 @@ $lista_tipos = lista_tipos_habitaciones();
                                 <th scope='col'>Precio</th>
                             </tr>
                         </thead>
-                        <tr><th scope='row'>#</th><td>$tipo</td><td>$id</td><td><input type='text' name='metros' value=$m2></td>";
+                        <tr><th scope='row'>#</th><td>$tipo_m </td><td>$id_m</td><td><input type='text' name='m2_m' value=$m2_m></td>";
 
 
-                        echo "<input type='hidden' name='id' value='$id'>";
+                            echo "<input type='hidden' name='id_m' value='$id_m'>";
 
 
-                        if ($lista_tipos[$tipo_seleccionado]['ventana'] == 1) {
-                            echo "<td><input type='checkbox' name='ventana' value='true' checked ></td>";
+                            if ($lista_tipos[$tipo_seleccionado]['ventana'] == 1) {
+                                echo "<td><input type='checkbox' name='ventana_m' value='true' checked style='align-items:center'></td>";
+                            } else {
+                                echo "<td><input type='checkbox' name='ventana_m' value='false'></td>";
+                            }
+                            echo "<td><input type='text' name='precio_m' value=$precio_m> €</td></tr>";
+                            echo '</tbody></table>';
+                            echo "<input type='submit' value='Guardar' name='guardar'>";
+                            echo "</form>";
                         } else {
-                            echo "<td><input type='checkbox' name='ventana' value='true'></td>";
+                            echo "<div class='col-5 me-auto ms-auto my-4 p-3' style='border: 2px solid red; border-radius:20px'><h5>Selecciona el tipo de habitacion a modificar por favor</h5></div>";
                         }
-                        echo "<td><input type='text' name='precios' value=$precio> €</td></tr>";
-                        echo '</tbody></table>';
-                        echo "<input type='submit' value='Guardar' name='guardar'>";
-                        echo "</form>";
                     }
                 }
                 ?>
