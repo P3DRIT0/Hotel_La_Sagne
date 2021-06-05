@@ -95,18 +95,18 @@ function servicios_seleccionados($lista, $id) {
     <body>
         <div class="container">
 
-<!--            <div class="row">
-                <div class="col">
-                    <h1 style="text-align: center; margin-top: 60px">Administrar servicios</h1>
-                </div>
-            </div>-->
+            <!--            <div class="row">
+                            <div class="col">
+                                <h1 style="text-align: center; margin-top: 60px">Administrar servicios</h1>
+                            </div>
+                        </div>-->
             <div class="row mt-5">
 
-                <div class="col px-5 py-2">
+                <div class="col px-5 py-3 bg-dark text-light" >
                     <h3 style="text-align: center">Servicios disponibles</h3>
 
                     <form action="" method="post">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-dark ">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">ID</th>
@@ -128,7 +128,9 @@ function servicios_seleccionados($lista, $id) {
                                         echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$precio_s</td><td>$descripcion_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
                                     }
                                 } else {
-                                    echo "<p style='color:gray;text-align: center'>No hay servicio para borrar</p>";
+                                    echo '</tbody>
+                        </table>';
+                                    echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos, inserte uno en el cuadro de abajo</p>";
                                 }
                                 ?>
                             </tbody>
@@ -181,7 +183,7 @@ function servicios_seleccionados($lista, $id) {
                         <input class="btn btn-secondary btn-sm px-4 mx-2 btnRegister" type="button" value="Atras" onclick="location = 'Reservas_habitaciones.php'" />
                     </form>
                 </div>
-                <div class="col-8 px-5">
+                <div class="col-8 my-3 px-5 bg-dark text-light">
                     <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post" id="formulario">
                         <div class="row">
                             <div class="col-8 pl-5 py-5"><h4 style="text-align: end">Servicios disponibles para el tipo de habitación</h3></div>
@@ -196,7 +198,7 @@ function servicios_seleccionados($lista, $id) {
                                             echo"Selecciona un tipo de habitación";
                                         }
                                         ?></option>
-                                        <?php
+                                    <?php
                                     for ($i = 0; $i < count($lista_tipos_habitaciones); $i++) {
                                         $tipo = $lista_tipos_habitaciones[$i]["tipo_de_habitacion"];
                                         echo "<option value='$tipo' id='option$tipo'>$tipo</option>";
@@ -207,7 +209,7 @@ function servicios_seleccionados($lista, $id) {
 
                             </div>
                         </div>
-                        <table class="table table-striped">
+                        <table class="table table-striped table-dark">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">ID</th>
@@ -221,13 +223,13 @@ function servicios_seleccionados($lista, $id) {
                                     for ($i = 0; $i < count($lista_servicios_tipo_habitacion_selec[0]); $i++) {
                                         $id = $lista_servicios_tipo_habitacion_selec[0][$i]['id'];
                                         $nombre_s = $lista_servicios_tipo_habitacion_selec[0][$i]["nombre_servicio"];
-//                                    $precio_s = $lista_servicios[0][$i]["precio_servicio"];
-//                                    $descripcion_s = $lista_servicios[0][$i]["descripcion"];
                                         $i++;
                                         echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td><input type='checkbox'" . $i-- . " name='servicioconcreto$i'</td></tr>";
                                     }
                                 } else {
-                                    echo "<p style='color:gray;text-align: center'>No hay servicio para borrar</p>";
+                                    echo '</tbody>
+                        </table>';
+                                    echo "<p style='color:gray;text-align: center'>No hay servicios disponibles para el tipo de habitacion seleccionado, incluye alguno de la tabla de arriba</p>";
                                 }
                                 ?>
                             </tbody>
