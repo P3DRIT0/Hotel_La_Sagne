@@ -32,6 +32,29 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
             return enviar_correo_multiples("$correo, $correo_Departamento_Pedidos",
                     $cuerpo, "Hotel La Sagne");
         }
+        function enviar_correo_reserva($correo, $nombre) {
+            /*
+             * Envía un correo de confirmación al restaurante que ha realizado el pedido
+             * y al departamento de pedidos. El correo incluye el número del pedido, el 
+             * restaurante que lo realiza y una tabla HTML con los productos del pedido.
+             */
+            $cuerpo = crear_correo_reserva($nombre);
+            $correo_Departamento_Pedidos = "Hotel La Sagne"; //Poner al responsable del departamento de pedidos
+            return enviar_correo_multiples("$correo, $correo_Departamento_Pedidos",
+                    $cuerpo, "Hotel La Sagne");
+        } 
+        function crear_correo_reserva($nombre) {
+            $texto = "<h1 class='titulo'> Hotel La Sagne</h1>";
+            $texto .= "Reserva Realizada:";
+            $texto .= "<p>Estimad@ ciente ,$nombre</p>";
+            $texto .= "<p>Su reserva se ha procesado con exito esperamos verle pronto. </p>";
+            $texto .= "<p>Gracias por confiar en nosotros.</p>";
+            return $texto;
+        }
+        
+        
+        
+        
 
         /**
          * Método que crea el correo para informar al usuario de que se ha completado 

@@ -197,7 +197,7 @@ if (isset($_POST['num_habitacion'])) {
                 <!--botones-->
                 <div class="buttons">
                     <input type="submit"  class="login__submit" value="Reservar online" id="select">
-                    <input type="submit"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
+                    <input type="button"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
                 </div>
                 <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo?>">
             </div>

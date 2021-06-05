@@ -27,6 +27,8 @@
 </html>
 <?php
 require_once './Bd_habitacion.php';
+require_once '../Registro/Correo_registro.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['fecha_llegada']) && isset($_POST['fecha_salida']) && isset($_POST['tipo'])) {
@@ -51,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             for ($index = 0; $index < count($id_habitaciones) && $id_no_valido; $index++) {
                 if(empty($id_reservadas)){
                     crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_habitaciones[$index][0]);
+                      enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
                     $id_no_valido = false;
                      echo '   <div class="wrapper green">
   <div class="header__wrapper">
@@ -70,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                     crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd, $id_habitaciones[$index][0]);
+                      enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
                     $id_no_valido = false;
                     echo '   <div class="wrapper green">
   <div class="header__wrapper">
@@ -87,15 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 }
             }
+            
         } else {
-            $fechas_mas_altas = ver_fechas_mas_altas($tipo);
-            $fecha_entrada = str_replace("-", "", $fecha_entrada_amd);
-            $condicion = true;
-            $contador = 0;
-            for ($index2 = 0; $index2 < count($fechas_mas_altas); $index2++) {
-                $fecha_alta = str_replace("-", "", $fechas_mas_altas[$index2][2]);
-                if ($fecha_alta < $fecha_entrada && $condicion) {
-                    crear_reserva_actualizando_fecha($tipo, $fecha_entrada_amd, $fecha_salida_amd, $fechas_mas_altas[$index2][1]);
+           
+             $id_reservables= consultar_id_reservas($fecha_salida_amd, $fecha_entrada_amd);
+             if(!(empty($id_reservables)) && $id_reservables[0][1]==$tipo){
+                 echo $id_reservables[0][1],$id_reservables[0][0];
+                    crear_reserva($tipo, $fecha_entrada_amd, $fecha_salida_amd,$id_reservables[0][0]);
+                    enviar_correo_reserva( $_SESSION['email'],$_SESSION['usuario']);
                     echo '   <div class="wrapper green">
   <div class="header__wrapper">
     <div class="header">
@@ -109,10 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <?php
   echo '
 </div>';
-  $condicion=false;
                 }else{
-                    $contador++;
-                    if($contador==count($fechas_mas_altas)){
+                   
                           echo '<div class="wrapper red">
   <div class="header__wrapper">
     <div class="header">
@@ -120,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
   <h1>Opps</h1>
-  <p>Lo sentimos pero no tenemos esta habitacion disponible en este periodo</p>
+  <p>Lo sentimos pero no tenemos  habitaciones de tipo '. $tipo.' disponibles en este periodo</p>
   '?>
   <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras habitaciones </button>
   <?php
@@ -132,8 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
           
         }
-    }
-}
+    
+
 
 
 
