@@ -36,12 +36,7 @@ if (!empty($tipos_habitaciones_a_borrar)) {
         }
     }
 }
-if (isset($_POST["consulta"])) {
-    echo 'Consultando';
-    $c = "Casa";
-    $consulta = consultar_reservas_por_tipo($c);
-    print_r($consulta);
-}
+
 ?>
 
 <html>
@@ -106,7 +101,6 @@ if (isset($_POST["consulta"])) {
                         </tbody>
                     </table>
                     <input id="boton" type='submit' name='borrar' value='Borrar'/>
-                    <input id="boton" type='submit' name='consulta' value='consulta'/>
                     <input id="boton" type="button" class="btnRegister"  value="Atras" onclick="location = 'Reservas_habitaciones.php'"/> 
                 </form>
             </div>
