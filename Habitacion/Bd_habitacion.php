@@ -23,6 +23,10 @@ function obtener_habitacion($rest) {
         $sentencia2->execute();
         $resultados2 = $sentencia2->fetchAll();
         return array($resultados, $resultados2);
+        $sentencia=null;
+        $sentencia2=null;
+        $base=null;
+        
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -42,6 +46,8 @@ function contar_habitaciones($tipo) {
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
         return $cuenta;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -61,6 +67,8 @@ function contar_reservas($tipo) {
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
         return $cuenta;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -93,10 +101,9 @@ function crear_reserva($tipo, $fecha_entrada, $fecha_salida,$id_habitacion) {
         $result = $sentencia2->fetch(PDO::FETCH_ASSOC);
         $num_reserva = $result['num_reserva'];
         
-        $sentencia3 = $base->prepare("INSERT INTO habitaciones_reservas (num_reserva,id_habitacion,fecha_disponibilidad)VALUES(:num_reserva,:id,:fecha)");
+        $sentencia3 = $base->prepare("INSERT INTO habitaciones_reservas (num_reserva,id_habitacion)VALUES(:num_reserva,:id)");
         $sentencia3->bindParam(':num_reserva', $num_reserva);
         $sentencia3->bindParam(':id', $id_habitacion);
-        $sentencia3->bindParam(':fecha', $fecha_salida);
         $sentencia3->execute();
          $sentencia = null;
          $sentencia2 = null;
@@ -117,6 +124,8 @@ function devolver_id_habitaciones_reservadas(){
         $sentencia->execute();
         $result = $sentencia->fetchAll();
         return $result;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -127,7 +136,8 @@ function devolver_id_habitaciones(){
     $sentencia2 = $base->prepare("SELECT id FROM habitaciones");
         $sentencia2->execute();
         $result2 = $sentencia2->fetchAll();
-        
+        $sentencia2=null;
+        $base=null;
         return $result2;
         } catch (PDOException $e) {
         print $e->getMessage();
@@ -135,63 +145,33 @@ function devolver_id_habitaciones(){
 }
 
 
-function ver_fechas_mas_altas($tipo){
+function consultar_id_reservas($fecha_salida,$fecha_entrada){
     try {
-     $fechas_salida;
-    $base = conectar('admin');
-    $sentencia = $base->prepare("SELECT * FROM reservas INNER JOIN habitaciones_reservas ON reservas.num_reserva=habitaciones_reservas.num_reserva WHERE tipo_habitacion=:tipo");
-        $sentencia->bindParam(':tipo', $tipo);
-         $sentencia->execute();
-        $result = $sentencia->fetchAll();
-        for ($index = 0; $index < count($result); $index++) { 
-             $fechas_salida[$index][0]=$result[$index][0];
-             $fechas_salida[$index][1]=$result[$index][7];
-             $fechas_salida[$index][2]=$result[$index][8];  
-
-        }
-        return $fechas_salida;
-        } catch (PDOException $e) {
-        print $e->getMessage();
-    }
-    }
-    function crear_reserva_actualizando_fecha($tipo, $fecha_entrada, $fecha_salida,$id_habitacion) {
-    try {
-
         $base = conectar('admin');
-         $base->beginTransaction();
-        $sentencia = $base->prepare("INSERT INTO reservas (id_usuario,fecha_entrada,fecha_salida,tipo_habitacion)VALUES(:id,:entrada,:salida,:tipo)");
-        $sentencia->bindParam(':id', $_SESSION['id']);
-        $sentencia->bindParam(':entrada', $fecha_entrada);
-        $sentencia->bindParam(':salida', $fecha_salida);
-        $sentencia->bindParam(':tipo', $tipo);
+        $sentencia = $base->prepare("select * from 
+                                      habitaciones as h 
+                                     where h.id not in(
+                                        select hr.id_habitacion 
+                                            from reservas as v inner join habitaciones_reservas as hr 
+                                                on v.num_reserva=hr.num_reserva 
+                                                    where v.num_reserva like hr.num_reserva 
+                                                       and :fecha_salida >= v.fecha_entrada 
+                                                         and :fecha_entrada<= v.fecha_salida    
+                                                            )");
+        $sentencia->bindParam(":fecha_salida", $fecha_salida);
+        $sentencia->bindParam(":fecha_entrada", $fecha_entrada);
         $sentencia->execute();
-
-        $sentencia2 = $base->prepare("SELECT num_reserva FROM reservas WHERE id_usuario=:id ORDER BY num_reserva DESC LIMIT 1;");
-        $sentencia2->bindParam(':id', $_SESSION['id']);
-        $sentencia2->execute();
-        $result = $sentencia2->fetch(PDO::FETCH_ASSOC);
-        $num_reserva = $result['num_reserva'];
-        
-        $sentencia3 = $base->prepare("INSERT INTO habitaciones_reservas (num_reserva,id_habitacion,fecha_disponibilidad)VALUES(:num_reserva,:id,:fecha)");
-        $sentencia3->bindParam(':num_reserva', $num_reserva);
-        $sentencia3->bindParam(':id', $id_habitacion);
-        $sentencia3->bindParam(':fecha', $fecha_salida);
-        $sentencia3->execute();
-        $sentencia4 = $base->prepare("UPDATE habitaciones_reservas  SET fecha_disponibilidad =:fecha WHERE id_habitacion =:id");
-        $sentencia4->bindParam(':fecha', $fecha_salida);
-        $sentencia4->bindParam(':id', $id_habitacion);
-        $sentencia4->execute();
-         $sentencia = null;
-         $sentencia2 = null;
-         $sentencia3 = null;
-         $sentencia4 = null;
-         $base->commit();
-         $base=null;
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        $sentencia=null;
+        $base=null;
     } catch (PDOException $e) {
         print $e->getMessage();
-        return false;
     }
 }
+
+
+
     
     
 ?>

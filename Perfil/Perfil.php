@@ -4,9 +4,13 @@ include_once './Bd_Perfil.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    if (isset($_POST['Usuario']) && isset($_POST['Direccion']) && isset($_POST['Telefono'])) {
+        $usuario = actualizar_datos_usuario($_POST['Usuario'], $_POST['Telefono'], $_POST['Direccion']);
+        $_SESSION["usuario"] = $_POST['Usuario'];
+        $_SESSION["telf"] = $_POST['Telefono'];
+        $_SESSION["direccion"] = $_POST['Direccion'];
+    }
     if (isset($_FILES['nuevaimagen']) && $_FILES['nuevaimagen']['error'] === UPLOAD_ERR_OK) {
-        echo "entra";
         $imagen = $_POST['nuevaimagen'];
         $mensaje_error;
 //Obtener detalles del fichero
@@ -36,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $imagen_actual_aux = explode("/", $imagen_actual_ruta);
                 $imagen_actual = end($imagen_actual_aux);
                 //Aqui compruebo si la imagen por defecto es la que esta,si es el caso no la borro pero si no lo es borro la imagen anterior
-                if ($imagen_actual === "avatar_defecto.png" || $imagen_actual === "foto_perfil_trabajadores.png"|| $imagen_actual === "foto_perfil_administradores.png") {
+                if ($imagen_actual === "avatar_defecto.png" || $imagen_actual === "foto_perfil_trabajadores.png" || $imagen_actual === "foto_perfil_administradores.png") {
                     cambiar_img_perfil($_SESSION["email"], $target_path);
                     header('Location:./Perfil.php');
                 } else {
@@ -103,18 +107,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
-                        
+
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #habitaciones">Habitaciones</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#habitaciones">Habitaciones</a>
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #Actividades">Explora</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Actividades">Explora</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#../Pagina_principal/Pagina_principal.php Sobre_nosotros">Sobre Nosotros</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Sobre_nosotros">Sobre Nosotros</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -124,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </ul>
                         <form class="d-flex">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                <?php if (!empty($_SESSION["usuario"])) { ?>
+<?php if (!empty($_SESSION["usuario"])) { ?>
 
 
                                     <li class="nav-item dropdown">
@@ -140,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </li>
 
                                     <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
-                                <?php } ?>
+<?php } ?>
                             </ul>
 
                         </form>
@@ -161,15 +165,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="row"><h2 style="text-align: center;margin-top: 20px;text-decoration: underline;">Perfil</h2></div>
                                     <div class="row"><div class="col-5 m-auto my-5">
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Nombre:     <?php echo $_SESSION["usuario"] ?></li>
+                                                <li class="list-group-item">Nombre:<input type="text" id="Usuario" name="Usuario" style="border: 0" readonly="true"  value="<?php echo $_SESSION["usuario"] ?>"</li>
                                                 <li class="list-group-item">Correo electrónico:     <?php echo $_SESSION["email"] ?></li>
-                                                <li class="list-group-item">Número de teléfono:     <?php echo $_SESSION["telf"] ?></li>
-                                                <li class="list-group-item">Dirección:      <?php echo $_SESSION["direccion"] ?></li>
+                                                <li class="list-group-item">Número de teléfono:<input type="text" id="Telefono" name="Telefono" style="border: 0" readonly="true" value="<?php echo $_SESSION["telf"] ?>"</li>
+                                                <li class="list-group-item">Dirección: <input type="text" style="border: 0 " id="Direccion"  name="Direccion" readonly="true" value="<?php echo $_SESSION["direccion"] ?>"></li>
+                                                <li class="list-group-item" > <a <input  type="button" title="Boton editar" class="boton_editar me-5 ms-3" onclick="Cambiarcampos()"><svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                                                        <path fill="#000000" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                                                        </svg></a>
+                                                    <input type="submit" class="btn btn-dark"  value="Guardar Cambios" />
+                                                </li>
                                             </ul>
                                         </div>                                
                                         <div class="col-5 bg-dark">
                                             <div class="container">
-                                                <div class="picture-container">
+                                                <div class="picture-container mt-5" >
                                                     <div class="picture">
                                                         <img src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" class="picture-src" id="wizardPicturePreview" title="">
                                                         <input type="file" id="wizard-picture" name="nuevaimagen">
@@ -181,42 +190,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-dark"  value="Guardar Cambios" />
-                   
+
+
+                            </form>
                             <div id="Historial reservas" >
                                 <br>   
-           <table class='table table-striped'>
-            <thead class="thead-light">
-            <tr>
-            <th scope="col">Tipo de habitacion</th>
-            <th scope="col">Numero de reserva</th>
-            <th scope="col">Fecha de entrada </th>
-            <th scope="col">Fecha de salida </th>
-            </tr>
-            </thead>
-            <tbody>
-<?php $reservas_usuario=consultar_reservas();
-    if(!(empty($reservas_usuario))){
-        echo "   <tr>";
-        for ($index = 0; $index < count($reservas_usuario);$index++) {
+                                <table class='table table-striped'>
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Tipo de habitacion</th>
+                                            <th scope="col">Numero de reserva</th>
+                                            <th scope="col">Fecha de entrada </th>
+                                            <th scope="col">Fecha de salida </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<?php
+$reservas_usuario = consultar_reservas();
+if (!(empty($reservas_usuario))) {
+    echo "   <tr>";
+    for ($index = 0; $index < count($reservas_usuario); $index++) {
         echo "
-                   <td scope='row'>".$reservas_usuario[$index][4]."</td>
-                    <td scope='row'>".$reservas_usuario[$index][0]."</td>
-                    <td scope='row'>".$reservas_usuario[$index][2]."</td>
-                    <td scope='row'>".$reservas_usuario[$index][3]."</td>
+                   <td scope='row'>" . $reservas_usuario[$index][4] . "</td>
+                    <td scope='row'>" . $reservas_usuario[$index][0] . "</td>
+                    <td scope='row'>" . $reservas_usuario[$index][2] . "</td>
+                    <td scope='row'>" . $reservas_usuario[$index][3] . "</td>
                     </tr>
                 
-              ";  
-                  }
-            } else {
-                echo "<p style='color:gray;text-align: center'>No hay habitaciones introducidas</p>";
-            }
-            ?>
-            </tbody>
-            </table>
+              ";
+    }
+}
+?>
+                                    </tbody>
+                                </table>
+                                <?php
+                                if ((empty($reservas_usuario))) {
+                                    echo "<p style='color:gray;text-align: center'>No hay habitaciones introducidas</p>";
+                                }
+                                ?>
                             </div>
 
-                            
+
                             </section>
 
                             </form>
@@ -229,23 +243,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ></script>
                             <script src="../config/jquery-3.6.0.min.js"></script>
                             <script>
-                                $(document).ready(function () {
-                                    // Prepare the preview for profile picture
-                                    $("#wizard-picture").change(function () {
-                                        readURL(this);
-                                    });
+                                                    $(document).ready(function () {
+                                                        // Prepare the preview for profile picture
+                                                        $("#wizard-picture").change(function () {
+                                                            readURL(this);
+                                                        });
 
-                                });
-                                function readURL(input) {
-                                    if (input.files && input.files[0]) {
-                                        var reader = new FileReader();
+                                                    });
+                                                    function readURL(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
 
-                                        reader.onload = function (e) {
-                                            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-                                        }
-                                        reader.readAsDataURL(input.files[0]);
-                                    }
-                                }
+                                                            reader.onload = function (e) {
+                                                                $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+                                                            }
+                                                            reader.readAsDataURL(input.files[0]);
+                                                        }
+                                                    }
+                                                      var contador=true;
+                                                    function Cambiarcampos() {                                                    
+                                                        if (contador) {
+                                                            $("#Usuario").prop('readonly', false);
+                                                            $("#Usuario").css('border', '1px solid black');
+                                                            $("#Telefono").prop('readonly', false);
+                                                            $("#Telefono").css('border', '1px solid black');
+                                                            $("#Direccion").prop('readonly', false);
+                                                            $("#Direccion").css('border', '1px solid black');
+                                                            contador=false;
+                                                        }else{
+                                                            $("#Usuario").prop('readonly', true);
+                                                            $("#Usuario").css('border', '0px solid black');
+                                                            $("#Telefono").prop('readonly', true);
+                                                            $("#Telefono").css('border', '0px solid black');
+                                                            $("#Direccion").prop('readonly', true);
+                                                            $("#Direccion").css('border', '0px solid black');
+                                                            contador=true;
+                                                        }
+
+
+                                                    }
 
                             </script>
 

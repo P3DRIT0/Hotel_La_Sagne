@@ -4,12 +4,13 @@ require_once './BD_habitaciones.php';
 require_once '../Perfil/Bd_Perfil.php';
  if ($_SESSION['rol'] == "Usuario_trabajador") {
      if(empty($consultar_datos_trabajador= consultar_datos_trabajadores($_SESSION['id']))){
-         header('Location:../Añadir_propiedades_usuarios/Añadir_datos_trabajadores.php');
+        
+         header('Location:../Propiedades/Datos.php');
      }
  }
  if ($_SESSION['rol'] == "Usuario_administrador") {
      if(empty($consultar_datos_admin= consultar_datos_administradores($_SESSION['id']))){
-         header('Location:../Añadir_propiedades_usuarios/Añadir_datos_trabajadores.php');
+         header('Location:../Propiedades/Datos.php');
      }
  }
 ?>
@@ -62,14 +63,14 @@ require_once '../Perfil/Bd_Perfil.php';
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #habitaciones">Habitaciones</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#habitaciones">Habitaciones</a>
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #Actividades">Explora</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Actividades">Explora</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#../Pagina_principal/Pagina_principal.php Sobre_nosotros">Sobre Nosotros</a>
+                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Sobre_nosotros">Sobre Nosotros</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
