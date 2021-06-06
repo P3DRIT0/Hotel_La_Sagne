@@ -17,16 +17,8 @@ if (isset($_POST['num_habitacion'])) {
     $precio = $habitacion[0][0][6];
     $lista_servicios_tipo = lista_servicios_tipo_habitacion($tipo);
     for ($i = 0; $i < count($lista_servicios_tipo[0]); $i++) {
-//        echo '"Servicios: " ';
-//        print_r($lista_servicios_tipo[0][$i]["nombre_servicio"]);
         $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]] = lista_datos_servicio($lista_servicios_tipo[0][$i]["nombre_servicio"]);
     }
-
-
-    echo '"Servicios: " ';
-    print_r($lista_servicios_tipo[0][0]["nombre_servicio"]);
-    echo 'datos';
-    print_r($lista_datos_servicios);
 }
 ?>
 
@@ -255,7 +247,7 @@ if (isset($_POST['num_habitacion'])) {
                                 role="tabpanel"
                                 aria-labelledby="profile-tab"
                                 >
-                                <div class="col-8 mx-2">
+                                <div class="col-8 me-auto ms-auto pt-5">
                                     <table class="table table-striped table-dark ">
                                         <thead class="thead-light">
                                             <tr>
@@ -272,10 +264,10 @@ if (isset($_POST['num_habitacion'])) {
                                                 for ($i = 0; $i < count($lista_servicios_tipo[0]); $i++) {
                                                     $id = $lista_servicios_tipo[0][$i]['id'];
                                                     $nombre_s = $lista_servicios_tipo[0][$i]["nombre_servicio"];
-                                                    $precio_s = $lista_servicios_tipo[0][$i]["precio_servicio"];
-                                                    $descripcion_s = $lista_servicios[0][$i]["descripcion"];
+                                                    $precio_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["precio_servicio"];
+                                                    $descripcion_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["descripcion"];
                                                     $i++;
-                                                    echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$precio_s</td><td>$descripcion_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
+                                                    echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$descripcion_s</td><td>$precio_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
                                                 }echo '</tbody> </table>';
                                             } else {
                                                 echo '</tbody> </table>';

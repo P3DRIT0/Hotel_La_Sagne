@@ -189,6 +189,12 @@ function lista_servicios_tipo_habitacion($tipo_habitacion) {
     }
 }
 
+/**
+ * Método para listar los datos de la tabla servicios
+ * 
+ * @param string $servicio Servicio por el cual vamos a determinar la consulta
+ * @return array
+ */
 function lista_datos_servicio($servicio) {
     try {
         $base = conectar('admin');
@@ -199,6 +205,8 @@ function lista_datos_servicio($servicio) {
         $sentencia2 = null;
         $base = null;
         return $result2;
+        $sql = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
