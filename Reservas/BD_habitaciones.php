@@ -150,10 +150,10 @@ function borrar_habitaciones($habitaciones_borrar) {
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
-            $sentencia = null;
-            $sentencia2 = null;
-            $base = null;
         }
+        $sentencia = null;
+        $sentencia2 = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -563,7 +563,8 @@ function consultar_reservas_por_tipo($tipo) {
         print $e->getMessage();
     }
 }
-function consultar_id_reservas($fecha_salida,$fecha_entrada){
+
+function consultar_id_reservas($fecha_salida, $fecha_entrada) {
     try {
         $base = conectar('admin');
         $sentencia = $base->prepare("select * from 
@@ -581,8 +582,8 @@ function consultar_id_reservas($fecha_salida,$fecha_entrada){
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -596,8 +597,23 @@ function devolver_imagenes_por_tipo($tipo) {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+
+function ver_servicios_tipo($tipo) {
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM servicios as s INNER JOIN habitacion_servicio as h ON s.id=h.id_servicio WHERE h.tipo_habitacion =:tipo");
+        $sentencia->bindParam(":tipo", $tipo);
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
