@@ -417,7 +417,6 @@ function servicio_nuevo($nombre, $precio, $descripcion) {
  * @return boolean Indica si existe en la base de datos
  */
 function servicio_comprobar($lista_servicios, $nombre) {
-//print_r($lista_servicios[0]);
     $existe = false;
     for ($i = 0; $i < count($lista_servicios[0]); $i++) {
         if ($lista_servicios[0][$i]["nombre_servicio"] == $nombre) {
@@ -428,11 +427,10 @@ function servicio_comprobar($lista_servicios, $nombre) {
 }
 
 /**
- * 
- * @param type $servicios_a_borrar_id
+ * Método para borrar servicios de la tabla servicios
+ * @param array $servicios_a_borrar_id Array con los servicios a borrar
  */
 function servicio_borrar($servicios_a_borrar_id) {
-//Borrar en servicios
     try {
         $base = conectar("admin");
         for ($i = 0; $i < count($servicios_a_borrar_id); $i++) {
@@ -445,34 +443,26 @@ function servicio_borrar($servicios_a_borrar_id) {
     } catch (Exception $ex) {
         echo $ex->getMessage();
     }
-
-//Borrar en servicios_habitaciones
 }
 
 /**
+ * Método para insertar datos en la tabla habitacion_servicio
  * 
- * @param type $tipo_habitacion
- * @param type $servicios
+ * @param string $tipo_habitacion Tipo de habitaciones seleccionada
+ * @param array $servicios Array con los servicios a insertar
  */
 function insertar_en_servicios_habitaciones($tipo_habitacion, $servicios) {
-    echo 'Entrando en insertar<br>';
-    print_r($servicios);
-    echo '<br>';
-
     try {
         $base = conectar("admin");
         for ($i = 0; $i < count($servicios); $i++) {
-            echo "<br>count = " . count($servicios) . "<br>";
             $servicio = $servicios[$i];
-            echo "Servicio: " . $servicio . "<br>";
-
             $sql = $base->prepare("INSERT INTO habitacion_servicio (tipo_habitacion, id_servicio) VALUES (:tipo, :servicio)");
             $sql->bindParam(":tipo", $tipo_habitacion);
             $sql->bindParam(":servicio", $servicio);
             $sql->execute();
-            $sql = null;
-            $base = null;
         }
+        $sql = null;
+        $base = null;
     } catch (Exception $ex) {
         echo $ex->getMessage();
     }
@@ -566,6 +556,8 @@ function consultar_reservas_por_tipo($tipo) {
         $sql->bindParam(":tipo", $tipo);
         $sql->execute();
         $resultados = $sql->fetchAll();
+        $sql = null;
+        $base = null;
         return $resultados;
     } catch (PDOException $e) {
         print $e->getMessage();
