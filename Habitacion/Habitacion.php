@@ -267,7 +267,9 @@ if (isset($_POST['num_habitacion'])) {
                                                     $precio_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["precio_servicio"];
                                                     $descripcion_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["descripcion"];
                                                     $i++;
-                                                    echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$descripcion_s</td><td>$precio_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
+                                                    echo "<tr><th scope='row'>$nombre_s</th><td>$nombre_s</td><td>$descripcion_s</td><td value='$precio'>$precio_s" . "€</td><td><input id='$nombre_s' onclick='sumar_precio($nombre_s)' value='$precio_s' type='checkbox'; " . $i-- . " name='serviciototal$i'</td></tr>";
+
+//                                                    echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$descripcion_s</td><td>$precio_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
                                                 }echo '</tbody> </table>';
                                             } else {
                                                 echo '</tbody> </table>';
@@ -282,7 +284,7 @@ if (isset($_POST['num_habitacion'])) {
 
                                             <!--precio de habitacion-->
                                         <div class="roomprice">
-                                            <p style=" color:white;font-family: 'Alex Brush', cursive;"><?php echo $precio ?>€</p>
+                                            <p style=" color:white;font-family: 'Alex Brush', cursive;" id="precioTotal"><?php echo $precio ?>€</p>
                                         </div>
                                         <!--botones-->
                                         <div class="buttons">
@@ -298,6 +300,24 @@ if (isset($_POST['num_habitacion'])) {
 
                                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
+                                        <script
+                                            type="text/javascript"
+                                            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+                                        ></script>
+                                        <script type="text/javascript">
+                                                function sumar_precio($servicio) {
+                                                    input = $servicio;
+                                                    precio = $servicio.value;
+                                                    precioTotal = $("#precioTotal").text();
+                                                    cuenta = $("#precioTotal");
+                                                    if (input.checked) {
+                                                        cuenta.text((parseFloat(precio) + parseFloat(precioTotal)) + "€");
+                                                    } else {
+                                                        cuenta.text((parseFloat(precioTotal) - parseFloat(precio)) + "€");
+                                                    }
+                                                    ;
+                                                }
+                                        </script>
                                         </body>
 
                                         </html>

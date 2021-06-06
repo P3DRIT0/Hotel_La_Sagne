@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -79,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </ul>
                     <form class="d-flex">
                         <ul class="navbar-nav mt-2 ">
-<?php if (!empty($_SESSION["usuario"])) { ?>
+                            <?php if (!empty($_SESSION["usuario"])) { ?>
 
 
                                 <li class="nav-item dropdown">
@@ -95,127 +96,126 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </li>
 
                                 <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
-<?php } ?>
+                            <?php } ?>
                         </ul>
-
                     </form>
-                    </nav>
-                    </header>
-                    <body>
-                        <div class="divhabitaciones" style="display: flex;justify-content: center;padding-top: 5%" >
-                            <div class="datoshabitaciones">
-                                <div >
-<?php
-$id_habitaciones = consultar_id_reservas($fecha_salida, $fecha_entrada);
-$tipos_diferentes;
-for ($index3 = 0; $index3 < count($id_habitaciones); $index3++) {
-    $tipos_diferentes[] = $id_habitaciones[$index3][1];
-}
-$contar_habitaciones_tipo = (array_count_values($tipos_diferentes));
-print_r($contar_habitaciones_tipo);
-$separado_por_comas = implode(",", $tipos_diferentes);
+                </div>
+            </div>
+        </nav>
+    </header>
 
-$tipos_diferentes = implode(',', array_unique(explode(',', $separado_por_comas)));
-$array_tipos_diferentes = explode(",", $tipos_diferentes);
-$index1 = 0;
-$index2 = 0;
-$titulo = 0;
-$id = 1;
+    <body>
+        <div class="divhabitaciones" style="display: flex;justify-content: center;padding-top: 5%" >
+            <div class="datoshabitaciones">
+                <div class="container">
+                    <?php
+                    $id_habitaciones = consultar_id_reservas($fecha_salida, $fecha_entrada);
+                    $tipos_diferentes;
+                    for ($index3 = 0; $index3 < count($id_habitaciones); $index3++) {
+                        $tipos_diferentes[] = $id_habitaciones[$index3][1];
+                    }
+                    $contar_habitaciones_tipo = (array_count_values($tipos_diferentes));
+                    print_r($contar_habitaciones_tipo);
+                    $separado_por_comas = implode(",", $tipos_diferentes);
 
-for ($index = 0; $index < count($array_tipos_diferentes); $index++) {
-    $tipos = devolver_imagenes_por_tipo($array_tipos_diferentes[$index]);
-    $habitacioncliacada;
-    ?>
-                                        <div class='habitacion2 col-12  justify-content' id=tipo<?php echo $tipos[0][3];
-                                    $tipo_seleccionado = $tipos[0][3] ?> >
-                                            <img src="<?php echo $tipos[0][10] ?>" style="width: 30%;height: 100%">
-                                            <div class="texto  col-4" style="height: 80%" id="tipo<?php echo $id ?>" value='<?php echo $tipos[0][3] ?>'>
-                                                <h1 class="titulo"><?php echo $tipos[0][3]; ?></h1>
+                    $tipos_diferentes = implode(',', array_unique(explode(',', $separado_por_comas)));
+                    $array_tipos_diferentes = explode(",", $tipos_diferentes);
+                    $index1 = 0;
+                    $index2 = 0;
+                    $titulo = 0;
+                    $id = 1;
 
-                                                <p><?php echo $tipos[0][7]; ?></p>
+                    for ($index = 0; $index < count($array_tipos_diferentes); $index++) {
+                        $tipos = devolver_imagenes_por_tipo($array_tipos_diferentes[$index]);
+                        $habitacioncliacada;
+                        ?>
 
+                        <div class='row habitacion2 my-3 border border-1 rounded' id="tipo"<?php
+                        echo $tipos[0][3];
+                        $tipo_seleccionado = $tipos[0][3]
+                        ?> >
+                            <div class="col-4 p-2">
+                                <img src="<?php echo $tipos[0][10] ?>" style="width: 100%;height: 100%; margin:0px; padding: 0px">
+                            </div>
+                            <div class="col-4 p-2">
+                                <div class="row texto" style="height: 80%" id="tipo<?php echo $id ?>" value='<?php echo $tipos[0][3] ?>'>
+                                    <h1 class="titulo"><?php echo $tipos[0][3]; ?></h1>
 
-                                            </div>
-                                            <div class="" style="height: 10%;">
-                                                <p class='cantidad'>Habitaciones disponibles :<?php echo $contar_habitaciones_tipo[$tipo_seleccionado]; ?></p>
-                                            </div>
-                                            <div class=" texto2 col-5 bg-dark text-light justify-content-center">
-                                                <h3 style="text-align: center">Servicios disponibles</h3>
-
-                                                <table class="table table-striped table-dark "style="margin-left: 3%">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th scope="col">Servicio</th>
-                                                            <th scope="col">Precio</th>
-                                                            <th scope="col">Descripción</th>
-                                                            <th scope="col">Seleccionar</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-    <?php
-    $lista_servicios = ver_servicios_tipo($tipo_seleccionado);
-    if (!empty($lista_servicios[0])) {
-        for ($i = 0; $i < count($lista_servicios); $i++) {
-            $nombre_s = $lista_servicios[$i]["nombre_servicio"];
-            $precio_s = $lista_servicios[$i]["precio_servicio"];
-            $descripcion_s = $lista_servicios[$i]["descripcion"];
-            $i++;
-            echo "<tr><th scope='row'>$nombre_s</th><td id='$nombre_s'>$precio_s" . "€</td><td>$descripcion_s</td><td><input id='$tipo_seleccionado$i'   onclick='sumar_precio($tipo_seleccionado$i,texto$tipo_seleccionado)' value='$precio_s' type='checkbox'; " . $i-- . " name='serviciototal$i'</td></tr>";
-        }
-    } else {
-        echo '</tbody>
-                        </table>';
-        echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos</p>";
-    }
-    ?>
-                                                    </tbody>
-                                                </table>
-                                                <a class='precio'    id="<?php echo 'texto' . $tipo_seleccionado; ?>"><?php echo $tipos[0]['precio'] . "€"; ?></a>
-                                            </div>
-                                        </div>
-
-
-
-
-
-
-    <?php
-    $index2++;
-    $titulo = $titulo + 3;
-    $id++;
-}
-?>
-
-
+                                    <p><?php echo $tipos[0][7]; ?></p>
 
 
                                 </div>
+                                <div class="row" style="height: 10%;">
+                                    <p class='cantidad'>Habitaciones disponibles :<?php echo $contar_habitaciones_tipo[$tipo_seleccionado]; ?></p>
+                                </div>
+                            </div>
+
+                            <div class=" texto2 col-4 p-2 bg-dark text-light" style="height:315px">
+                                <h3 style="text-align: center">Servicios disponibles</h3>
+
+                                <table class="table table-striped table-dark">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Servicio</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Seleccionar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $lista_servicios = ver_servicios_tipo($tipo_seleccionado);
+                                        if (!empty($lista_servicios[0])) {
+                                            for ($i = 0; $i < count($lista_servicios); $i++) {
+                                                $nombre_s = $lista_servicios[$i]["nombre_servicio"];
+                                                $precio_s = $lista_servicios[$i]["precio_servicio"];
+                                                $descripcion_s = $lista_servicios[$i]["descripcion"];
+                                                $i++;
+                                                echo "<tr><th scope='row'>$nombre_s</th><td id='$nombre_s'>$precio_s" . "€</td><td>$descripcion_s</td><td><input id='$tipo_seleccionado$i'   onclick='sumar_precio($tipo_seleccionado$i,texto$tipo_seleccionado)' value='$precio_s' type='checkbox'; " . $i-- . " name='serviciototal$i'</td></tr>";
+                                            }
+                                        } else {
+
+                                            echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos</p>";
+                                        }
+                                        ?>
+                                    </tbody> </table>
+
+                                <p class='precio align-self-end' id="<?php echo 'texto' . $tipo_seleccionado; ?>"><?php echo $tipos[0]['precio'] . "€"; ?></p>
                             </div>
                         </div>
-                    </body>
-                    <!-- Separate Popper and Bootstrap JS -->
-                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-                    <!--Jquery-->
-                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-                    <script src="../config/jquery-3.6.0.min.js" type="text/javascript"></script>
-                    <script>
-                        
-                        
-                        
-                        
-                        function sumar_precio(id, tipo) {
-                        
-                           console.log(document.getElementById(tipo.id).value);
-                            var precio = parseFloat(id.value);
-                            var precio_total = parseFloat(tipo.innerHTML);
-                            if (id.checked) {
-                             tipo.innerHTML=precio_total+precio+"€";
-                            }else{
-                                 tipo.innerHTML=precio_total-precio+"€";
-                            }
 
-                        }
+                        <?php
+                        $index2++;
+                        $titulo = $titulo + 3;
+                        $id++;
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
 
-                    </script>
-                    </html>
+
+
+    </body>
+    <!-- Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <!--Jquery-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="../config/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script>
+        function sumar_precio(id, tipo) {
+
+            console.log(document.getElementById(tipo.id).value);
+            var precio = parseFloat(id.value);
+            var precio_total = parseFloat(tipo.innerHTML);
+            if (id.checked) {
+                tipo.innerHTML = precio_total + precio + "€";
+            } else {
+                tipo.innerHTML = precio_total - precio + "€";
+            }
+
+        }
+
+    </script>
+</html>
