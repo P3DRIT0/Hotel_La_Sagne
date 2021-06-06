@@ -81,6 +81,16 @@ img{
     height: 299px;
     background: url(Multimedia/Fondo_pantalla.jpg);;
 }
+.habitacion2{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 3%;
+    margin-left: 3%;
+    width: 80%;
+    height: 20%;
+    background: url(Multimedia/Fondo_pantalla.jpg);;
+}
 
 .barra_busqueda{
     height: 100px;

@@ -105,7 +105,7 @@ require_once '../Perfil/Bd_Perfil.php';
             <div class="barra_busqueda">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
-
+                        <div class="row d-flex align-items-center justify-content-center px-2">
                         <?php
                         if ($_SESSION['rol'] == "Usuario_administrador") {
 
@@ -114,7 +114,7 @@ require_once '../Perfil/Bd_Perfil.php';
 
                             $visibilidad = "hidden";
                         }
-                        echo "<ul class='navbar-nav  mb-lg-0' style='visibility: $visibilidad'>";
+                        echo "<ul class='navbar-nav  ' style='visibility: $visibilidad'>";
                         ?>
                         <li class="nav-item dropdown">
 
@@ -147,13 +147,22 @@ require_once '../Perfil/Bd_Perfil.php';
                             </ul>
                         </li>
                         </ul>
-
-
-                        <form class="d-flex" style="width: 65%;margin-left:10% ">
-
-                            <input class="form-control mb-4" type="search" placeholder="Search" aria-label="Search">
-                            <button style="padding-bottom :10px " class="btn btn-outline-light mb-4" type="submit">Buscar</button>
-                        </form>
+                        </div>
+                        <form action="./Lista_Disponibles.php" 
+                        class="row  d-flex align-items-center justify-content-center "                       
+                        method="post"
+                        style="margin-left: 40%;width: 900px"
+                        
+                        >
+                        <label class="col-12 col-md-4" for="" style="line-height: 30px ;width:30%"
+                               ><input class="form-control" type="date"  name="fecha_entrada" value="<?php echo ''.date("Y") . "-" . date("m") . "-" .date("d") ?>" id="example-date-input">
+                                      </label>
+                        <label class="col-12 " for="" style="line-height: 30px ;width:30%"
+                               > <input class="form-control" type="date"  name="fecha_salida" value="<?php $fecha_actual = date("Y-m-d");echo date("Y-m-d",strtotime($fecha_actual."+ 1 days"));  ?>" id="example-date-input">
+                                      </label>
+                        <input class=" btn btn-dark col-3" type="submit" value="Habitaciones" />
+                    </form>
+           
                     </div>
                 </div>
             </div>
@@ -169,16 +178,12 @@ require_once '../Perfil/Bd_Perfil.php';
                     <?php
                     $tipos = devolver_tipos_imagenes();
                     $contar_tipos = contar_tipos();
-                    $devolver_tipos = ver_tipos_existentes();
                     $index1 = 0;
                     $index2 = 0;
                     $titulo = 0;
                     $id = 1;
 
                     for ($index = 0; $index < $contar_tipos; $index++) {
-
-                        //                $numhabitaciones = visualizar_habitaciones();
-                        //               $habitacioncliacada;
                         ?>
                         <div class='habitacion' id=tipo<?php echo $tipos[$titulo][3] ?>>
                             <div id="carousel-<?php echo "carrusel" . $index2 ?>" class="carousel slide col-6" data-bs-ride="carousel" value='<?php echo $devolver_tipos[$index][0] ?>'>

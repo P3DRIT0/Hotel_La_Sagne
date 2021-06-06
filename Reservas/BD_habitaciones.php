@@ -555,3 +555,42 @@ function consultar_datos_administradores($id_usuario) {
         print $e->getMessage();
     }
 }
+function consultar_id_reservas($fecha_salida,$fecha_entrada){
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("select * from 
+                                      habitaciones as h 
+                                     where h.id not in(
+                                        select hr.id_habitacion 
+                                            from reservas as v inner join habitaciones_reservas as hr 
+                                                on v.num_reserva=hr.num_reserva 
+                                                    where v.num_reserva like hr.num_reserva 
+                                                       and :fecha_salida >= v.fecha_entrada 
+                                                         and :fecha_entrada<= v.fecha_salida    
+                                                            )");
+        $sentencia->bindParam(":fecha_salida", $fecha_salida);
+        $sentencia->bindParam(":fecha_entrada", $fecha_entrada);
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        $sentencia=null;
+        $base=null;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
+
+function devolver_imagenes_por_tipo($tipo) {
+    try {
+        $base = conectar('admin');
+        $sentencia = $base->prepare("SELECT * FROM  tipo_habitaciones INNER JOIN imagenes_habitaciones  ON tipo_habitaciones.id=imagenes_habitaciones.id_tipo_habitacion WHERE tipo_habitaciones.tipo_de_habitacion=:tipo ");
+        $sentencia->bindParam(":tipo", $tipo);
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll();
+        return $resultados;
+        $sentencia=null;
+        $base=null;
+    } catch (PDOException $e) {
+        print $e->getMessage();
+    }
+}
