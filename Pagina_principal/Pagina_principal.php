@@ -35,6 +35,7 @@ include_once '../Perfil/Bd_Perfil.php';
 
     <!-- CSS -->
     <link href="./estilo.css" rel="stylesheet" type="text/css" />
+    <link href="./accesibilidad.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -52,253 +53,254 @@ include_once '../Perfil/Bd_Perfil.php';
     <title>Hotel La sagne </title>
 
 </head>
+<div class="filtro" style="width: 100%; filter: none">
+    <header>
 
-<header>
-    <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01 ">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#habitaciones">Habitaciones</a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Actividades">Explora</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Sobre_nosotros">Sobre Nosotros</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div>
-                        <a class="titulo" href="#Arriba">Hotel La Sagne </a>
-                    </div>
-                </ul>
-                <form class="d-flex">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <?php if (!empty($_SESSION["usuario"])) { ?>
-
-                            <li class="nav-item dropdown">
-
-                                <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
-                                    <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
-                                </ul>
-                            </li>
-                            <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>"width="50" height="50"/></a>
-                    </form>
-                <?php } else { ?>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
-                    </li>
-                <?php } ?>
-                </ul>
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<body>
-    <a name="Arriba"></a>
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <ol class="carousel-indicators">
-                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
-            </ol>
-            <div class="carousel-item active">
-                <img src="./Multimedia/Fondo1.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h1 class="display">Hotel La Sagne</h1>
-                    <p>Las vacaciones que necesitas a un precio que no podras olvidar .</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="./Multimedia/Fondo2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h1 class="titulo_carousel">Gran variedad de habitaciones </h1>
-                    <p>Para que encuentres tu habitación ideal al mejor precio</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="./Multimedia/Fondo3.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h1>Multitud de actividades</h1>
-                    <p>Disfruta de nuestra multitud de actividades de ocio tanto si vienes solo como acompañado</p>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-    <a name="habitaciones"></a>
-    <div class="habitaciones">
-        <div class="texto_habitaciones">
-            <nav style="background-color: transparent;" class="navbar navbar-expand-lg navbar-light bg-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse" id="navbarColor01 ">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto px-5">
-                        <li class="nav-item active">
-                            <a id="suite">Suite</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav me-auto mb-1 mb-lg-0">
                         <li class="nav-item">
-                            <a id="individual">Individual</a>
+                            <a class="nav-link" href="#habitaciones">Habitaciones</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#Actividades">Explora</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#Sobre_nosotros">Sobre Nosotros</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <div>
+                            <a class="titulo" href="#Arriba">Hotel La Sagne </a>
+                        </div>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <?php if (!empty($_SESSION["usuario"])) { ?>
+
+                                <li class="nav-item dropdown">
+
+                                    <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
+                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
+                                    </ul>
+                                </li>
+                                <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>"width="50" height="50"/></a>
+                        </form>
+                    <?php } else { ?>
                         <li class="nav-item">
-                            <a id="doble">Doble</a>
+                            <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
+                        </li>
+                    <?php } ?>
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <a name="Arriba"></a>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <ol class="carousel-indicators">
+                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
+                </ol>
+                <div class="carousel-item active">
+                    <img src="./Multimedia/Fondo1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display">Hotel La Sagne</h1>
+                        <p>Las vacaciones que necesitas a un precio que no podras olvidar .</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./Multimedia/Fondo2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="titulo_carousel">Gran variedad de habitaciones </h1>
+                        <p>Para que encuentres tu habitación ideal al mejor precio</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./Multimedia/Fondo3.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1>Multitud de actividades</h1>
+                        <p>Disfruta de nuestra multitud de actividades de ocio tanto si vienes solo como acompañado</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+        <a name="habitaciones"></a>
+        <div class="habitaciones">
+            <div class="texto_habitaciones">
+                <nav style="background-color: transparent;" class="navbar navbar-expand-lg navbar-light bg-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto px-5">
+                            <li class="nav-item active">
+                                <a id="suite">Suite</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+                            <li class="nav-item">
+                                <a id="individual">Individual</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a id="doble">Doble</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div id="texto_cambiante" class="texto_cambiante">
+                    <h1 id="titulo_habitaciones" class="titulo_habitaciones"></h1>
+                    <p id="descripcion_habitacion" class="descripcion_habitacion"></p>
+                    <ul class="habitaciones_tipos">
+                        <li id="opcion1">
+                        </li>
+                        <p id="caracteristicas_habitacion1"> </p>
+                        <li id="opcion2"></li>
+                        <p id="caracteristicas_habitacion2"> </p>
+                        <li id="opcion3"></li>
+                        <p id="caracteristicas_habitacion3"> </p>
+                        <li id="opcion4"></li>
+                        <p id="caracteristicas_habitacion4"> </p>
+                        <li id="opcion5"></li>
+                        <p id="caracteristicas_habitacion5"> </p>
+                        <li id="opcion6"></li>
+                        <p id="caracteristicas_habitacion6"> </p>
                     </ul>
                 </div>
-            </nav>
-            <div id="texto_cambiante" class="texto_cambiante">
-                <h1 id="titulo_habitaciones" class="titulo_habitaciones"></h1>
-                <p id="descripcion_habitacion" class="descripcion_habitacion"></p>
-                <ul class="habitaciones_tipos">
-                    <li id="opcion1">
+
+            </div>
+            <div class="imagenes_habitaciones">
+                <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img id="habitaciones_img1" src="" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="habitaciones_img2" src="" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img id="habitaciones_img3" src="" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="seccion2">
+
+            <nav class="navbar bg-dark">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button id="oceano"> Snorkel</button>
                     </li>
-                    <p id="caracteristicas_habitacion1"> </p>
-                    <li id="opcion2"></li>
-                    <p id="caracteristicas_habitacion2"> </p>
-                    <li id="opcion3"></li>
-                    <p id="caracteristicas_habitacion3"> </p>
-                    <li id="opcion4"></li>
-                    <p id="caracteristicas_habitacion4"> </p>
-                    <li id="opcion5"></li>
-                    <p id="caracteristicas_habitacion5"> </p>
-                    <li id="opcion6"></li>
-                    <p id="caracteristicas_habitacion6"> </p>
+                    <li class="nav-item">
+                        <button id="deportes_acuaticos">Kayak </button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="avion"> Avioneta </button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="ciudad"> Ciudad </button>
+                    </li>
                 </ul>
-            </div>
+            </nav>
 
-        </div>
-        <div class="imagenes_habitaciones">
-            <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img id="habitaciones_img1" src="" class="d-block w-100" alt="...">
+            <div class class="Contenedor_video_generico">
+
+                <div id="contenedorv1" class="opacidad">
+
+                    <div class="ancla">
+                        <a name="Actividades"></a>
+                         
                     </div>
-                    <div class="carousel-item">
-                        <img id="habitaciones_img2" src="" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img id="habitaciones_img3" src="" class="d-block w-100" alt="...">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
+                    <div class="submarinismo">
 
+                        <button class="h1_titulos" id="boton_texto">Snorkel</button>
+                        <div id="texto_emergente" class="opacidad_actividades">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis molestias minus itaque fuga, autem
+                                nihil laboriosam sequi culpa sapiente quas, quaerat fugiat odit quis numquam cum aspernatur temporibus
+                                reiciendis facilis.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab veniam porro voluptatibus assumenda ratione
+                                voluptatem pariatur unde enim! Reprehenderit numquam deserunt incidunt asperiores explicabo enim cum
+                                eaque, ut ad perferendis?</p>
 
-
-
-
-
-
-    <div class="seccion2">
-
-        <nav class="navbar bg-dark">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <button id="oceano"> Snorkel</button>
-                </li>
-                <li class="nav-item">
-                    <button id="deportes_acuaticos">Kayak </button>
-                </li>
-                <li class="nav-item">
-                    <button id="avion"> Avioneta </button>
-                </li>
-                <li class="nav-item">
-                    <button id="ciudad"> Ciudad </button>
-                </li>
-            </ul>
-        </nav>
-
-        <div class class="Contenedor_video_generico">
-
-            <div id="contenedorv1" class="opacidad">
-
-                <div class="ancla">
-                    <a name="Actividades"></a>
-                     
-                </div>
-                <div class="submarinismo">
-
-                    <button class="h1_titulos" id="boton_texto">Snorkel</button>
-                    <div id="texto_emergente" class="opacidad_actividades">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis molestias minus itaque fuga, autem
-                            nihil laboriosam sequi culpa sapiente quas, quaerat fugiat odit quis numquam cum aspernatur temporibus
-                            reiciendis facilis.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab veniam porro voluptatibus assumenda ratione
-                            voluptatem pariatur unde enim! Reprehenderit numquam deserunt incidunt asperiores explicabo enim cum
-                            eaque, ut ad perferendis?</p>
-
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+
+            <video id="v1" loop autoplay muted class="opacidad" style="opacity: 100;">
+                <source src="./Multimedia/oceano.mp4" type="video/mp4">
+                </source>
+            </video>
+            <video id="v4" loop autoplay muted class="opacidad" style="opacity: 0;">
+                <source src="./Multimedia/ciudad.mp4" type="video/mp4">
+                </source>
+            </video>
+            <video id="v2" loop autoplay muted class="opacidad" style="opacity: 0;">
+                <source src="./Multimedia/avion.mp4" type="video/mp4">
+                </source>
+            </video>
+
+            <video id="v3" loop autoplay muted class="opacidad" style="opacity: 0;">
+                <source src="./Multimedia/kayak.mp4" type="video/mp4">
+                </source>
+            </video>
         </div>
-
-
-
-        <video id="v1" loop autoplay muted class="opacidad" style="opacity: 100;">
-            <source src="./Multimedia/oceano.mp4" type="video/mp4">
-            </source>
-        </video>
-        <video id="v4" loop autoplay muted class="opacidad" style="opacity: 0;">
-            <source src="./Multimedia/ciudad.mp4" type="video/mp4">
-            </source>
-        </video>
-        <video id="v2" loop autoplay muted class="opacidad" style="opacity: 0;">
-            <source src="./Multimedia/avion.mp4" type="video/mp4">
-            </source>
-        </video>
-
-        <video id="v3" loop autoplay muted class="opacidad" style="opacity: 0;">
-            <source src="./Multimedia/kayak.mp4" type="video/mp4">
-            </source>
-        </video>
-    </div>
 </div>
 
 
-</div>
+
 <a name="Sobre_nosotros"></a>
 <div class="quienes_somos" id="contenedorv2" class="opacidad">
     <div class="contenido_quienes_somos">
@@ -318,11 +320,92 @@ include_once '../Perfil/Bd_Perfil.php';
         </div>
     </div>
 </div>
+
+
+<!---------------------------------------------------->
+<!------------------ Complementos -------------------->
+<!---------------------------------------------------->
+
+<div class="contenedor_accesibilidad">
+    <div class="boton-accesibilidad">
+        <div class="perrete">
+            <img
+                src="../Pagina_principal/Multimedia/logo.png"
+                alt=""
+                width="100%"
+                />
+        </div>
+    </div>
+    <div class="accesibilidad">
+        <h5
+            style="
+            text-align: center;
+            padding-top: 10px;
+            border-bottom: solid black 2px;
+            "
+            >
+            Accesibilidad
+        </h5>
+        <ul style="display: flex; flex-direction: column; align-items: center">
+            <input
+                value="Invertido"
+                type="button"
+                name=""
+                id="btn_color1"
+                style="margin: 10px; width: 60%"
+                /><input
+                value="Sepia"
+                type="button"
+                name=""
+                id="btn_color2"
+                style="margin: 10px; width: 60%"
+                />
+            <input
+                value="Saturado"
+                type="button"
+                name=""
+                id="btn_color3"
+                style="margin: 10px; width: 60%"
+                />
+            <input
+                value="Sin filtro"
+                type="button"
+                name=""
+                id="btn_color4"
+                style="margin: 10px; width: 60%"
+                />
+        </ul>
+    </div>
 </div>
-</div>
 
+<script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+></script>
+<script>
+    $(document).ready(function () {
+        $(".filtro").css("filter", "none");
 
-
+        $(".perrete").on("click", function () {
+            console.log("en accesibilidad");
+            $(".contenedor_accesibilidad").toggleClass("mostrar");
+        });
+        $("#btn_color1").on("click", function () {
+            $(".filtro").css("filter", "invert()");
+        });
+        $("#btn_color2").on("click", function () {
+            console.log("colorendo de azul");
+            $(".filtro").css("filter", "sepia(100%)");
+        });
+        $("#btn_color3").on("click", function () {
+            $(".filtro").css("filter", "saturate(200%)");
+        });
+        $("#btn_color4").on("click", function () {
+            $(".filtro").css("filter", "none");
+        });
+    });
+</script>
 
 <script>
     window.onload = function () {

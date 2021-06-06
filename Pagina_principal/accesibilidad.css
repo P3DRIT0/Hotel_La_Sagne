@@ -1,0 +1,30 @@
+.boton-accesibilidad {
+    height: 70px;
+    width: 70px;
+}
+
+.perrete {
+    cursor: pointer;
+}
+
+.accesibilidad {
+    background: #212529;
+    width: 200px;
+    transition: all 0.5s;
+    color: white;
+}
+
+.contenedor_accesibilidad.mostrar {
+    right: 0px;
+}
+
+.contenedor_accesibilidad {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    right: -200px;
+    top: 360px;
+    width: 270px;
+    transition: all 0.5s;
+    z-index: 3;
+}

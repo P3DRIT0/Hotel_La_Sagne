@@ -55,9 +55,9 @@ function añadir_imagenes($rutas_imagenes, $tipo) {
             $sentencia->bindParam(':imagen_habitacion', $imagenes);
             $sentencia->bindParam(':tipo', $id);
             $sentencia->execute();
-            $sentencia = null;
-            $base = null;
         }
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -89,8 +89,8 @@ function lista_tipos_habitaciones() {
     $sentencia->execute();
     $resultados = $sentencia->fetchAll();
     return $resultados;
-    $sentencia=null;
-    $base=null;
+    $sentencia = null;
+    $base = null;
 }
 
 /**
@@ -123,9 +123,9 @@ function visualizar_habitaciones() {
             echo "</div>";
         }
         return array($id - $index, $id);
-        $sentencia=null;
-        $sentencia2=null;
-        $base=null;
+        $sentencia = null;
+        $sentencia2 = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -150,9 +150,9 @@ function borrar_habitaciones($habitaciones_borrar) {
             $sentencia = $base->prepare("DELETE FROM habitaciones WHERE id=:id");
             $sentencia->bindParam(':id', $habitaciones_borrar[$index]);
             $sentencia->execute();
-            $sentencia=null;
-            $sentencia2=null;
-            $base=null;
+            $sentencia = null;
+            $sentencia2 = null;
+            $base = null;
         }
     } catch (PDOException $e) {
         print $e->getMessage();
@@ -176,9 +176,9 @@ function borrar_tipo_habitaciones($tipo_habitacion_a_borrar, $id_tipo) {
 //Borrando reservas dependientes del tipo de habitación
 //PENDIENTE
 //Borrando servicios adjuntos al tipo de habitación
-            $sentencia4 = $base->prepare("DELETE FROM habitacion_servicio WHERE tipo_habitacion=:tipo");
-            $sentencia4->bindParam(':tipo', $tipo_habitacion_a_borrar);
-            $sentencia4->execute();
+        $sentencia4 = $base->prepare("DELETE FROM habitacion_servicio WHERE tipo_habitacion=:tipo");
+        $sentencia4->bindParam(':tipo', $tipo_habitacion_a_borrar);
+        $sentencia4->execute();
 //Borrando las imagenes dependientes del tipo de habitación
 
         $sentencia = $base->prepare("DELETE FROM imagenes_habitaciones WHERE id_tipo_habitacion=:id_tipo;");
@@ -247,8 +247,8 @@ function modificar_tipo_habitaciones($id, $m2, $precio, $ventana) {
         $sentencia->bindParam(':id', $id);
         $sentencia->execute();
         print 'Modificacion ejecutada';
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (Exception $e) {
         print $e->getMessage();
     }
@@ -274,8 +274,8 @@ function crear_habitacion($tipo) {
         $sentencia = $base->prepare("INSERT INTO `habitaciones`(`tipo_habitacion`) VALUES (:tipo_habitacion)");
         $sentencia->bindParam(':tipo_habitacion', $tipo);
         $sentencia->execute();
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -288,8 +288,8 @@ function listar_habitaciones() {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -303,8 +303,8 @@ function asignar_nombres() {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados[0][0];
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -318,8 +318,8 @@ function comprobar_tipo($tipo) {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -332,8 +332,8 @@ function devolver_tipos_imagenes() {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -346,8 +346,8 @@ function contar_tipos() {
         $sentencia->execute();
         $cuenta = $sentencia->rowCount();
         return $cuenta;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -360,8 +360,8 @@ function modificar_habitacion($id, $nuevo_tipo) {
         $sentencia->bindParam(':tipo', $nuevo_tipo);
         $sentencia->bindParam(':id', $id);
         $sentencia->execute();
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -378,8 +378,8 @@ function lista_servicios() {
         $sql->execute();
         $result[] = $sql->fetchAll();
         return $result;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (Exception $ex) {
         print $ex->getMessage();
     }
@@ -402,8 +402,8 @@ function servicio_nuevo($nombre, $precio, $descripcion) {
         $sql->execute();
 
         echo "Guardado <br>";
-        $sql=null;
-        $base=null;
+        $sql = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -440,8 +440,8 @@ function servicio_borrar($servicios_a_borrar_id) {
             $sql->bindParam(":id", $servicios_a_borrar_id[$i]);
             $sql->execute();
         }
-        $sql=null;
-        $base=null;
+        $sql = null;
+        $base = null;
     } catch (Exception $ex) {
         echo $ex->getMessage();
     }
@@ -470,8 +470,8 @@ function insertar_en_servicios_habitaciones($tipo_habitacion, $servicios) {
             $sql->bindParam(":tipo", $tipo_habitacion);
             $sql->bindParam(":servicio", $servicio);
             $sql->execute();
-            $sql=null;
-            $base=null;
+            $sql = null;
+            $base = null;
         }
     } catch (Exception $ex) {
         echo $ex->getMessage();
@@ -479,9 +479,10 @@ function insertar_en_servicios_habitaciones($tipo_habitacion, $servicios) {
 }
 
 /**
+ * Método para obtener todos los servicios adjuntos al tipo de habitación indicada por cabecera
  * 
- * @param type $id_tipo_habitacion
- * @return type
+ * @param string $tipo_habitacion Tipo de habitación
+ * @return array Contiene los servicios
  */
 function lista_servicios_tipo_habitacion($tipo_habitacion) {
     try {
@@ -491,8 +492,8 @@ function lista_servicios_tipo_habitacion($tipo_habitacion) {
         $sql->execute();
         $result[] = $sql->fetchAll();
         return $result;
-        $sql=null;
-        $base=null;
+        $sql = null;
+        $base = null;
     } catch (Exception $ex) {
         print $ex->getMessage();
     }
@@ -506,8 +507,8 @@ function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servici
             $sql->bindParam(":id", $servicios_a_borrar_id[$i]);
             $sql->bindParam(":tipo", $tipo_habitacion_seleccionada);
             $sql->execute();
-            $sql=null;
-            $base=null;
+            $sql = null;
+            $base = null;
         }
     } catch (Exception $ex) {
         echo $ex->getMessage();
@@ -521,8 +522,8 @@ function listar_reservas() {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -536,8 +537,8 @@ function consultar_datos_trabajadores($id_usuario) {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
@@ -551,8 +552,8 @@ function consultar_datos_administradores($id_usuario) {
         $sentencia->execute();
         $resultados = $sentencia->fetchAll();
         return $resultados;
-        $sentencia=null;
-        $base=null;
+        $sentencia = null;
+        $base = null;
     } catch (PDOException $e) {
         print $e->getMessage();
     }
