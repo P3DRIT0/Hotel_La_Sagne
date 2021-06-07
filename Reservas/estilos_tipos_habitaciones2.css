@@ -1,23 +1,4 @@
 
-body{
-    margin-top: 2%;
-	position: relative;
-	z-index: 0;
-    background-image: url(Multimedia/Fondo_pantalla.jpg);
-    
- 
-}
-html:before{ 
-    content: '';
-	position: absolute;
-	z-index: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
-box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
-}
 
 .datoshabitaciones{
     position: relative;
@@ -134,4 +115,47 @@ button{
 }
 .barra_busqueda .d-flex{ 
     padding-top: 1.5%;
+}
+@media(min-height:800px){
+.divhabitaciones{
+    margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(Multimedia/Fondo_pantalla.jpg);
+    
+ 
+}
+.divhabitaciones:after{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+}
+@media(min-height:0px){
+body{
+    margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(Multimedia/Fondo_pantalla.jpg);
+    
+ 
+}
+html:before{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+
 }

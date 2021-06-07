@@ -147,27 +147,7 @@ button{
     padding-top: 1.5%;
 }
  
-html:before{ 
-    content: '';
-	position: absolute;
-	z-index: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
-box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
-}
-body {
-  background: linear-gradient(135deg, white 0%, #f3f6ff 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#f3f6ff",GradientType=1 );
-  font-family: "proxima-nova";
-  text-align: center;
-     margin-top: 2%;
-	position: relative;
-	z-index: 0;
-    background-image: url(Multimedia/Fondo_pantalla.jpg);
-}
+
 .wrapper {
   -webkit-animation: wrapperAni 230ms ease-in 200ms forwards;
           animation: wrapperAni 230ms ease-in 200ms forwards;
@@ -408,12 +388,49 @@ p {
 /*
  * EMBED STYLING
 */
-@media (max-width: 800px) {
-  html,
+@media(min-height:800px){
+.divhabitaciones{
+    margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(Multimedia/Fondo_pantalla.jpg);
+    
+ 
+}
+.divhabitaciones:after{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+}
+@media(min-height:0px){
+html:before{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
 body {
-    height: 600px;
-    overflow: hidden;
-    width: 800px;
-  }
+  background: linear-gradient(135deg, white 0%, #f3f6ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#f3f6ff",GradientType=1 );
+  font-family: "proxima-nova";
+  text-align: center;
+     margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(Multimedia/Fondo_pantalla.jpg);
+}
+
 }
 
