@@ -110,14 +110,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="container">
                     <?php
                     $id_habitaciones = consultar_id_reservas($fecha_salida, $fecha_entrada);
+                    if(empty($id_habitaciones)){
+                        
+                            echo '<div style="margin-top:10%" class="wrapper red">
+                        <div class="header__wrapper">
+                          <div class="header">
+                            <div class="sign"><span></span></div>
+                          </div>
+                        </div>
+                        <h1>Opps</h1>
+                        <p>Lo sentimos pero no tenemos  habitaciones disponibles en este periodo</p>
+                        '
+                ?>
+                    <button class="boton" onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras fechas </button>
+                <?php
+                echo '</div>';
+                    }else{
                     $tipos_diferentes;
                     for ($index3 = 0; $index3 < count($id_habitaciones); $index3++) {
                         $tipos_diferentes[] = $id_habitaciones[$index3][1];
                     }
+                   
                     $contar_habitaciones_tipo = (array_count_values($tipos_diferentes));
                     print_r($contar_habitaciones_tipo);
                     $separado_por_comas = implode(",", $tipos_diferentes);
-
                     $tipos_diferentes = implode(',', array_unique(explode(',', $separado_por_comas)));
                     $array_tipos_diferentes = explode(",", $tipos_diferentes);
                     $index1 = 0;
@@ -188,6 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $index2++;
                         $titulo = $titulo + 3;
                         $id++;
+                    }
                     }
                     ?>
                 </div>
