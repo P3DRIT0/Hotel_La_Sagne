@@ -2,17 +2,17 @@
 session_start();
 require_once './BD_habitaciones.php';
 require_once '../Perfil/Bd_Perfil.php';
- if ($_SESSION['rol'] == "Usuario_trabajador") {
-     if(empty($consultar_datos_trabajador= consultar_datos_trabajadores($_SESSION['id']))){
-        
-         header('Location:../Propiedades/Datos.php');
-     }
- }
- if ($_SESSION['rol'] == "Usuario_administrador") {
-     if(empty($consultar_datos_admin= consultar_datos_administradores($_SESSION['id']))){
-         header('Location:../Propiedades/Datos.php');
-     }
- }
+if ($_SESSION['rol'] == "Usuario_trabajador") {
+    if (empty($consultar_datos_trabajador = consultar_datos_trabajadores($_SESSION['id']))) {
+
+        header('Location:../Propiedades/Datos.php');
+    }
+}
+if ($_SESSION['rol'] == "Usuario_administrador") {
+    if (empty($consultar_datos_admin = consultar_datos_administradores($_SESSION['id']))) {
+        header('Location:../Propiedades/Datos.php');
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,117 +52,119 @@ require_once '../Perfil/Bd_Perfil.php';
     </head>
 
     <header>
-            <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
-                <div class="container-fluid">
-                    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor01 ">
-                        
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01 ">
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#habitaciones">Habitaciones</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Actividades">Explora</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Sobre_nosotros">Sobre Nosotros</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#habitaciones">Habitaciones</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Actividades">Explora</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Sobre_nosotros">Sobre Nosotros</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <div>
+                            <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
+                        </div>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav mt-2">
+                            <?php if (!empty($_SESSION["usuario"])) { ?>
+
+
+                                <li class="nav-item dropdown">
+
+                                    <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
+                                        <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
+                                    </ul>
+                                </li>
+
+                                <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
+                            <?php } ?>
                         </ul>
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <div>
-                                <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
-                            </div>
-                        </ul>
-                        <form class="d-flex">
-                            <ul class="navbar-nav mt-2">
-                                <?php if (!empty($_SESSION["usuario"])) { ?>
 
-
-                                    <li class="nav-item dropdown">
-
-                                        <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
-
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
-                                            <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
-                                <?php } ?>
-                            </ul>
-
-                        </form>
-                    </div>
+                    </form>
                 </div>
+            </div>
             <div class="barra_busqueda">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarColor01 ">
                         <div class="row d-flex align-items-center justify-content-center px-2">
-                        <?php
-                        if ($_SESSION['rol'] == "Usuario_administrador") {
+                            <?php
+                            if ($_SESSION['rol'] == "Usuario_administrador") {
 
-                            $visibilidad = "visible";
-                        } else {
+                                $visibilidad = "visible";
+                            } else {
 
-                            $visibilidad = "hidden";
-                        }
-                        echo "<ul class='navbar-nav  ' style='visibility: $visibilidad'>";
-                        ?>
-                        <li class="nav-item dropdown">
+                                $visibilidad = "hidden";
+                            }
+                            echo "<ul class='navbar-nav  ' style='visibility: $visibilidad'>";
+                            ?>
+                            <li class="nav-item dropdown">
 
-                            <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Tipos</a>
+                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Tipos</a>
 
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./Crear_tipo.php">Crear tipo</a></li>
-                                <li><a class="dropdown-item" href="./Borrar_tipo_habitacion.php">Borrar Tipo </a></li>
-                                <li><a class="dropdown-item" href="./Modificar_tipo.php">Modificar Tipo</a></li>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./Crear_tipo.php">Crear tipo</a></li>
+                                    <li><a class="dropdown-item" href="./Borrar_tipo_habitacion.php">Borrar Tipo </a></li>
+                                    <li><a class="dropdown-item" href="./Modificar_tipo.php">Modificar Tipo</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Habitaciones</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./Crear_habitacion.php">Crear Habitacion</a></li>
+                                    <li><a class="dropdown-item" href="./Borrar_habitacion.php">Borrar habitacion </a></li>
+                                    <li><a class="dropdown-item" href="./Modificar_Habitacion.php">Modificar Habitacion</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Otros</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./Servicios.php">Gestionar Servicios</a></li>
+                                    <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li
+                                    <li></li>
+                                </ul>
+                            </li>
                             </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-
-                            <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Habitaciones</a>
-
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./Crear_habitacion.php">Crear Habitacion</a></li>
-                                <li><a class="dropdown-item" href="./Borrar_habitacion.php">Borrar habitacion </a></li>
-                                <li><a class="dropdown-item" href="./Modificar_Habitacion.php">Modificar Habitacion</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Otros</a>
-
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./Servicios.php">Gestionar Servicios</a></li>
-                                <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li
-                                <li></li>
-                            </ul>
-                        </li>
-                        </ul>
                         </div>
                         <form action="./Lista_Disponibles.php" 
-                        class="row  d-flex align-items-center justify-content-center "                       
-                        method="post"
-                        style="margin-left: 40%;width: 900px"
-                        
-                        >
-                        <label class="col-12 col-md-4" for="" style="line-height: 30px ;width:30%"
-                               ><input class="form-control" type="date"  name="fecha_entrada" value="<?php echo ''.date("Y") . "-" . date("m") . "-" .date("d") ?>" id="example-date-input">
-                                      </label>
-                        <label class="col-12 " for="" style="line-height: 30px ;width:30%"
-                               > <input class="form-control" type="date"  name="fecha_salida" value="<?php $fecha_actual = date("Y-m-d");echo date("Y-m-d",strtotime($fecha_actual."+ 1 days"));  ?>" id="example-date-input">
-                                      </label>
-                        <input class=" btn btn-dark col-3" type="submit" value="Habitaciones" />
-                    </form>
-           
+                              class="row  d-flex align-items-center justify-content-center "                       
+                              method="post"
+                              style="margin-left: 40%;width: 900px"
+
+                              >
+                            <label class="col-12 col-md-4" for="" style="line-height: 30px ;width:30%"
+                                   ><input class="form-control" type="date"  name="fecha_entrada" value="<?php echo '' . date("Y") . "-" . date("m") . "-" . date("d") ?>" id="example-date-input">
+                            </label>
+                            <label class="col-12 " for="" style="line-height: 30px ;width:30%"
+                                   > <input class="form-control" type="date"  name="fecha_salida" value="<?php $fecha_actual = date("Y-m-d");
+                            echo date("Y-m-d", strtotime($fecha_actual . "+ 1 days"));
+                            ?>" id="example-date-input">
+                            </label>
+                            <input class=" btn btn-dark col-3" type="submit" value="Habitaciones" />
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -221,7 +223,7 @@ require_once '../Perfil/Bd_Perfil.php';
 
                             </div>
                             <a class='precio'><?php echo $tipos[$titulo][6] . "€"; ?></a>
-
+                            <div id="cuenta_tipos" style="visibility: hidden"><?php echo $contar_tipos ?></div>
 
                         </div>
 
@@ -232,9 +234,15 @@ require_once '../Perfil/Bd_Perfil.php';
                     }
                     ?>
 
-
+                    <script
+                        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                        crossorigin="anonymous"
+                    ></script>
                     <script>
-                        for (var i = 1; i <= 3; i++) {
+                        var vueltas = $("#cuenta_tipos").text();
+                        console.log(vueltas);
+                        for (var i = 1; i <= vueltas; i++) {
                             console.log(i);
                             var num = parseInt(i, 10);
                             console.log(num);
@@ -269,5 +277,4 @@ require_once '../Perfil/Bd_Perfil.php';
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
                 <!--Jquery-->
                 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
                 </html>
