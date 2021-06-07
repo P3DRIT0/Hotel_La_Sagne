@@ -17,45 +17,45 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
 <!doctype html>
 <html lang="en">
 
-    <head>
-        <link rel="apple-touch-icon" sizes="57x57" href="../config/ico/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="../config/ico/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="../config/ico/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="../config/ico/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="../config/ico/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="../config/ico/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="../config/ico/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="../config/ico/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="../config/ico/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="../config/ico/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../config/ico/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="../config/ico/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="../config/ico/favicon-16x16.png">
-        <link rel="manifest" href="../config/ico//manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="../config/ico/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Reservas</title>
+<head>
+    <link rel="apple-touch-icon" sizes="57x57" href="../config/ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../config/ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../config/ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../config/ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../config/ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../config/ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../config/ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../config/ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../config/ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../config/ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../config/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../config/ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../config/ico/favicon-16x16.png">
+    <link rel="manifest" href="../config/ico//manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="../config/ico/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reservas</title>
 
-        <!-- CSS -->
-        <link rel='stylesheet' type='text/css' media='screen' href='./estilos_tipos_habitaciones2.css'>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+    <!-- CSS -->
+    <link rel='stylesheet' type='text/css' media='screen' href='./estilos_tipos_habitaciones2.css'>
+    <link href="../Pagina_principal/accesibilidad.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
 
-        <!--Fuentes -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
+    <!--Fuentes -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat&display=swap" rel="stylesheet">
 
-    </head>
-
+</head>
+<div class="filtro" style="width: 100%; filter: none">
     <header>
         <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01 ">
@@ -85,89 +85,86 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
 
                                 <li class="nav-item dropdown">
 
-                                    <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+                                    <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $_SESSION['usuario'] ?></a>
 
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
                                         <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
-                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
                                     </ul>
                                 </li>
 
-                                <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
+                                <a href="../Perfil/Perfil.php">
+                                    <image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50" />
+                                </a>
                             <?php } ?>
                         </ul>
 
                     </form>
                 </div>
-            </div>
-            <div class="barra_busqueda">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbarColor01 ">
-                        <div class="row d-flex align-items-center justify-content-center px-2">
-                            <?php
-                            if ($_SESSION['rol'] == "Usuario_administrador") {
+                <div class="barra_busqueda">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarColor01 ">
+                            <div class="row d-flex align-items-center justify-content-center px-2">
+                                <?php
+                                if ($_SESSION['rol'] == "Usuario_administrador") {
 
-                                $visibilidad = "visible";
-                            } else {
+                                    $visibilidad = "visible";
+                                } else {
 
-                                $visibilidad = "hidden";
-                            }
-                            echo "<ul class='navbar-nav  ' style='visibility: $visibilidad'>";
-                            ?>
-                            <li class="nav-item dropdown">
+                                    $visibilidad = "hidden";
+                                }
+                                echo "<ul class='navbar-nav  ' style='visibility: $visibilidad'>";
+                                ?>
+                                <li class="nav-item dropdown">
 
-                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Tipos</a>
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestionar Tipos</a>
 
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./Crear_tipo.php">Crear tipo</a></li>
-                                    <li><a class="dropdown-item" href="./Borrar_tipo_habitacion.php">Borrar Tipo </a></li>
-                                    <li><a class="dropdown-item" href="./Modificar_tipo.php">Modificar Tipo</a></li>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./Crear_tipo.php">Crear tipo</a></li>
+                                        <li><a class="dropdown-item" href="./Borrar_tipo_habitacion.php">Borrar Tipo </a></li>
+                                        <li><a class="dropdown-item" href="./Modificar_tipo.php">Modificar Tipo</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestionar Habitaciones</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./Crear_habitacion.php">Crear Habitacion</a></li>
+                                        <li><a class="dropdown-item" href="./Borrar_habitacion.php">Borrar habitacion </a></li>
+                                        <li><a class="dropdown-item" href="./Modificar_Habitacion.php">Modificar Habitacion</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Otros</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./Servicios.php">Gestionar Servicios</a></li>
+                                        <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li <li>
+                                </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-
-                                <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Gestionar Habitaciones</a>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./Crear_habitacion.php">Crear Habitacion</a></li>
-                                    <li><a class="dropdown-item" href="./Borrar_habitacion.php">Borrar habitacion </a></li>
-                                    <li><a class="dropdown-item" href="./Modificar_Habitacion.php">Modificar Habitacion</a></li>
+                                </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item dropdown">
+                            </div>
+                            <form action="./Lista_Disponibles.php" class="row  d-flex align-items-center justify-content-center " method="post" style="margin-left: 40%;width: 900px">
+                                <label class="col-12 col-md-4" for="" style="line-height: 30px ;width:30%"><input class="form-control" type="date" name="fecha_entrada" value="<?php echo '' . date("Y") . "-" . date("m") . "-" . date("d") ?>" id="example-date-input">
+                                </label>
+                                <label class="col-12 " for="" style="line-height: 30px ;width:30%"> <input class="form-control" type="date" name="fecha_salida" value="<?php
+                                                                                                                                                                        $fecha_actual = date("Y-m-d");
+                                                                                                                                                                        echo date("Y-m-d", strtotime($fecha_actual . "+ 1 days"));
+                                                                                                                                                                        ?>" id="example-date-input">
+                                </label>
+                                <input class=" btn btn-dark col-3" type="submit" value="Habitaciones" />
+                            </form>
 
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" >Otros</a>
-
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./Servicios.php">Gestionar Servicios</a></li>
-                                    <li><a class="dropdown-item" href="./Listar_reservas.php">Listar reservas </a></li
-                                    <li></li>
-                                </ul>
-                            </li>
-                            </ul>
                         </div>
-                        <form action="./Lista_Disponibles.php" 
-                              class="row  d-flex align-items-center justify-content-center "                       
-                              method="post"
-                              style="margin-left: 40%;width: 900px"
-
-                              >
-                            <label class="col-12 col-md-4" for="" style="line-height: 30px ;width:30%"
-                                   ><input class="form-control" type="date"  name="fecha_entrada" value="<?php echo '' . date("Y") . "-" . date("m") . "-" . date("d") ?>" id="example-date-input">
-                            </label>
-                            <label class="col-12 " for="" style="line-height: 30px ;width:30%"
-                                   > <input class="form-control" type="date"  name="fecha_salida" value="<?php $fecha_actual = date("Y-m-d");
-                            echo date("Y-m-d", strtotime($fecha_actual . "+ 1 days"));
-                            ?>" id="example-date-input">
-                            </label>
-                            <input class=" btn btn-dark col-3" type="submit" value="Habitaciones" />
-                        </form>
-
                     </div>
                 </div>
-            </div>
         </nav>
     </header>
 
@@ -186,7 +183,7 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
                     $id = 1;
 
                     for ($index = 0; $index < $contar_tipos; $index++) {
-                        ?>
+                    ?>
                         <div class='habitacion' id=tipo<?php echo $tipos[$titulo][3] ?>>
                             <div id="carousel-<?php echo "carrusel" . $index2 ?>" class="carousel slide col-6" data-bs-ride="carousel" value='<?php echo $devolver_tipos[$index][0] ?>'>
                                 <div class="carousel-indicators">
@@ -227,18 +224,14 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
 
                         </div>
 
-                        <?php
+                    <?php
                         $index2++;
                         $titulo = $titulo + 3;
                         $id++;
                     }
                     ?>
 
-                    <script
-                        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                        crossorigin="anonymous"
-                    ></script>
+                    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
                     <script>
                         var vueltas = $("#cuenta_tipos").text();
                         console.log(vueltas);
@@ -270,11 +263,65 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </body>
+</div>
+<!---------------------------------------------------->
+<!------------------ Complementos -------------------->
+<!---------------------------------------------------->
 
-                </body>
-                <!-- Separate Popper and Bootstrap JS -->
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-                <!--Jquery-->
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-                </html>
+<div class="contenedor_accesibilidad">
+    <div class="boton-accesibilidad">
+        <div class="perrete">
+            <img src="../Pagina_principal/Multimedia/logo.png" alt="" width="100%" />
+        </div>
+    </div>
+    <div class="accesibilidad">
+        <h5 style="
+                text-align: center;
+                padding-top: 10px;
+                border-bottom: solid black 2px;
+                ">
+            Accesibilidad
+        </h5>
+        <ul style="display: flex; flex-direction: column; align-items: center">
+            <input value="Invertido" type="button" name="" id="btn_color1" style="margin: 10px; width: 60%" /><input value="Sepia" type="button" name="" id="btn_color2" style="margin: 10px; width: 60%" />
+            <input value="Saturado" type="button" name="" id="btn_color3" style="margin: 10px; width: 60%" />
+            <input value="Sin filtro" type="button" name="" id="btn_color4" style="margin: 10px; width: 60%" />
+        </ul>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $(".filtro").css("filter", "none");
+
+        $(".perrete").on("click", function() {
+            console.log("en accesibilidad");
+            $(".contenedor_accesibilidad").toggleClass("mostrar");
+        });
+        $("#btn_color1").on("click", function() {
+            $(".filtro").css("filter", "invert()");
+        });
+        $("#btn_color2").on("click", function() {
+            console.log("colorendo de azul");
+            $(".filtro").css("filter", "sepia(100%)");
+        });
+        $("#btn_color3").on("click", function() {
+            $(".filtro").css("filter", "saturate(200%)");
+        });
+        $("#btn_color4").on("click", function() {
+            $(".filtro").css("filter", "none");
+        });
+    });
+</script>
+
+
+<!-- Separate Popper and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<!--Jquery-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+</html>
