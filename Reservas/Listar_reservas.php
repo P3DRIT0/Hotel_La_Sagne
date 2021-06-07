@@ -115,6 +115,8 @@ $submit=true;
             <tbody>
                 <?php
                 
+                
+                
               if((!empty($reservas_lista)&&!$submit)){
                     echo "   <tr>";
                     for ($index = 0; $index < count($reservas_lista); $index++) {

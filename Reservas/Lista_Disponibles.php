@@ -78,6 +78,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <ul class="navbar-nav me-auto mb-2  mb-lg-0" style="margin-right: 30%">
                             <div>
                                 <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        <div class="divhabitaciones" style="display: flex;justify-content: center;padding-top: 5%" >
+            <div class="datoshabitaciones">
+                <div class="container">
+                    <?php
+                    $id_habitaciones = consultar_id_reservas($fecha_salida, $fecha_entrada);
+                    if(empty($id_habitaciones)){
+                        
+                            echo '<div style="margin-top:10%" class="wrapper red">
+                        <div class="header__wrapper">
+                          <div class="header">
+                            <div class="sign"><span></span></div>
+                          </div>
+                        </div>
+                        <h1>Opps</h1>
+                        <p>Lo sentimos pero no tenemos  habitaciones disponibles en este periodo</p>
+                        '
+                ?>
+                    <button class="boton" onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras fechas </button>
+                <?php
+                echo '</div>';
+                    }else{
+                    $tipos_diferentes;
+                    for ($index3 = 0; $index3 < count($id_habitaciones); $index3++) {
+                        $tipos_diferentes[] = $id_habitaciones[$index3][1];
+                    }
+                   
+                    $contar_habitaciones_tipo = (array_count_values($tipos_diferentes));
+                    print_r($contar_habitaciones_tipo);
+                    $separado_por_comas = implode(",", $tipos_diferentes);
+                    $tipos_diferentes = implode(',', array_unique(explode(',', $separado_por_comas)));
+                    $array_tipos_diferentes = explode(",", $tipos_diferentes);
+                    $index1 = 0;
+                    $index2 = 0;
+                    $titulo = 0;
+                    $id = 1;
+
+                    for ($index = 0; $index < count($array_tipos_diferentes); $index++) {
+                        $tipos = devolver_imagenes_por_tipo($array_tipos_diferentes[$index]);
+                        $habitacioncliacada;
+                        ?>
+
+                        <div class='row habitacion2 my-3 border border-1 rounded' id="tipo"<?php
+                        echo $tipos[0][3];
+                        $tipo_seleccionado = $tipos[0][3]
+                        ?> >
+                            <div class="col-4 p-2">
+                                <img src="<?php echo $tipos[0][10] ?>" style="width: 100%;height: 100%; margin:0px; padding: 0px">
                             </div>
                         </ul>
                         <form class="d-flex">
