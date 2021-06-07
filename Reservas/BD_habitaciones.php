@@ -254,6 +254,10 @@ function modificar_tipo_habitaciones($id, $m2, $precio, $ventana) {
     }
 }
 
+/**
+ * Metodo que nos permite ver los tipos de habitaciones existentes 
+ * @return array con los tipos de habitaciones existentes 
+ */
 function ver_tipos_existentes() {
     $base = conectar('admin');
     $sentencia = $base->prepare("SELECT tipo_de_habitacion FROM tipo_habitaciones");
@@ -268,6 +272,10 @@ function ver_tipos_existentes() {
     }
 }
 
+/**
+ * Metodo que  recibe por cabecera el tipo de habitacion  nos permite crear una habitacion de dicho tipo
+ * @param string $tipo
+ */
 function crear_habitacion($tipo) {
     try {
         $base = conectar('admin');
@@ -280,7 +288,11 @@ function crear_habitacion($tipo) {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que nos permite listar las habitaciones habitaciones 
+ * @param string $tipo
+ * @return array $resultados array con las habitaciones 
+ */
 function listar_habitaciones() {
     try {
         $base = conectar('admin');
@@ -294,7 +306,10 @@ function listar_habitaciones() {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que seleciona el ultimo id de los tipos de habitaciones 
+ * @return string devuelve el id del tipo de habitacion 
+ */
 function asignar_nombres() {
     try {
 
@@ -310,6 +325,12 @@ function asignar_nombres() {
     }
 }
 
+/**
+ * Metodo que recibe por cabecera un tipo de habitacion  y lo busca en la tabla tipo de 
+ * habitaciones 
+ * @param string $tipo 
+ * @return array datos tipo seleccionado o array vacio si no encuentra el tipo
+ */
 function comprobar_tipo($tipo) {
     try {
         $base = conectar('admin');
@@ -324,7 +345,11 @@ function comprobar_tipo($tipo) {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que junta las tablas imagenes habitaciones con la de tipos_habitaciones y lo devuelve en 
+ * un array
+ * @return array con los datos de la tabla imagenes habitaciones y la tabla tipo habitaciones
+ */
 function devolver_tipos_imagenes() {
     try {
         $base = conectar('admin');
@@ -339,6 +364,10 @@ function devolver_tipos_imagenes() {
     }
 }
 
+/**
+ * Metodo que permite contar los tipos de habitaciones existentes 
+ * @return int cuenta el numero  de tipos de habitaciones distintos 
+ */
 function contar_tipos() {
     try {
         $base = conectar('admin');
@@ -352,7 +381,12 @@ function contar_tipos() {
         print $e->getMessage();
     }
 }
-
+/**
+ * Mentodo que recibe por cabecera un id y un tipo y permite actualizar la
+ * habitacion a ese tipo determinado 
+ * @param int $id
+ * @param string $nuevo_tipo
+ */
 function modificar_habitacion($id, $nuevo_tipo) {
     try {
         $base = conectar('admin');
@@ -489,6 +523,13 @@ function lista_servicios_tipo_habitacion($tipo_habitacion) {
     }
 }
 
+/**
+ * Metodo que recibe por cabecera un id y un tipo y nos permite
+ * borrar de la tabla habitacion la tupla que cumpla la condicion de ser igual al id y el tipo
+ * pasado por cabecera 
+ * @param string $tipo_habitacion_seleccionada
+ * @param int $servicios_a_borrar_id 
+ */
 function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servicios_a_borrar_id) {
     try {
         $base = conectar("admin");
@@ -505,6 +546,11 @@ function borrar_servicio_tipo_habitacion($tipo_habitacion_seleccionada, $servici
     }
 }
 
+/**
+ * Metodo que nos devuelve en un array la tabla reservas unida con la tabla
+ * habitaciones reservas 
+ * @return array contiene los datos de las dos tablas mencionadas anteriormente 
+ */
 function listar_reservas() {
     try {
         $base = conectar('admin');
@@ -518,7 +564,12 @@ function listar_reservas() {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que nos permite consultar los datos de un trabajador cuyo id sea el recibido 
+ * por cabecera 
+ * @param int $id_usuario
+ * @return array datos del usuario 
+ */
 function consultar_datos_trabajadores($id_usuario) {
     try {
         $base = conectar('admin');
@@ -533,6 +584,12 @@ function consultar_datos_trabajadores($id_usuario) {
         print $e->getMessage();
     }
 }
+/**
+ * Metodo que nos permite consultar los datos de un administrador cuyo id sea el recibido 
+ * por cabecera 
+ * @param int $id_usuario
+ * @return array con los datos del administrador 
+ */
 
 function consultar_datos_administradores($id_usuario) {
     try {
@@ -548,7 +605,12 @@ function consultar_datos_administradores($id_usuario) {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que une la tabla habitaciones reservas con la tabla habitaciones y nos devuelve
+ * un array con las reservas de las habitaciones del tipo especificado por cabecera 
+ * @param string $tipo
+ * @return array con los datos de la tabla habitaciones reservas y la tabla habitaciones
+ */
 function consultar_reservas_por_tipo($tipo) {
     try {
         $base = conectar('admin');
@@ -564,6 +626,13 @@ function consultar_reservas_por_tipo($tipo) {
     }
 }
 
+/**
+ * metodo que a traves de una fecha de entrada y una de salida nos permite ver que habitaciones 
+ * estan disponibles en ese rango de tiempo 
+ * @param date $fecha_salida
+ * @param date $fecha_entrada
+ * @return array con el tipo de habitacion y su id  
+ */
 function consultar_id_reservas($fecha_salida, $fecha_entrada) {
     try {
         $base = conectar('admin');

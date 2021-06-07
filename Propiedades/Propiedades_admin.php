@@ -1,11 +1,23 @@
 <?php
 include_once './BD_propiedades.php';
 session_start();
+/**
+ * Metodo que crea un objeto de tipo trabajador y llama a la funcion que añade 
+ * los trabajadores a la base de datos 
+ * @param date $fecha_nac
+ * @param string $dni
+ * @param string $nacionalidad
+ * @param string $sexo
+ */
 function añadir_datos_trabajadores($fecha_nac,$dni,$nacionalidad,$sexo){
  $lista_prp_usuarios=cargar_propiedades_usuario($_SESSION['id']);
 $Trabajador= new Trabajador($lista_prp_usuarios[0][0],$lista_prp_usuarios[0][1],$lista_prp_usuarios[0][2],$lista_prp_usuarios[0][3],$lista_prp_usuarios[0][4],$lista_prp_usuarios[0][5],$lista_prp_usuarios[0][6],"../Perfil/Multimedia/foto_perfil_trabajadores.png",$fecha_nac,$dni,$nacionalidad,$sexo);
 $Trabajador->Anadir_Trabajador(); 
 }
+/**
+ * Metodo que crea un objeto de tipo administrador y llama a la funcion que añade 
+ * los administradores a la base de datos 
+ */
 function  añadir_datos_administradores(){
     $lista_prp_usuarios=cargar_propiedades_usuario($_SESSION['id']);
    $Administrador= new Administrador($lista_prp_usuarios[0][0],$lista_prp_usuarios[0][1],$lista_prp_usuarios[0][2],$lista_prp_usuarios[0][3],$lista_prp_usuarios[0][4],$lista_prp_usuarios[0][5],$lista_prp_usuarios[0][6],"../Perfil/Multimedia/foto_perfil_administradores.png");
@@ -43,6 +55,21 @@ class Trabajador extends Usuarios{
     protected $dni;
     protected $nacionalidad;
     protected $sexo;
+    /**
+     * Constructor de la clase trabajador 
+     * @param int $id
+     * @param string $nombre
+     * @param string $email
+     * @param string $telf
+     * @param string $direccion
+     * @param string $password
+     * @param string $rol
+     * @param string $imagen_usuario
+     * @param date $fecha_nac
+     * @param string $dni
+     * @param string $nacionalidad
+     * @param string $sexo
+     */
     function __construct($id, $nombre, $email, $telf, $direccion, $password, $rol, $imagen_usuario,$fecha_nac,$dni,$nacionalidad,$sexo){
        parent::__construct($id, $nombre, $email, $telf, $direccion, $password, $rol, $imagen_usuario);
        $this->fecha_nac=$fecha_nac;

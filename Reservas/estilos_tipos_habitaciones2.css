@@ -1,0 +1,137 @@
+
+.divhabitaciones{
+    margin-top: 2%;
+	position: relative;
+	z-index: 0;
+    background-image: url(Multimedia/Fondo_pantalla.jpg);
+    
+ 
+}
+.divhabitaciones:after{ 
+    content: '';
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+background-image:radial-gradient(ellipse at left bottom, rgba(33, 37, 41, 1) 0%,rgba(0, 0, 0, .9) 59%, rgba(33, 37, 41, .9) 100%);
+box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);  
+}
+
+.datoshabitaciones{
+    position: relative;
+	z-index: 1;
+  padding-bottom: 4.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+ 
+.avatar{
+    width: 2%;
+    height: 2%;
+}
+.titulo  {
+    width: 100%;
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding-right: 20px;
+    font-family: 'Alex Brush', cursive;
+    font-size: 2.5em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.titulo:hover{
+    color: rgba(255, 255, 255, 0.658);
+
+}
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
+
+.hide-scroll {
+    overflow: hidden;
+}
+.usuario{
+    color: white;
+    margin-top: 3%;
+    margin-right: 1%;
+}
+img{
+    width: 100%;
+    max-height: 299px;
+      
+}
+.contenedor{
+    margin-top:2%;
+    height: 100%;
+    padding-top:  10%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.habitacion{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 3%;
+    margin-left: 3%;
+    width: 46%;
+    height: 299px;
+    background: url(Multimedia/Fondo_pantalla.jpg);;
+}
+
+.barra_busqueda{
+    height: 100px;
+    width: 100%;
+}
+.barra_busqueda .d-flex{ 
+    padding-top: 1.5%;
+}
+
+.texto{
+    width: 100%;
+    height: 83%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.precio{
+    font-size: 150%;
+    height: 3%;
+    text-align: end;
+    font-family: 'Alex Brush', cursive;
+    color: white;
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.precio:hover{
+    color: white;
+}
+.habitacion h1 {
+
+    color: white;
+    margin: auto;
+    text-align: center;
+    font-family: 'Alex Brush', cursive;
+    font-size: 300%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.habitacion p{
+    color: white;
+}
+button{
+    margin-top: 3%;
+}
+.barra_busqueda{
+    height: 100px;
+    width: 100%;
+   background: url(Multimedia/Fondo_pantalla.jpg);
+
+}
+.barra_busqueda .d-flex{ 
+    padding-top: 1.5%;
+}

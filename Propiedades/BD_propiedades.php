@@ -2,6 +2,12 @@
 
 include_once '../config/conexiones_BD.php';
 
+
+/**
+ * Metodo que obtiene de la tabla usuarios todas sus propiedades para el usuario especificado
+ * @param type $id
+ * @return array con todos los capos de la tabla usuarios
+ */
 function cargar_propiedades_usuario($id) {
     try {
         $base = conectar('admin');
@@ -16,6 +22,16 @@ function cargar_propiedades_usuario($id) {
         print $e->getMessage();
     }
 }
+/**
+ * Metodo que recibe por cabecera la ruta de una imagen,la fecha de nacimiento,dni,nacionalidad y sexo
+ * y las inserta en la tabla trabajadores 
+ * 
+ * @param string $imagen_perfil
+ * @param date $fecha_nac
+ * @param string $dni
+ * @param string $nacionalidad
+ * @param string $sexo
+ */
 
 function añadir_trabajadores($imagen_perfil, $fecha_nac, $dni, $nacionalidad, $sexo) {
     try {
@@ -39,6 +55,11 @@ function añadir_trabajadores($imagen_perfil, $fecha_nac, $dni, $nacionalidad, $
     }
 }
 
+/**
+ * Metodo que recibe por cabecera la ruta de una imagen y la actualiza en la tabla usuarios  
+ * y añade el administrador a la tabla de los administradores
+ * @param string $imagen_perfil
+ */
 function añadir_administradores($imagen_perfil) {
     try {
         $base = conectar('admin');

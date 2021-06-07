@@ -23,9 +23,8 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
          */
         function enviar_correos($correo, $nombre) {
             /*
-             * Envía un correo de confirmación al restaurante que ha realizado el pedido
-             * y al departamento de pedidos. El correo incluye el número del pedido, el 
-             * restaurante que lo realiza y una tabla HTML con los productos del pedido.
+             * Envía un correo al usuario especificado conforme se ha registrado con exito 
+             * en la pagina web
              */
             $cuerpo = crear_correo($correo, $nombre);
             $correo_Departamento_Pedidos = "Hotel La Sagne"; //Poner al responsable del departamento de pedidos
@@ -34,15 +33,19 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
         }
         function enviar_correo_reserva($correo, $nombre) {
             /*
-             * Envía un correo de confirmación al restaurante que ha realizado el pedido
-             * y al departamento de pedidos. El correo incluye el número del pedido, el 
-             * restaurante que lo realiza y una tabla HTML con los productos del pedido.
+             * Envía un correo conforme la reserva se ha realizado con exito
              */
             $cuerpo = crear_correo_reserva($nombre);
             $correo_Departamento_Pedidos = "Hotel La Sagne"; //Poner al responsable del departamento de pedidos
             return enviar_correo_multiples("$correo, $correo_Departamento_Pedidos",
                     $cuerpo, "Hotel La Sagne");
         } 
+        /**
+         * Metodo que crea el cuerpo del correo para el email de confirmacion de 
+         * la reserva 
+         * @param string $nombre
+         * @return string cuerpo del correo
+         */
         function crear_correo_reserva($nombre) {
             $texto = "<h1 class='titulo'> Hotel La Sagne</h1>";
             $texto .= "Reserva Realizada:";

@@ -1,6 +1,5 @@
 <?php
 require_once './BD_habitaciones.php';
-$visiblidad = "visible";
 $lista_tipos_habitaciones = lista_tipos_habitaciones();
 $tipos_habitaciones_a_borrar;
 $id_tipo;
@@ -20,7 +19,6 @@ if (!empty($tipos_habitaciones_a_borrar)) {
             borrar_tipo_habitaciones($tipos_habitaciones_a_borrar[$i], $id_tipo[$i]);
             header('Location:Borrar_tipo_habitacion.php');
         } else {
-            $visibilidad = "hidden";
             echo "<div class='wrapper red' style='height:450px'>
                                  <div class='header__wrapper'>
                                  <div class='header'>
@@ -29,6 +27,10 @@ if (!empty($tipos_habitaciones_a_borrar)) {
                                   </div>
                                   <h1 style='padding-top: 30px;'>Opps</h1>
                                   <p>La habitaciones de tipo $tipos_habitaciones_a_borrar[$i] no se pueden borrar ya que existen habitaciones de este tipo con reservas vigentes</p>";
+            echo '<script>
+    console.log(document.getElementById("caja"))
+    </script>';
+            
             ?>
             <button onclick="location = '../Reservas/Reservas_habitaciones.php'">Ver otras habitaciones </button>
             <?php
@@ -73,7 +75,7 @@ if (!empty($tipos_habitaciones_a_borrar)) {
         <title>Borrar habitacion</title>
     </head>
     <body>
-        <div id="caja" class="col-6" style="visibility: <?php $visibilidad ?>">
+        <div id="caja" class="col-6">
             <h3>Borrar tipo de habitación</h3>
             <div class="col-10" id="formulario">
                 <form action='./Borrar_tipo_habitacion.php' method='post'> 
@@ -106,5 +108,12 @@ if (!empty($tipos_habitaciones_a_borrar)) {
             </div>
         </div>
     </body>
+    
+    <script>
+  función getStyle(visibilidad){
+. document.getElementById ("caja") style.visibility = visibilidad;
+} 
+    
+    </script>
 </html>
 

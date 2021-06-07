@@ -8,7 +8,7 @@
 }
 
 .accesibilidad {
-    background: #212529;
+    background:rgba(33,37,41, 0.6);
     width: 200px;
     transition: all 0.5s;
     color: white;

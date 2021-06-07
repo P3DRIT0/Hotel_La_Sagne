@@ -6,6 +6,11 @@ include_once '../config/conexiones_BD.php';
  * and open the template in the editor.
  */
 
+/**
+ * Metodo que recibe por cabecera un email y busca en la tabla usuarios la imagen asociada a dicho email 
+ * @param string $email
+ * @return string devuelve la ruta de la imagen de perfil 
+ */
 function cargar_img_perfil($email){
     try {
         $base = conectar('admin');
@@ -20,7 +25,12 @@ function cargar_img_perfil($email){
         die('No se pudo conectar: ' . mysql_error());
     }
 }
-
+/**
+ * Metodo que recibe por cabecera un email y la ruta de una imagen y a traves de la consulta update cambia dicha ruta para el usuario 
+ * con ese email 
+ * @param string $email 
+ * @param string $img ruta de la imagen 
+ */
 function cambiar_img_perfil($email,$img){
      try {
         $base = conectar('admin');
@@ -35,7 +45,10 @@ function cambiar_img_perfil($email,$img){
         die('No se pudo conectar: ' . mysql_error());
     }
 }
-
+/**
+ * Metodo para consultar las reservas de un usuario a traves del id 
+ * @return array con los campos de la tabla reservas
+ */
 function consultar_reservas(){
      try {
         $base = conectar('admin');
@@ -50,6 +63,13 @@ function consultar_reservas(){
         die('No se pudo conectar: ' . mysql_error());
     }
 }
+/**
+ * Metodo que recibe por cabecera un nombre,telefono y una direccion y mediante un update nos permite 
+ * actualizar los datos.
+ * @param string $nombre
+ * @param string $telf
+ * @param string $direccion
+ */
 function actualizar_datos_usuario($nombre,$telf,$direccion){
      try {
      $base = conectar('admin');

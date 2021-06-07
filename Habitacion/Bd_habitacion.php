@@ -114,7 +114,10 @@ function crear_reserva($tipo, $fecha_entrada, $fecha_salida, $id_habitacion) {
         return false;
     }
 }
-
+/**
+ * Metodo que nos devuelve el id de las habitaciones reservadas
+ * @return array Devuelve un array con los ids de la tabla habitaciones reservadas
+ */
 function devolver_id_habitaciones_reservadas() {
     try {
         $base = conectar('admin');
@@ -128,7 +131,10 @@ function devolver_id_habitaciones_reservadas() {
         print $e->getMessage();
     }
 }
-
+/**
+ * Metodo que nos devuelve el id de las habitaciones 
+ * @return  array Devuelve un array con los ids de la tabla habitaciones 
+ */
 function devolver_id_habitaciones() {
     try {
         $base = conectar('admin');
@@ -142,7 +148,13 @@ function devolver_id_habitaciones() {
         print $e->getMessage();
     }
 }
-
+/** 
+ * Metodo que recibe por cabecera una fecha de entrada y una de salida y devuelve un array con los ids y tipos de 
+ * habitaciones que se encuentran disponibles entre esas dos fechas   
+ * @param date $fecha_salida 
+ * @param date $fecha_entrada 
+ * @return array con los id y tipos de habitaciones disponibles entre esas fechas
+ */
 function consultar_id_reservas($fecha_salida, $fecha_entrada) {
     try {
         $base = conectar('admin');
