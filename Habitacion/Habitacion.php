@@ -59,265 +59,350 @@ if (isset($_POST['num_habitacion'])) {
         rel="stylesheet"
         />
 
+    <link href="../Pagina_principal/accesibilidad.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
 </head>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01 ">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #habitaciones">Habitaciones</a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #Actividades">Explora</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#../Pagina_principal/Pagina_principal.php Sobre_nosotros">Sobre Nosotros</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div>
-                        <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
-                    </div>
-                </ul>
-                <form class="d-flex">
+<div class="filtro" style="width: 100%; filter: none">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01 ">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
 
-                            <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #habitaciones">Habitaciones</a>
 
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
-                                <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
-                            </ul>
                         </li>
-                        <a href="../Perfil/Perfil.php"><img src='<?php echo cargar_img_perfil($_SESSION['email']); ?>' style="width: 50px;height: 50px;margin-top: 1px"></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Pagina_principal/Pagina_principal.php #Actividades">Explora</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#../Pagina_principal/Pagina_principal.php Sobre_nosotros">Sobre Nosotros</a>
+                        </li>
                     </ul>
-                </form>
-                </ul>
-                </form>
-            </div>
-        </div>
-    </nav>
-</header>
-<body>
-    <form action="./Solicitud_reserva.php" method="post">
-        <!--contenedor principal-->
-        <div class="contenedor">
-            <!--zona reserva-->
-            <div class="reservationcalendar">
-                <div class="datosreservas" >
-                    <div class="infohotel">
-                        <h1><?php echo $titulo ?></h1>
-                        <img src="../Pagina_principal/Multimedia/logo.png" height="150px">
-                    </div>
-                    <div class="reservationinfo">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <div>
+                            <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
+                        </div>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
 
-                        <ul class="minicalendar">
-                            <li class="datein">
-                                <label class="fecha">Fecha de llegada</label>
-                                <input id="checkin" class="login__input" maxlength="10" value=""  name="fecha_llegada" readonly="">
+                                <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
+                                    <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
+                                </ul>
                             </li>
-                            <img src="./Multimedia/arrow.png" height="25px">
-                            <li class="dateout">
-                                <label class="fecha">Fecha de salida</label>
-                                <input id="checkout" class="login__input" maxlength="10" value="" name="fecha_salida" readonly="">
-                            </li>
+                            <a href="../Perfil/Perfil.php"><img src='<?php echo cargar_img_perfil($_SESSION['email']); ?>' style="width: 50px;height: 50px;margin-top: 1px"></a>
                         </ul>
+                    </form>
+                    </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <body>
+        <form action="./Solicitud_reserva.php" method="post">
+            <!--contenedor principal-->
+            <div class="contenedor">
+                <!--zona reserva-->
+                <div class="reservationcalendar">
+                    <div class="datosreservas" >
+                        <div class="infohotel">
+                            <h1><?php echo $titulo ?></h1>
+                            <img src="../Pagina_principal/Multimedia/logo.png" height="150px">
+                        </div>
+                        <div class="reservationinfo">
 
-                        <div class="contenedor_calendario">
-                            <div class="real_calendar">
-                                <div class="calendar">
-                                    <div class="month">
-                                        <i class="fas fa-angle-left prev"></i>
-                                        <div class="date">
-                                            <h1 id="month"></h1>
+                            <ul class="minicalendar">
+                                <li class="datein">
+                                    <label class="fecha">Fecha de llegada</label>
+                                    <input id="checkin" class="login__input" maxlength="10" value=""  name="fecha_llegada" readonly="">
+                                </li>
+                                <img src="./Multimedia/arrow.png" height="25px">
+                                <li class="dateout">
+                                    <label class="fecha">Fecha de salida</label>
+                                    <input id="checkout" class="login__input" maxlength="10" value="" name="fecha_salida" readonly="">
+                                </li>
+                            </ul>
+
+                            <div class="contenedor_calendario">
+                                <div class="real_calendar">
+                                    <div class="calendar">
+                                        <div class="month">
+                                            <i class="fas fa-angle-left prev"></i>
+                                            <div class="date">
+                                                <h1 id="month"></h1>
+                                            </div>
+                                            <i class="fas fa-angle-right next"></i>
                                         </div>
-                                        <i class="fas fa-angle-right next"></i>
-                                    </div>
-                                    <div class="weekdays">
-                                        <div>Lun</div>
-                                        <div>Mar</div>
-                                        <div>Mié</div>
-                                        <div>Jue</div>
-                                        <div>Vie</div>
-                                        <div>Sáb</div>
-                                        <div>Dom</div>
-                                    </div>
-                                    <div class="days">
+                                        <div class="weekdays">
+                                            <div>Lun</div>
+                                            <div>Mar</div>
+                                            <div>Mié</div>
+                                            <div>Jue</div>
+                                            <div>Vie</div>
+                                            <div>Sáb</div>
+                                            <div>Dom</div>
+                                        </div>
+                                        <div class="days">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--zona habitacion-->
-            <div class="room">
-                <div class="datosreservas" >
+                <!--zona habitacion-->
+                <div class="room">
+                    <div class="datosreservas" >
 
 
 
-                    <div>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link active"
-                                    id="home-tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#home"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="home"
-                                    aria-selected="true"
+                        <div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link active"
+                                        id="home-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#home"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="home"
+                                        aria-selected="true"
+                                        >
+                                        Descripción
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link"
+                                        id="profile-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#profile"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="profile"
+                                        aria-selected="false"
+                                        >
+                                        Servicios
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div
+                                    class="tab-pane fade show active"
+                                    id="home"
+                                    role="tabpanel"
+                                    aria-labelledby="home-tab"
                                     >
-                                    Descripción
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link"
-                                    id="profile-tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#profile"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="profile"
-                                    aria-selected="false"
-                                    >
-                                    Servicios
-                                </button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div
-                                class="tab-pane fade show active"
-                                id="home"
-                                role="tabpanel"
-                                aria-labelledby="home-tab"
-                                >
 
-                                <!--imagen de habitacion-->
-                                <div class="roomimg">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-indicators">
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    <!--imagen de habitacion-->
+                                    <div class="roomimg">
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-indicators">
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                            </div>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src='<?php echo $imagen1 ?>' class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src='<?php echo $imagen2 ?>' class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src='<?php echo $imagen3 ?>' class="d-block w-100" alt="...">
+                                                </div>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
                                         </div>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img src='<?php echo $imagen1 ?>' class="d-block w-100" alt="...">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img src='<?php echo $imagen2 ?>' class="d-block w-100" alt="...">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img src='<?php echo $imagen3 ?>' class="d-block w-100" alt="...">
-                                            </div>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                                    </div>
+                                    <!--descripción de habitacion-->
+                                    <div class="roominfo">
+                                        <p style="color: white"><?php echo $descripcion ?></p>
                                     </div>
                                 </div>
-                                <!--descripción de habitacion-->
-                                <div class="roominfo">
-                                    <p style="color: white"><?php echo $descripcion ?></p>
-                                </div>
-                            </div>
-                            <div
-                                class="tab-pane fade"
-                                id="profile"
-                                role="tabpanel"
-                                aria-labelledby="profile-tab"
-                                >
-                                <div class="col-8 me-auto ms-auto pt-5">
-                                    <table class="table table-striped table-dark ">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Servicio</th>
-                                                <th scope="col">Descripción</th>
-                                                <th scope="col">Precio</th>
-                                                <th scope="col">Seleccionar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if (!empty($lista_servicios_tipo[0])) {
-                                                for ($i = 0; $i < count($lista_servicios_tipo[0]); $i++) {
-                                                    $id = $lista_servicios_tipo[0][$i]['id'];
-                                                    $nombre_s = $lista_servicios_tipo[0][$i]["nombre_servicio"];
-                                                    $precio_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["precio_servicio"];
-                                                    $descripcion_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["descripcion"];
-                                                    $i++;
-                                                    echo "<tr><th scope='row'>$nombre_s</th><td>$nombre_s</td><td>$descripcion_s</td><td value='$precio'>$precio_s" . "€</td><td><input id='$nombre_s' onclick='sumar_precio($nombre_s)' value='$precio_s' type='checkbox'; " . $i-- . " name='serviciototal$i'</td></tr>";
+                                <div
+                                    class="tab-pane fade"
+                                    id="profile"
+                                    role="tabpanel"
+                                    aria-labelledby="profile-tab"
+                                    >
+                                    <div class="col-8 me-auto ms-auto pt-5">
+                                        <table class="table table-striped table-dark ">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Servicio</th>
+                                                    <th scope="col">Descripción</th>
+                                                    <th scope="col">Precio</th>
+                                                    <th scope="col">Seleccionar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                if (!empty($lista_servicios_tipo[0])) {
+                                                    for ($i = 0; $i < count($lista_servicios_tipo[0]); $i++) {
+                                                        $id = $lista_servicios_tipo[0][$i]['id'];
+                                                        $nombre_s = $lista_servicios_tipo[0][$i]["nombre_servicio"];
+                                                        $precio_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["precio_servicio"];
+                                                        $descripcion_s = $lista_datos_servicios[$lista_servicios_tipo[0][$i]["nombre_servicio"]][0]["descripcion"];
+                                                        $i++;
+                                                        echo "<tr><th scope='row'>$nombre_s</th><td>$nombre_s</td><td>$descripcion_s</td><td value='$precio'>$precio_s" . "€</td><td><input id='$nombre_s' onclick='sumar_precio($nombre_s)' value='$precio_s' type='checkbox'; " . $i-- . " name='serviciototal$i'</td></tr>";
 
 //                                                    echo "<tr><th scope='row'>$i</th><td>$nombre_s</td><td>$descripcion_s</td><td>$precio_s</td><td><input type='checkbox'" . $i-- . " name='serviciototal$i'</td></tr>";
-                                                }echo '</tbody> </table>';
-                                            } else {
-                                                echo '</tbody> </table>';
-                                                echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos, inserte uno en el cuadro de abajo</p>";
-                                            }
-                                            ?>
-                                            </div>
-                                            </div>
-                                            </div>
-                                            </div>
-
-
-                                            <!--precio de habitacion-->
-                                        <div class="roomprice">
-                                            <p style=" color:white;font-family: 'Alex Brush', cursive;" id="precioTotal"><?php echo $precio ?>€</p>
-                                        </div>
-                                        <!--botones-->
-                                        <div class="buttons">
-                                            <input type="submit"  class="login__submit" value="Reservar online" id="select">
-                                            <input type="button"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
-                                        </div>
-                                        <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo ?>">
-                                        </div>
-                                        </div>
-                                        </div>
-                                        </form>
-                                        <script src="calendario.js"></script> 
-
-                                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
-                                        <script
-                                            type="text/javascript"
-                                            src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
-                                        ></script>
-                                        <script type="text/javascript">
-                                                function sumar_precio($servicio) {
-                                                    input = $servicio;
-                                                    precio = $servicio.value;
-                                                    precioTotal = $("#precioTotal").text();
-                                                    cuenta = $("#precioTotal");
-                                                    if (input.checked) {
-                                                        cuenta.text((parseFloat(precio) + parseFloat(precioTotal)) + "€");
-                                                    } else {
-                                                        cuenta.text((parseFloat(precioTotal) - parseFloat(precio)) + "€");
-                                                    }
-                                                    ;
+                                                    }echo '</tbody> </table>';
+                                                } else {
+                                                    echo '</tbody> </table>';
+                                                    echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos, inserte uno en el cuadro de abajo</p>";
                                                 }
-                                        </script>
-                                        </body>
+                                                ?>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
 
-                                        </html>
+
+                                                <!--precio de habitacion-->
+                                            <div class="roomprice">
+                                                <p style=" color:white;font-family: 'Alex Brush', cursive;" id="precioTotal"><?php echo $precio ?>€</p>
+                                            </div>
+                                            <!--botones-->
+                                            <div class="buttons">
+                                                <input type="submit"  class="login__submit" value="Reservar online" id="select">
+                                                <input type="button"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
+                                            </div>
+                                            <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo ?>">
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </form>  
+                                            </body><!---------------------------------------------------->
+                                            <!------------------ Complementos -------------------->
+                                            <!---------------------------------------------------->
+
+                                            <div class="contenedor_accesibilidad">
+                                                <div class="boton-accesibilidad">
+                                                    <div class="perrete">
+                                                        <img
+                                                            src="../Pagina_principal/Multimedia/logo.png"
+                                                            alt=""
+                                                            width="100%"
+                                                            />
+                                                    </div>
+                                                </div>
+                                                <div class="accesibilidad">
+                                                    <h5
+                                                        style="
+                                                        text-align: center;
+                                                        padding-top: 10px;
+                                                        border-bottom: solid black 2px;
+                                                        "
+                                                        >
+                                                        Accesibilidad
+                                                    </h5>
+                                                    <ul style="display: flex; flex-direction: column; align-items: center">
+                                                        <input
+                                                            value="Invertido"
+                                                            type="button"
+                                                            name=""
+                                                            id="btn_color1"
+                                                            style="margin: 10px; width: 60%"
+                                                            /><input
+                                                            value="Sepia"
+                                                            type="button"
+                                                            name=""
+                                                            id="btn_color2"
+                                                            style="margin: 10px; width: 60%"
+                                                            />
+                                                        <input
+                                                            value="Saturado"
+                                                            type="button"
+                                                            name=""
+                                                            id="btn_color3"
+                                                            style="margin: 10px; width: 60%"
+                                                            />
+                                                        <input
+                                                            value="Sin filtro"
+                                                            type="button"
+                                                            name=""
+                                                            id="btn_color4"
+                                                            style="margin: 10px; width: 60%"
+                                                            />
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <script
+                                                src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                                                crossorigin="anonymous"
+                                            ></script>
+                                            <script>
+                                                    $(document).ready(function () {
+                                                        $(".filtro").css("filter", "none");
+
+                                                        $(".perrete").on("click", function () {
+                                                            console.log("en accesibilidad");
+                                                            $(".contenedor_accesibilidad").toggleClass("mostrar");
+                                                        });
+                                                        $("#btn_color1").on("click", function () {
+                                                            $(".filtro").css("filter", "invert()");
+                                                        });
+                                                        $("#btn_color2").on("click", function () {
+                                                            console.log("colorendo de azul");
+                                                            $(".filtro").css("filter", "sepia(100%)");
+                                                        });
+                                                        $("#btn_color3").on("click", function () {
+                                                            $(".filtro").css("filter", "saturate(200%)");
+                                                        });
+                                                        $("#btn_color4").on("click", function () {
+                                                            $(".filtro").css("filter", "none");
+                                                        });
+                                                    });
+                                            </script>
+                                            <script src="calendario.js"></script> 
+
+                                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+                                            <script
+                                                type="text/javascript"
+                                                src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+                                            ></script>
+                                            <script type="text/javascript">
+                                                    function sumar_precio($servicio) {
+                                                        input = $servicio;
+                                                        precio = $servicio.value;
+                                                        precioTotal = $("#precioTotal").text();
+                                                        cuenta = $("#precioTotal");
+                                                        if (input.checked) {
+                                                            cuenta.text((parseFloat(precio) + parseFloat(precioTotal)) + "€");
+                                                        } else {
+                                                            cuenta.text((parseFloat(precioTotal) - parseFloat(precio)) + "€");
+                                                        }
+                                                        ;
+                                                    }
+                                            </script>
+
+
+                                            </html>
