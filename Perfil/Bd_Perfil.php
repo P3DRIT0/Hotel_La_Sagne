@@ -34,7 +34,7 @@ function cargar_img_perfil($email){
 function cambiar_img_perfil($email,$img){
      try {
         $base = conectar('admin');
-        $sentencia = $base->prepare("UPDATE usuarios SET imagen_usuario=:img; WHERE email=:email");
+        $sentencia = $base->prepare("UPDATE usuarios SET imagen_usuario=:img WHERE email=:email");
         $sentencia->bindParam(':email', $email);
         $sentencia->bindParam(':img', $img);
         $sentencia->execute();

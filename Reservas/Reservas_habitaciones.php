@@ -15,9 +15,12 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
 }
 ?>
 <!doctype html>
-<html lang="en">
-
+<html lang="es">
 <head>
+     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="apple-touch-icon" sizes="57x57" href="../config/ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="../config/ico/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="../config/ico/apple-icon-72x72.png">
@@ -134,7 +137,7 @@ if ($_SESSION['rol'] == "Usuario_administrador") {
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestionar Habitaciones</a>
 
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./Crear_habitacion.php">Crear Habitacion</a></li>
+                                        <li><a class="dropdown-item" href="./Crear_Habitacion.php">Crear Habitacion</a></li>
                                         <li><a class="dropdown-item" href="./Borrar_habitacion.php">Borrar habitacion </a></li>
                                         <li><a class="dropdown-item" href="./Modificar_Habitacion.php">Modificar Habitacion</a></li>
                                     </ul>

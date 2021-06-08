@@ -128,12 +128,15 @@ if (isset($_POST['num_habitacion'])) {
                             <ul class="minicalendar">
                                 <li class="datein">
                                     <label class="fecha">Fecha de llegada</label>
-                                    <input id="checkin" class="login__input" maxlength="10" value=""  name="fecha_llegada" readonly="">
+                                    <input id="checkin" class="login__input" maxlength="10" value="<?php echo '' . date("Y") . "-" . date("m") . "-" . date("d") ?>"  name="fecha_llegada" readonly="">
                                 </li>
                                 <img src="./Multimedia/arrow.png" height="25px">
                                 <li class="dateout">
                                     <label class="fecha">Fecha de salida</label>
-                                    <input id="checkout" class="login__input" maxlength="10" value="" name="fecha_salida" readonly="">
+                                    <input id="checkout" class="login__input" maxlength="10" value="<?php
+                                    $fecha_actual = date("Y-m-d");
+                                    echo date("Y-m-d", strtotime($fecha_actual . "+ 1 days"));
+                                    ?>" name="fecha_salida" readonly="">
                                 </li>
                             </ul>
 

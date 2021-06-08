@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="register-heading">Introduce unos datos mas</h3>
-                            <form action="./Añadir_datos_trabajadores.php" method="post">
+                            <form action="./Datos.php" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">

@@ -1,5 +1,4 @@
 <?php
-
 include '../config/conexiones_BD.php';
 
 /**

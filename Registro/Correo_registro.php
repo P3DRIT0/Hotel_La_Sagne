@@ -47,11 +47,40 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
          * @return string cuerpo del correo
          */
         function crear_correo_reserva($nombre) {
-            $texto = "<h1 class='titulo'> Hotel La Sagne</h1>";
-            $texto .= "Reserva Realizada:";
-            $texto .= "<p>Estimad@ ciente ,$nombre</p>";
-            $texto .= "<p>Su reserva se ha procesado con exito esperamos verle pronto. </p>";
-            $texto .= "<p>Gracias por confiar en nosotros.</p>";
+            $texto = "<div title='correo' class='aviso'
+    style='max-width:600px; background:#A8A296; color: white !important; padding:10px; font-size:1.2em; background: #00c6ff; background: -webkit-linear-gradient(left, #0d37f1, #00c6ff); background: -webkit-linear-gradient(top,  #0d37f1 0%,#00c6ff 100%); background: linear-gradient(to bottom,  #0d37f1 0%,#00c6ff 100%); filter: progid:DXImageTransform.Microsoft.gradient( startC​​olorstr='#a8a296', endColorstr='#66625b',GradientType=0 );'>
+    <div>
+        <h1  style='font-weight:bold;text-align: center;'>Hotel La Sagne Informa:</h1>
+    </div>
+    <div class='recuadro' style='border:1px solid gray; background-color: rgb(33,37,41);
+'>
+        <div
+            style='background-image: url(http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Multimedia/Fondo1.jpg);background-size: 160%;'>
+            
+            <div style='background-color: rgba(33,37,41, 0.8);  padding:30px 50px ;padding-top: 60px; text-align: center;'>
+                <img style='margin:0 auto; display:block' width='150px'
+                src='http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Multimedia/logo.png'>
+                <p style='padding-top: 30px;font-size: 24;color:white'>Estimado ciente:<strong>$nombre</strong><br>Su reserva ha sido aceptada.
+                </p>
+                <p style='color:white;font-size: 24'>Gracias por confiar en nosotros. </p>
+                <p style='color:white;font-size: 24'>Disfrute de su estancia. </p>
+                <p style='color:white;font-size: 24'>Atentamente <strong>Pablo Castiñeira Director Ejecutivo del hotel</strong></p>
+                <p style='color:white;font-size: 24'>Contacto: Pablo Castiñeira.
+                    <br>Tels.: 318 7560443 - 318 6046760
+                    <br>Bogotá - Colombia
+                </p>
+            </div>
+        </div>
+        <div style='text-align: center;'>
+        <p style='padding: 0 10px; color:white'>Conozca más sobre <a style='color: #205EA0'
+                href='http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Pagina_principal.php#Sobre_nosotros'>nosotros</a></p>
+        <p style='padding: 0 10px; color:white'>Realice ya su <a style='color: #205EA0'
+                href='http://hotelasagne.teis38.dewordpress.org/Inicio_Sesion/Inicio_sesion.php'>reserva</a></p>
+        <p style='padding: 0 10px; color:white'>Comentarios o inquietudes no dude en contactarnos respondiendo este
+            correo <a style='color: #205EA0' href='mailto:hotellasagne@gmail.com'>o haciendo clic.</a></p>
+        </div>
+    </div>
+</div>";
             return $texto;
         }
         
@@ -69,11 +98,40 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
          * @return string Texto predefinido con los datos del usuario 
          */
         function crear_correo($correo, $nombre) {
-            $texto = "<h1 class='titulo'> Hotel La Sagne</h1>";
-            $texto .= "Registro exitoso:";
-            $texto .= "<p>Estimado ciente ,$nombre</p>";
-            $texto .= "<p>Su registro en nuestra página web a traves del correo  $correo  se ha completado con exito </p>";
-            $texto .= "<p>Gracias por confiar en nosotros.</p>";
+            $texto = "<div title='correo' class='aviso'
+    style='max-width:600px; background:#A8A296; color: white !important; padding:10px; font-size:1.2em; background: #00c6ff; background: -webkit-linear-gradient(left, #0d37f1, #00c6ff); background: -webkit-linear-gradient(top,  #0d37f1 0%,#00c6ff 100%); background: linear-gradient(to bottom,  #0d37f1 0%,#00c6ff 100%); filter: progid:DXImageTransform.Microsoft.gradient( startC​​olorstr='#a8a296', endColorstr='#66625b',GradientType=0 );'>
+    <div>
+        <h1  style='font-weight:bold;text-align: center;'>Hotel La Sagne Informa:</h1>
+    </div>
+    <div class='recuadro' style='border:1px solid gray; background-color: rgb(33,37,41);
+'>
+        <div
+            style='background-image: url(http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Multimedia/Fondo1.jpg);background-size: 160%;'>
+            
+            <div style='background-color: rgba(33,37,41, 0.8);  padding:30px 50px ;padding-top: 60px; text-align: center;'>
+                <img style='margin:0 auto; display:block' width='150px'
+                src='http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Multimedia/logo.png'>
+                <p style='padding-top: 30px;font-size: 24;color:white'>Estimado ciente:<strong>$nombre</strong><br>Su registro en nuestra página web a traves del correo 
+                     <strong> $correo</strong> se ha completado con exito.
+                </p>
+                <p style='color:white;font-size: 24'>Gracias por confiar en nosotros. </p>
+                <p style='color:white;font-size: 24'>Atentamente <strong>Pablo Castiñeira Director Ejecutivo del hotel</strong></p>
+                <p style='color:white;font-size: 24'>Contacto: Pablo Castiñeira.
+                    <br>Tels.: 318 7560443 - 318 6046760
+                    <br>Bogotá - Colombia
+                </p>
+            </div>
+        </div>
+        <div style='text-align: center;'>
+        <p style='padding: 0 10px; color:white'>Conozca más sobre <a style='color: #205EA0'
+                href='http://hotelasagne.teis38.dewordpress.org/Pagina_principal/Pagina_principal.php#Sobre_nosotros'>nosotros</a></p>
+        <p style='padding: 0 10px; color:white'>Realice ya su <a style='color: #205EA0'
+                href='http://hotelasagne.teis38.dewordpress.org/Inicio_Sesion/Inicio_sesion.php'>reserva</a></p>
+        <p style='padding: 0 10px; color:white'>Comentarios o inquietudes no dude en contactarnos respondiendo este
+            correo <a style='color: #205EA0' href='mailto:hotellasagne@gmail.com'>o haciendo clic.</a></p>
+        </div>
+    </div>
+</div>";
             return $texto;
         }
 

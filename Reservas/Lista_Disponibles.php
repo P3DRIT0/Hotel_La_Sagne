@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="filtro" style="width: 100%; filter: none">
 
         <header>
-            <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
+                      <nav class="navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
                     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,12 +75,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <a class="nav-link" href="../Pagina_principal/Pagina_principal.php#Sobre_nosotros">Sobre Nosotros</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav me-auto mb-2  mb-lg-0" style="margin-right: 30%">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <div>
                                 <a class="titulo" href="../Pagina_principal/Pagina_principal.php">Hotel La Sagne </a>
-                                </form>
                             </div>
+                        </ul>
+                        <form class="d-flex">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<?php if (!empty($_SESSION["usuario"])) { ?>
+
+
+                                    <li class="nav-item dropdown">
+
+                                        <a style=margin-top:10% class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" ><?php echo $_SESSION['usuario'] ?></a>
+
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="../Perfil/Perfil.php"> Ver Perfil</a></li>
+                                            <li><a class="dropdown-item" href="../Reservas/Reservas_habitaciones.php">Habitaciones </a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="../Perfil/logout.php">Logout</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>" href="../Perfil/Perfil.php" width="50" height="50"/></a>
+<?php } ?>
+                            </ul>
+
+                        </form>
                     </div>
+                </div>
             </nav>
         </header>
         <body>
@@ -94,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $tipos_diferentes[] = $id_habitaciones[$index3][1];
                         }
                         $contar_habitaciones_tipo = (array_count_values($tipos_diferentes));
-                        print_r($contar_habitaciones_tipo);
                         $separado_por_comas = implode(",", $tipos_diferentes);
 
                         $tipos_diferentes = implode(',', array_unique(explode(',', $separado_por_comas)));
