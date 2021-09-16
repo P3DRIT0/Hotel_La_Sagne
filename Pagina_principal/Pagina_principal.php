@@ -97,16 +97,16 @@ include_once '../Perfil/Bd_Perfil.php';
                                     </ul>
                                 </li>
                                 <a href="../Perfil/Perfil.php"><image src="<?php echo cargar_img_perfil($_SESSION["email"]) ?>"width="50" height="50"/></a>
-                        </form>
-                    <?php } else { ?>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
-                        </li>
-                    <?php } ?>
-                    </ul>
+
+                            <?php } else { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="../Registro/Registro.php">Registro </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../Inicio_Sesion/Inicio_sesion.php">Login</a>
+                                </li>
+                            <?php } ?>
+                        </ul>
                     </form>
                 </div>
             </div>

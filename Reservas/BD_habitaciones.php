@@ -1,4 +1,5 @@
 <?php
+
 include '../config/conexiones_BD.php';
 
 /**
@@ -287,6 +288,7 @@ function crear_habitacion($tipo) {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que nos permite listar las habitaciones habitaciones 
  * @param string $tipo
@@ -305,6 +307,7 @@ function listar_habitaciones() {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que seleciona el ultimo id de los tipos de habitaciones 
  * @return string devuelve el id del tipo de habitacion 
@@ -344,6 +347,7 @@ function comprobar_tipo($tipo) {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que junta las tablas imagenes habitaciones con la de tipos_habitaciones y lo devuelve en 
  * un array
@@ -380,6 +384,7 @@ function contar_tipos() {
         print $e->getMessage();
     }
 }
+
 /**
  * Mentodo que recibe por cabecera un id y un tipo y permite actualizar la
  * habitacion a ese tipo determinado 
@@ -563,6 +568,7 @@ function listar_reservas() {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que nos permite consultar los datos de un trabajador cuyo id sea el recibido 
  * por cabecera 
@@ -583,13 +589,13 @@ function consultar_datos_trabajadores($id_usuario) {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que nos permite consultar los datos de un administrador cuyo id sea el recibido 
  * por cabecera 
  * @param int $id_usuario
  * @return array con los datos del administrador 
  */
-
 function consultar_datos_administradores($id_usuario) {
     try {
         $base = conectar('admin');
@@ -604,6 +610,7 @@ function consultar_datos_administradores($id_usuario) {
         print $e->getMessage();
     }
 }
+
 /**
  * Metodo que une la tabla habitaciones reservas con la tabla habitaciones y nos devuelve
  * un array con las reservas de las habitaciones del tipo especificado por cabecera 
