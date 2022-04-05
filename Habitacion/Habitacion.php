@@ -281,131 +281,133 @@ if (isset($_POST['num_habitacion'])) {
                                                     echo "<p style='color:gray;text-align: center'>No existen servicios en la base de datos, inserte uno en el cuadro de abajo</p>";
                                                 }
                                                 ?>
-                                                </div>
-                                                </div>
-                                                </div>
-                                                </div>
+                                            </tbody>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
-                                                <!--precio de habitacion-->
-                                            <div class="roomprice">
-                                                <p style=" color:white;font-family: 'Alex Brush', cursive;" id="precioTotal"><?php echo $precio ?>€</p>
-                                            </div>
-                                            <!--botones-->
-                                            <div class="buttons">
-                                                <input type="submit"  class="login__submit" value="Reservar online" id="select">
-                                                <input type="button"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
-                                            </div>
-                                            <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo ?>">
-                                            </div>
-                                            </div>
-                                            </div>
-                                            </form>  
-                                            </body><!---------------------------------------------------->
-                                            <!------------------ Complementos -------------------->
-                                            <!---------------------------------------------------->
+                        <!--precio de habitacion-->
+                        <div class="roomprice">
+                            <p style=" color:white;font-family: 'Alex Brush', cursive;" id="precioTotal"><?php echo $precio ?>€</p>
+                        </div>
+                        <!--botones-->
+                        <div class="buttons">
+                            <input type="submit"  class="login__submit" value="Reservar online" id="select">
+                            <input type="button"  class="login__cancelar" value="Cancelar" id="cancel" onclick="location = '../Reservas/Reservas_habitaciones.php'">             
+                        </div>
+                        <input type="text" readonly="" style="visibility:hidden" name="tipo"  value="<?php echo $titulo ?>">
+                    </div>
+                </div>
+            </div>
+        </form>  
+    </body>
+    <!---------------------------------------------------->
+    <!------------------ Complementos -------------------->
+    <!---------------------------------------------------->
 
-                                            <div class="contenedor_accesibilidad">
-                                                <div class="boton-accesibilidad">
-                                                    <div class="perrete">
-                                                        <img
-                                                            src="../Pagina_principal/Multimedia/logo.png"
-                                                            alt=""
-                                                            width="100%"
-                                                            />
-                                                    </div>
-                                                </div>
-                                                <div class="accesibilidad">
-                                                    <h5
-                                                        style="
-                                                        text-align: center;
-                                                        padding-top: 10px;
-                                                        border-bottom: solid black 2px;
-                                                        "
-                                                        >
-                                                        Accesibilidad
-                                                    </h5>
-                                                    <ul style="display: flex; flex-direction: column; align-items: center">
-                                                        <input
-                                                            value="Invertido"
-                                                            type="button"
-                                                            name=""
-                                                            id="btn_color1"
-                                                            style="margin: 10px; width: 60%"
-                                                            /><input
-                                                            value="Sepia"
-                                                            type="button"
-                                                            name=""
-                                                            id="btn_color2"
-                                                            style="margin: 10px; width: 60%"
-                                                            />
-                                                        <input
-                                                            value="Saturado"
-                                                            type="button"
-                                                            name=""
-                                                            id="btn_color3"
-                                                            style="margin: 10px; width: 60%"
-                                                            />
-                                                        <input
-                                                            value="Sin filtro"
-                                                            type="button"
-                                                            name=""
-                                                            id="btn_color4"
-                                                            style="margin: 10px; width: 60%"
-                                                            />
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <script
-                                                src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                                                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                                                crossorigin="anonymous"
-                                            ></script>
-                                            <script>
-                                                    $(document).ready(function () {
-                                                        $(".filtro").css("filter", "none");
+    <div class="contenedor_accesibilidad">
+        <div class="boton-accesibilidad">
+            <div class="perrete">
+                <img
+                    src="../Pagina_principal/Multimedia/logo.png"
+                    alt=""
+                    width="100%"
+                    />
+            </div>
+        </div>
+        <div class="accesibilidad">
+            <h5
+                style="
+                text-align: center;
+                padding-top: 10px;
+                border-bottom: solid black 2px;
+                "
+                >
+                Accesibilidad
+            </h5>
+            <ul style="display: flex; flex-direction: column; align-items: center">
+                <input
+                    value="Invertido"
+                    type="button"
+                    name=""
+                    id="btn_color1"
+                    style="margin: 10px; width: 60%"
+                    /><input
+                    value="Sepia"
+                    type="button"
+                    name=""
+                    id="btn_color2"
+                    style="margin: 10px; width: 60%"
+                    />
+                <input
+                    value="Saturado"
+                    type="button"
+                    name=""
+                    id="btn_color3"
+                    style="margin: 10px; width: 60%"
+                    />
+                <input
+                    value="Sin filtro"
+                    type="button"
+                    name=""
+                    id="btn_color4"
+                    style="margin: 10px; width: 60%"
+                    />
+            </ul>
+        </div>
+    </div>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+    ></script>
+    <script>
+                                $(document).ready(function () {
+                                    $(".filtro").css("filter", "none");
 
-                                                        $(".perrete").on("click", function () {
-                                                            console.log("en accesibilidad");
-                                                            $(".contenedor_accesibilidad").toggleClass("mostrar");
-                                                        });
-                                                        $("#btn_color1").on("click", function () {
-                                                            $(".filtro").css("filter", "invert()");
-                                                        });
-                                                        $("#btn_color2").on("click", function () {
-                                                            console.log("colorendo de azul");
-                                                            $(".filtro").css("filter", "sepia(100%)");
-                                                        });
-                                                        $("#btn_color3").on("click", function () {
-                                                            $(".filtro").css("filter", "saturate(200%)");
-                                                        });
-                                                        $("#btn_color4").on("click", function () {
-                                                            $(".filtro").css("filter", "none");
-                                                        });
-                                                    });
-                                            </script>
-                                            <script src="calendario.js"></script> 
+                                    $(".perrete").on("click", function () {
+                                        console.log("en accesibilidad");
+                                        $(".contenedor_accesibilidad").toggleClass("mostrar");
+                                    });
+                                    $("#btn_color1").on("click", function () {
+                                        $(".filtro").css("filter", "invert()");
+                                    });
+                                    $("#btn_color2").on("click", function () {
+                                        console.log("colorendo de azul");
+                                        $(".filtro").css("filter", "sepia(100%)");
+                                    });
+                                    $("#btn_color3").on("click", function () {
+                                        $(".filtro").css("filter", "saturate(200%)");
+                                    });
+                                    $("#btn_color4").on("click", function () {
+                                        $(".filtro").css("filter", "none");
+                                    });
+                                });
+    </script>
+    <script src="calendario.js"></script> 
 
-                                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-                                            <script
-                                                type="text/javascript"
-                                                src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
-                                            ></script>
-                                            <script type="text/javascript">
-                                                    function sumar_precio($servicio) {
-                                                        input = $servicio;
-                                                        precio = $servicio.value;
-                                                        precioTotal = $("#precioTotal").text();
-                                                        cuenta = $("#precioTotal");
-                                                        if (input.checked) {
-                                                            cuenta.text((parseFloat(precio) + parseFloat(precioTotal)) + "€");
-                                                        } else {
-                                                            cuenta.text((parseFloat(precioTotal) - parseFloat(precio)) + "€");
-                                                        }
-                                                        ;
-                                                    }
-                                            </script>
+    <script
+        type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+    ></script>
+    <script type="text/javascript">
+                                function sumar_precio($servicio) {
+                                    input = $servicio;
+                                    precio = $servicio.value;
+                                    precioTotal = $("#precioTotal").text();
+                                    cuenta = $("#precioTotal");
+                                    if (input.checked) {
+                                        cuenta.text((parseFloat(precio) + parseFloat(precioTotal)) + "€");
+                                    } else {
+                                        cuenta.text((parseFloat(precioTotal) - parseFloat(precio)) + "€");
+                                    }
+                                    ;
+                                }
+    </script>
 
 
-                                            </html>
+</html>
